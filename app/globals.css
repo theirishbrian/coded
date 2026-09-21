@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: #111315;
+  color: #f3f4f1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: #d3ef8b;
+  color: #111315;
+}
+
+a:focus-visible {
+  outline: 2px solid #d3ef8b;
+  outline-offset: 6px;
+}
