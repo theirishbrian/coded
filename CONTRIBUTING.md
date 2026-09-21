@@ -18,10 +18,10 @@ Do not backdate commits or manufacture activity, review, test or deployment evid
 
 ## Checks at the current stage
 
-This repository initially contains governance only. Check documentation links,
-template syntax, scope and git diff --check. There are no application checks yet.
-Issue #1 adds installation, type-check and build instructions; #2 adds lint/format
-commands; #3 adds tests; #4 automates them. Use the actual documented commands once present.
+Use npm ci, npm run typecheck and npm run build for application changes.
+Use npm run dev for the local browser check; npm start serves a completed production build.
+Also check documentation links, scope and git diff --check.
+Issue #2 adds lint/format commands; #3 adds tests; #4 automates them.
 Report skipped or unavailable checks explicitly.
 
 Application changes should include appropriate behavioural tests. Use deterministic

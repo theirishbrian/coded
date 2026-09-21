@@ -2,9 +2,9 @@
 
 ## Purpose and current stage
 Coded turns public GitHub activity into a clear developer proof-of-work profile.
-The repository is currently being prepared for implementation. The first six
+The repository now has a minimal application foundation. The first six
 issues cover foundation work only; they do not constitute the full v0.1 release.
-Do not implement application features during governance setup.
+Implement only the currently assigned issue.
 
 ## Scope
 - Work on one agreed issue at a time. Read its acceptance criteria and dependencies first.
@@ -42,8 +42,9 @@ Do not implement application features during governance setup.
 - Add loading, empty and error states when the relevant feature is introduced.
 
 ## Validation
-No application or package scripts exist at bootstrap. Do not claim that lint, tests,
-type checks, builds or deployment have passed before they exist and have been run.
+The foundation provides npm ci, npm run dev, npm run typecheck, npm run build and
+npm start. Lint/format policy, tests and CI remain for #2–#4. Do not claim a check
+or deployment has passed before it exists and has been run.
 - Issue #1 establishes the application and documents the selected runtime/package manager,
   lockfile, actual commands, type check, production build and manual homepage check.
 - Issue #2 standardises lint, format checking and strict type checking.
@@ -71,4 +72,3 @@ type checks, builds or deployment have passed before they exist and have been ru
   empty main branch so subsequent changes can use PRs. Application work uses branches and PRs.
 - Preserve truthful history: no backdating, manufactured activity, fabricated tests or
   claims that scaffolding is a finished product.
-
