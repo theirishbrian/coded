@@ -1,12 +1,14 @@
 # Coded — contributor and agent instructions
 
 ## Purpose and current stage
+
 Coded turns public GitHub activity into a clear developer proof-of-work profile.
 The repository now has a minimal application foundation. The first six
 issues cover foundation work only; they do not constitute the full v0.1 release.
 Implement only the currently assigned issue.
 
 ## Scope
+
 - Work on one agreed issue at a time. Read its acceptance criteria and dependencies first.
 - Before edits, inspect the repository, explain the approach briefly, and identify architectural decisions.
 - v0.1 uses public GitHub data only. No user accounts/authentication, database,
@@ -17,6 +19,7 @@ Implement only the currently assigned issue.
   Escalate changes to the agreed product scope; resolve routine implementation details autonomously.
 
 ## Agreed technology and boundaries
+
 - Next.js App Router, TypeScript with strict mode, and Tailwind CSS.
 - Use shadcn/ui selectively when a component is needed. Vitest is the unit/integration
   test choice; Playwright is planned later in v0.1. Zod and charts belong to the
@@ -34,6 +37,7 @@ Implement only the currently assigned issue.
   Language usage must not be presented as developer proficiency.
 
 ## Code and user experience
+
 - Keep strict TypeScript enabled; avoid untyped any and unexplained suppression directives.
 - Use clear names, small cohesive modules, and comments for non-obvious reasoning.
 - Validate external input; use safe error messages and do not expose internal secrets.
@@ -42,9 +46,12 @@ Implement only the currently assigned issue.
 - Add loading, empty and error states when the relevant feature is introduced.
 
 ## Validation
+
 The foundation provides npm ci, npm run dev, npm run typecheck, npm run build and
-npm start. Lint/format policy, tests and CI remain for #2–#4. Do not claim a check
+npm start, plus npm run lint, npm run format:check and npm run format.
+Tests and CI remain for #3–#4. Do not claim a check
 or deployment has passed before it exists and has been run.
+
 - Issue #1 establishes the application and documents the selected runtime/package manager,
   lockfile, actual commands, type check, production build and manual homepage check.
 - Issue #2 standardises lint, format checking and strict type checking.
@@ -61,6 +68,7 @@ or deployment has passed before it exists and has been run.
 - Report exact checks run, results, skipped/unavailable checks and known limitations.
 
 ## Git and review workflow
+
 - Use an issue-linked branch: feat/<number>-<slug>, fix/<number>-<slug>,
   docs/<number>-<slug> or chore/<number>-<slug>.
 - Use focused conventional commits such as "chore: initialise application foundation".
