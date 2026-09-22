@@ -1,6 +1,7 @@
 # Contributing to Coded
 
-Start with [AGENTS.md](AGENTS.md), the [roadmap](docs/ROADMAP.md), and the issue's
+Start with [AGENTS.md](AGENTS.md), the [architecture](docs/ARCHITECTURE.md),
+the [roadmap](docs/ROADMAP.md), and the issue's
 acceptance criteria. Work on one issue at a time and honour its dependencies.
 
 ## Workflow
@@ -41,7 +42,10 @@ Broader product changes need agreement before implementation.
 
 The licence is pending an owner decision. Do not add one by assumption.
 Do not publish credentials or sensitive vulnerability details in public issues.
-An established private security-reporting route will be documented in Issue #5.
+Use the verified private route in [SECURITY.md](SECURITY.md) for vulnerabilities.
+Update [CHANGELOG.md](CHANGELOG.md) for delivered changes; do not list planned
+features as shipped. Follow the [data limitations](docs/DATA_LIMITATIONS.md)
+when implementing or describing future profiles and metrics.
 
 ## Labels
 

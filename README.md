@@ -22,23 +22,34 @@ Language usage describes repositories, not developer proficiency.
 No accounts, database, AI, payments, social features or private repositories in v0.1.
 Any example domain in planning is illustrative; no domain or deployment is claimed.
 
-Planned stack: Next.js App Router, strict TypeScript, Tailwind CSS, selective
-shadcn/ui components, Vitest, and Vercel. Playwright follows later in v0.1.
+Implemented stack: Next.js App Router, strict TypeScript, Tailwind CSS and Vitest.
+Selective shadcn/ui components, Playwright and Vercel deployment are planned later.
 Install dependencies only when the current issue requires them.
 
 ## Getting started
 
 Use Node **24.14.0** (also recorded in .nvmrc) and npm **11.9.0**.
+Install Git, Node and npm first; verify `git --version`, `node --version` and
+`npm --version`. The tested versions are Node 24.14.0 and npm 11.9.0; if npm differs,
+install the pinned version with `npm install --global npm@11.9.0`.
 The supported project runtime is Node 24; package.json records the runtime range.
 Read [AGENTS.md](AGENTS.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ```sh
+git clone https://github.com/theirishbrian/coded.git
+cd coded
 npm ci
 npm run dev
 ```
 
 Open http://localhost:3000. No environment variables, tokens or external services
-are required. Stop the server with Ctrl+C.
+are required to run the application. Installation requires internet access to
+download packages. Stop the server with Ctrl+C. Keep the terminal/server running
+while viewing the page; closing it makes localhost unavailable.
+
+If port 3000 is occupied, use `npm run dev -- --port 3001` and open
+http://localhost:3001. For a refused connection, first confirm that the terminal
+reports a ready server and use its displayed port. This local URL is not a public deployment.
 
 Validate and run the production build:
 
@@ -94,6 +105,11 @@ recommended branch-protection checks.
 - app/globals.css: Tailwind import and global styles.
 - app/icon.svg: local application icon.
 - postcss.config.mjs and tsconfig.json: styling and strict TypeScript configuration.
+- tests/app/page.test.tsx and tests/setup.ts: homepage smoke tests and shared isolation.
+- vitest.config.mts: test discovery, jsdom and source alias configuration.
+- eslint.config.mjs and .prettierrc.json: lint and formatting policy.
+- .github/workflows/ci.yml: automated quality checks.
+- docs/: architecture, data limitations, roadmap, testing and CI guidance.
 
 No client components, API calls, remote fonts or UI libraries are needed for this
 page. Future components/ and lib/ modules will be added only when an issue needs
@@ -111,3 +127,15 @@ The first six issues establish the foundation, not the complete v0.1 product.
 
 A licence has not yet been selected. The intended open-source release needs an
 owner-approved licence; public repository visibility alone is not a licence grant.
+
+## Documentation and reporting
+
+- [Architecture](docs/ARCHITECTURE.md): existing application and planned data flow.
+- [Data limitations](docs/DATA_LIMITATIONS.md): coverage, attribution and metric constraints.
+- [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
+- [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.
+- [Changelog](CHANGELOG.md): delivered, unreleased changes.
+
+Core setup/check commands are verified from a fresh checkout for Issue #5;
+PR validation records the environment and results. Browser layout/keyboard checks
+are separate from jsdom tests. Licence selection and initial deployment remain open decisions.

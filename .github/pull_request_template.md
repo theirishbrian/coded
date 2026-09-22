@@ -22,3 +22,4 @@
 - [ ] Behaviour changes have meaningful tests where applicable.
 - [ ] UI changes include keyboard and narrow-screen checks, if applicable.
 - [ ] Documentation accurately reflects implemented behaviour.
+- [ ] Changelog records delivered changes when applicable; future work is not listed as shipped.
