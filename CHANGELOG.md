@@ -14,3 +14,5 @@ published release; no release tags have been created.
 - ESLint, Prettier, strict type-check commands and consistent LF line endings.
 - Vitest homepage smoke tests, watch mode and deterministic fixture/mock guidance.
 - GitHub Actions checks for formatting, lint, types, tests and production build on PRs and main.
+- Setup, architecture and data-limitations documentation, an Unreleased changelog,
+  and a security policy backed by enabled GitHub private vulnerability reporting.
