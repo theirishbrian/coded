@@ -6,6 +6,9 @@ labels: bug
 assignees: ""
 ---
 
+For security vulnerabilities, follow [SECURITY.md](https://github.com/theirishbrian/coded/security/policy)
+and use private reporting instead of this public issue.
+
 ## What happened?
 
 ## Expected behaviour

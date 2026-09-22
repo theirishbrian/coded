@@ -6,6 +6,9 @@ Coded turns public GitHub activity into a clear developer proof-of-work profile.
 The repository now has a minimal application foundation. The first six
 issues cover foundation work only; they do not constitute the full v0.1 release.
 Implement only the currently assigned issue.
+Read [architecture](docs/ARCHITECTURE.md) and [data limitations](docs/DATA_LIMITATIONS.md)
+before feature work. Use [SECURITY.md](SECURITY.md) for private vulnerability reports.
+Licence selection remains an owner decision; do not add LICENSE by assumption.
 
 ## Scope
 
@@ -82,3 +85,5 @@ or deployment has passed before it exists and has been run.
   empty main branch so subsequent changes can use PRs. Application work uses branches and PRs.
 - Preserve truthful history: no backdating, manufactured activity, fabricated tests or
   claims that scaffolding is a finished product.
+- Keep README, contributor guidance and roadmap consistent. Add delivered changes
+  to CHANGELOG.md without announcing unimplemented features or a nonexistent release.
