@@ -49,7 +49,9 @@ Implement only the currently assigned issue.
 
 The foundation provides npm ci, npm run dev, npm run typecheck, npm run build and
 npm start, plus npm run lint, npm run format:check and npm run format.
-Tests and CI remain for #3–#4. Do not claim a check
+Tests run once with npm test or in watch mode with npm run test:watch; see
+docs/TESTING.md for locations, mocks and Server Component limitations.
+CI remains for #4. Do not claim a check
 or deployment has passed before it exists and has been run.
 
 - Issue #1 establishes the application and documents the selected runtime/package manager,
