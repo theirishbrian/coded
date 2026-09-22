@@ -5,14 +5,14 @@ No delivery date has been committed.
 
 ## First six issues
 
-| Order | Issue | Depends on | Result |
-| --- | --- | --- | --- |
-| 1 | [Set up Coded application foundation](https://github.com/theirishbrian/coded/issues/1) | Governance | Minimal running Next.js application |
-| 2 | [Configure linting, formatting and TypeScript strict mode](https://github.com/theirishbrian/coded/issues/2) | #1 | Reproducible quality checks |
-| 3 | [Add automated test infrastructure](https://github.com/theirishbrian/coded/issues/3) | #1, #2 | Deterministic Vitest setup |
-| 4 | [Create GitHub Actions CI workflow](https://github.com/theirishbrian/coded/issues/4) | #1–#3 | Automated PR/main checks |
-| 5 | [Add core repository documentation](https://github.com/theirishbrian/coded/issues/5) | #1–#4 | Verified setup and architecture documentation |
-| 6 | [Deploy initial application to Vercel](https://github.com/theirishbrian/coded/issues/6) | #1–#5 | Verified minimal deployment |
+| Order | Issue                                                                                                       | Depends on | Result                                        |
+| ----- | ----------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------- |
+| 1     | [Set up Coded application foundation](https://github.com/theirishbrian/coded/issues/1)                      | Governance | Minimal running Next.js application           |
+| 2     | [Configure linting, formatting and TypeScript strict mode](https://github.com/theirishbrian/coded/issues/2) | #1         | Reproducible quality checks                   |
+| 3     | [Add automated test infrastructure](https://github.com/theirishbrian/coded/issues/3)                        | #1, #2     | Deterministic Vitest setup                    |
+| 4     | [Create GitHub Actions CI workflow](https://github.com/theirishbrian/coded/issues/4)                        | #1–#3      | Automated PR/main checks                      |
+| 5     | [Add core repository documentation](https://github.com/theirishbrian/coded/issues/5)                        | #1–#4      | Verified setup and architecture documentation |
+| 6     | [Deploy initial application to Vercel](https://github.com/theirishbrian/coded/issues/6)                     | #1–#5      | Verified minimal deployment                   |
 
 These issues remain open until implemented and validated. The governance bootstrap
 does not complete Issue #1 or Issue #5.

@@ -51,8 +51,33 @@ The type check generates Next.js route types before running TypeScript, so it
 also works on a fresh checkout. npm ci installs the committed package-lock.json;
 use npm only and commit intentional lockfile changes.
 
-Lint/format policy, automated tests and CI are deliberately deferred to #2–#4;
-there are no lint, format or test scripts yet.
+## Code quality checks
+
+```sh
+npm run lint
+npm run format:check
+npm run typecheck
+npm run build
+```
+
+Use `npm run format` to apply formatting before committing.
+Linting uses the Next.js Core Web Vitals and TypeScript presets plus explicit
+accessible-label and keyboard-interaction rules. Warnings fail the lint command.
+Prettier handles formatting; its compatibility preset disables conflicting ESLint
+style rules. No application correctness rules are disabled.
+
+ESLint is pinned to 9.39.5 because the React/import/accessibility plugins bundled
+with Next.js 16.3.5 do not support ESLint 10. npm marks ESLint 9 as deprecated;
+upgrade this pin when the bundled plugins support 10. Do not bypass peer checks.
+
+Generated output, dependencies, environment files and npm's generated lockfile
+are excluded from formatting. ESLint excludes generated output and Next.js type
+declarations. LF line endings are shared by Git and Prettier for Windows/Linux
+consistency. TypeScript strict mode remains enabled.
+
+The configuration follows the [Next.js ESLint guide](https://nextjs.org/docs/app/api-reference/config/eslint)
+and [Prettier setup guide](https://prettier.io/docs/install).
+Automated tests and CI remain for #3 and #4; there is no test script yet.
 
 ## Application structure
 
