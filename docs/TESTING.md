@@ -53,5 +53,5 @@ Vitest does not currently support async Server Components. jsdom also does not
 prove Next.js routing, server rendering, hydration, visual layout or browser
 fragment-navigation behaviour. The focus assertion checks that the skip target
 can receive focus; keyboard and responsive browser checks remain separate.
-Playwright coverage for full browser flows is planned later in v0.1. CI automation
-belongs to Issue #4.
+Playwright coverage for full browser flows is planned later in v0.1.
+[CI](CI.md) runs the non-interactive suite alongside lint, formatting, types and build.

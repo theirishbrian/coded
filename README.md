@@ -9,7 +9,8 @@ activity into a clear, shareable profile.
 
 A minimal Next.js homepage now runs locally. It identifies Coded and links to
 this repository; public profiles and GitHub integration are not implemented.
-There is no live deployment, CI pipeline or release yet.
+GitHub Actions runs quality checks on pull requests and main. There is no live
+deployment or release yet.
 
 ## v0.1 direction
 
@@ -82,7 +83,9 @@ Vitest now runs deterministic homepage smoke tests with React Testing Library an
 jsdom. `npm test` runs once and fails for failing or empty suites;
 `npm run test:watch` watches for changes. See [testing guidance](docs/TESTING.md)
 for test locations, fixture/mock conventions and Server Component limitations.
-CI remains for Issue #4.
+[CI](docs/CI.md) runs these checks in the **Quality checks** job on pull requests
+and pushes to main. See that guide for runtime details, failure diagnosis and
+recommended branch-protection checks.
 
 ## Application structure
 

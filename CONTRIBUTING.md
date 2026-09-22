@@ -23,7 +23,8 @@ for application changes. Run npm run format to apply formatting before committin
 Use npm run dev for the local browser check; npm start serves a completed production build.
 Also check documentation links, scope and git diff --check.
 Lint warnings fail the check. Keep TypeScript strict mode enabled; document
-the reason for any narrowly scoped rule exception. #4 automates these checks.
+the reason for any narrowly scoped rule exception. [CI](docs/CI.md) runs these
+checks on pull requests and main; inspect the Quality checks job before merging.
 Use npm run test:watch while editing; see [testing guidance](docs/TESTING.md) for
 test locations, isolation and Server Component limitations.
 Report skipped or unavailable checks explicitly.
