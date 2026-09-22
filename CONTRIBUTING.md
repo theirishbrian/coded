@@ -18,12 +18,14 @@ Do not backdate commits or manufacture activity, review, test or deployment evid
 
 ## Checks at the current stage
 
-Use npm ci, npm run lint, npm run format:check, npm run typecheck and npm run build
+Use npm ci, npm run lint, npm run format:check, npm run typecheck, npm test and npm run build
 for application changes. Run npm run format to apply formatting before committing.
 Use npm run dev for the local browser check; npm start serves a completed production build.
 Also check documentation links, scope and git diff --check.
 Lint warnings fail the check. Keep TypeScript strict mode enabled; document
-the reason for any narrowly scoped rule exception. #3 adds tests; #4 automates them.
+the reason for any narrowly scoped rule exception. #4 automates these checks.
+Use npm run test:watch while editing; see [testing guidance](docs/TESTING.md) for
+test locations, isolation and Server Component limitations.
 Report skipped or unavailable checks explicitly.
 
 Application changes should include appropriate behavioural tests. Use deterministic

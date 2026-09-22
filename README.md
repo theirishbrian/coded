@@ -57,6 +57,7 @@ use npm only and commit intentional lockfile changes.
 npm run lint
 npm run format:check
 npm run typecheck
+npm test
 npm run build
 ```
 
@@ -77,7 +78,11 @@ consistency. TypeScript strict mode remains enabled.
 
 The configuration follows the [Next.js ESLint guide](https://nextjs.org/docs/app/api-reference/config/eslint)
 and [Prettier setup guide](https://prettier.io/docs/install).
-Automated tests and CI remain for #3 and #4; there is no test script yet.
+Vitest now runs deterministic homepage smoke tests with React Testing Library and
+jsdom. `npm test` runs once and fails for failing or empty suites;
+`npm run test:watch` watches for changes. See [testing guidance](docs/TESTING.md)
+for test locations, fixture/mock conventions and Server Component limitations.
+CI remains for Issue #4.
 
 ## Application structure
 
