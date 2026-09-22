@@ -51,6 +51,10 @@ If port 3000 is occupied, use `npm run dev -- --port 3001` and open
 http://localhost:3001. For a refused connection, first confirm that the terminal
 reports a ready server and use its displayed port. This local URL is not a public deployment.
 
+Next.js 16.3.5 may append a marked framework-guidance block to `AGENTS.md` when
+`npm run dev` starts. This is generated guidance, not a change to project scope.
+Review that local diff before committing; retain the project's instructions.
+
 Validate and run the production build:
 
 ```sh
