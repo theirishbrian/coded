@@ -14,8 +14,8 @@ No delivery date has been committed.
 | 5     | [Add core repository documentation](https://github.com/theirishbrian/coded/issues/5)                        | #1–#4      | Verified setup and architecture documentation |
 | 6     | [Deploy initial application to Vercel](https://github.com/theirishbrian/coded/issues/6)                     | #1–#5      | Verified minimal deployment                   |
 
-Issues #1–#4 are delivered and merged. Issue #5 supplies the expanded documentation;
-its completion is tracked in its PR/issue. Deployment (#6) is not implemented.
+Issues #1–#5 are delivered and merged. The initial Vercel deployment is live;
+Issue #6 records its configuration and [verification](DEPLOYMENT.md) in its PR.
 GitHub issues are the source of truth for current open/closed status.
 
 ## Later v0.1 work
@@ -32,7 +32,6 @@ states, appropriate tests, accessibility checks and a verified deployment.
 ## Decisions still to make
 
 - Select and approve the licence before an open-source release.
-- Confirm the Vercel account/project and actual URL in #6.
 - Specify API coverage, caching and ranking behaviour in later scoped issues.
 
 Runtime versions are recorded in [README](../README.md) and package.json.
