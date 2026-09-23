@@ -7,6 +7,8 @@ published release; no release tags have been created.
 
 ### Added
 
+- Server-only public GitHub account retrieval with runtime validation, explicit
+  failures, Coded profile mapping, coverage metadata and deterministic fixture tests.
 - Initial Vercel production deployment and configuration, live verification,
   preview workflow and rollback documentation.
 - Contributor/agent instructions, scoped issue and PR templates, and the foundation roadmap.

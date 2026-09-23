@@ -14,9 +14,13 @@ No delivery date has been committed.
 | 5     | [Add core repository documentation](https://github.com/theirishbrian/coded/issues/5)                        | #1–#4      | Verified setup and architecture documentation |
 | 6     | [Deploy initial application to Vercel](https://github.com/theirishbrian/coded/issues/6)                     | #1–#5      | Verified minimal deployment                   |
 
-Issues #1–#5 are delivered and merged. The initial Vercel deployment is live;
-Issue #6 records its configuration and [verification](DEPLOYMENT.md) in its PR.
+Issues #1–#6 are delivered and merged. The initial Vercel deployment is live;
+its configuration and [verification](DEPLOYMENT.md) are recorded in the repository.
 GitHub issues are the source of truth for current open/closed status.
+
+The next scoped task is [public account retrieval (#14)](https://github.com/theirishbrian/coded/issues/14):
+a tested server-only data boundary, with no profile pages or repository/activity
+analysis. Its completion is tracked in its PR/issue. See [the contract](GITHUB_PROFILE.md).
 
 ## Later v0.1 work
 
