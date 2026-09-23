@@ -7,10 +7,10 @@ activity into a clear, shareable profile.
 
 ## Status
 
-A minimal Next.js homepage now runs locally. It identifies Coded and links to
-this repository; public profiles and GitHub integration are not implemented.
-GitHub Actions runs quality checks on pull requests and main. There is no live
-deployment or release yet.
+A minimal Next.js homepage is live at <https://coded-beryl.vercel.app/> and runs
+locally. It identifies Coded and links to this repository; public profiles and
+GitHub data integration are not implemented. GitHub Actions runs quality checks
+on pull requests and main. No versioned release has been published.
 
 ## v0.1 direction
 
@@ -20,10 +20,10 @@ Unavailable data must be distinguished from zero, and coverage limits must be ex
 Language usage describes repositories, not developer proficiency.
 
 No accounts, database, AI, payments, social features or private repositories in v0.1.
-Any example domain in planning is illustrative; no domain or deployment is claimed.
+Any example custom domain in planning is illustrative; the live URL is listed above.
 
 Implemented stack: Next.js App Router, strict TypeScript, Tailwind CSS and Vitest.
-Selective shadcn/ui components, Playwright and Vercel deployment are planned later.
+Vercel hosts the foundation. Selective shadcn/ui components and Playwright are planned later.
 Install dependencies only when the current issue requires them.
 
 ## Getting started
@@ -135,6 +135,7 @@ owner-approved licence; public repository visibility alone is not a licence gran
 ## Documentation and reporting
 
 - [Architecture](docs/ARCHITECTURE.md): existing application and planned data flow.
+- [Deployment](docs/DEPLOYMENT.md): live URL, configuration, verification and rollback.
 - [Data limitations](docs/DATA_LIMITATIONS.md): coverage, attribution and metric constraints.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.
@@ -142,4 +143,4 @@ owner-approved licence; public repository visibility alone is not a licence gran
 
 Core setup/check commands are verified from a fresh checkout for Issue #5;
 PR validation records the environment and results. Browser layout/keyboard checks
-are separate from jsdom tests. Licence selection and initial deployment remain open decisions.
+are separate from jsdom tests. Licence selection remains an open decision.

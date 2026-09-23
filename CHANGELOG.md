@@ -7,6 +7,8 @@ published release; no release tags have been created.
 
 ### Added
 
+- Initial Vercel production deployment and configuration, live verification,
+  preview workflow and rollback documentation.
 - Contributor/agent instructions, scoped issue and PR templates, and the foundation roadmap.
 - A Next.js App Router homepage with strict TypeScript, Tailwind CSS, local branding,
   a project link and a skip-to-content link.

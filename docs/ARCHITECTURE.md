@@ -44,7 +44,8 @@ browser interaction requires them.
 
 Use strict TypeScript, npm's committed lockfile, Vitest and selective UI dependencies.
 Playwright, Zod, charts and shadcn/ui are future tools, not installed capabilities.
-Vercel deployment is Issue #6. Authentication, private repositories, a database,
+Vercel hosts the static foundation; see [deployment details](DEPLOYMENT.md).
+Authentication, private repositories, a database,
 AI, payments and social features are outside v0.1.
 
 Caching duration, API endpoint selection, pagination limits, profile schema and
