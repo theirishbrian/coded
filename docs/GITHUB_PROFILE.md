@@ -78,7 +78,11 @@ fixture in `tests/fixtures/github/user.json`, mocked fetch and controlled timers
 Tests and builds never call GitHub and need no credentials. The test-only mock of
 `server-only` allows ordinary Node execution; Next.js enforces that marker in app
 builds. This module is not wired into any route yet, so a successful preview does
-not prove live GitHub retrieval. No live API smoke check is part of this issue.
+not prove live GitHub retrieval. On 24 September 2026, a separate one-off local
+check called the actual function against the public `theirishbrian` account and
+verified successful mapping and the expected username/profile URL. It used no
+token; the temporary live test was removed afterward. This confirms local live
+retrieval, not deployment-host networking or every upstream failure mode.
 
 Official references checked for this implementation:
 [Get a user](https://docs.github.com/en/rest/users/users#get-a-user),
