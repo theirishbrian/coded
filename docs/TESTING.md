@@ -27,10 +27,10 @@ can select Node with `// @vitest-environment node` at the top of their test file
 Keep tests independent of execution order, wall-clock time and randomness; use
 fixed inputs and restore any fake timers after use.
 
-## Future GitHub adapter tests
+## GitHub adapter tests
 
 Normal tests must run without network access, credentials or live GitHub data.
-When an adapter exists, add small, synthetic JSON fixtures under
+The profile boundary suite runs in Node and uses small, synthetic JSON fixtures under
 `tests/fixtures/github/`. Include only fields relevant to the test; never copy
 tokens, private data or a live account's changing activity. Create fresh fixture
 objects for each test so mutations cannot leak across cases.
@@ -38,7 +38,8 @@ objects for each test so mutations cannot leak across cases.
 Override `fetch` in the individual test with `vi.stubGlobal("fetch", vi.fn(...))`
 returning a fixture-backed `Response`, or mock the adapter boundary for profile/UI
 tests. Cover success, empty/missing data, malformed responses, rate limits and
-network failures when those behaviours are implemented. The default fetch guard
+network failures. The current suite also exercises timeouts before headers and during
+body consumption, non-user accounts, safe URLs and discarded raw fields. The default fetch guard
 is not a network sandbox: any future HTTP client or other transport also needs an
 explicit mock. Do not add production API logic just to exercise this setup.
 

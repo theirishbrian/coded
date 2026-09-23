@@ -1,7 +1,12 @@
 # Data and metric limitations
 
-Coded does not collect GitHub data or calculate metrics yet. These are constraints
-for the planned public-profile feature, not claims about implemented coverage.
+Coded has a server-only public account retrieval boundary, currently disconnected
+from the homepage. It does not retrieve activity or calculate metrics. These are
+constraints for the profile feature, not claims of complete coverage.
+
+The [current boundary](GITHUB_PROFILE.md) preserves missing optional values as null
+and labels counts as public API reports. GitHub can return zero follower/following
+counts for private profiles; reported zero does not prove the actual total is zero.
 
 - Public activity is only a partial record of someone's work. Private, offline,
   non-GitHub and inaccessible contributions are outside this scope. A missing
@@ -21,6 +26,6 @@ for the planned public-profile feature, not claims about implemented coverage.
   behaviour. It must be reproducible from its stated inputs and must not claim
   objective developer quality or invent a proficiency score.
 
-Later implementation issues must verify actual GitHub API semantics and limits
+Each implementation issue must verify actual GitHub API semantics and limits
 against current official documentation. Do not treat this page as an API contract
 or claim that a proposed metric is already available.

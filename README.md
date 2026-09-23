@@ -8,8 +8,9 @@ activity into a clear, shareable profile.
 ## Status
 
 A minimal Next.js homepage is live at <https://coded-beryl.vercel.app/> and runs
-locally. It identifies Coded and links to this repository; public profiles and
-GitHub data integration are not implemented. GitHub Actions runs quality checks
+locally. It identifies Coded and links to this repository; public profile pages
+are not implemented. A tested server-only GitHub account retrieval
+boundary is available but is not connected to the homepage. GitHub Actions runs quality checks
 on pull requests and main. No versioned release has been published.
 
 ## v0.1 direction
@@ -113,10 +114,11 @@ recommended branch-protection checks.
 - vitest.config.mts: test discovery, jsdom and source alias configuration.
 - eslint.config.mjs and .prettierrc.json: lint and formatting policy.
 - .github/workflows/ci.yml: automated quality checks.
+- lib/github/ and lib/profile/: validated public account retrieval and Coded model mapping.
 - docs/: architecture, data limitations, roadmap, testing and CI guidance.
 
 No client components, API calls, remote fonts or UI libraries are needed for this
-page. Future components/ and lib/ modules will be added only when an issue needs
+page. Future components/ and additional lib/ modules will be added only when an issue needs
 them. Dependencies use exact versions; TypeScript stays on the established 5.9
 line for this initial scaffold. See package.json and the lockfile for exact versions.
 
@@ -136,6 +138,7 @@ owner-approved licence; public repository visibility alone is not a licence gran
 
 - [Architecture](docs/ARCHITECTURE.md): existing application and planned data flow.
 - [Deployment](docs/DEPLOYMENT.md): live URL, configuration, verification and rollback.
+- [GitHub profile boundary](docs/GITHUB_PROFILE.md): server-only retrieval, errors and coverage.
 - [Data limitations](docs/DATA_LIMITATIONS.md): coverage, attribution and metric constraints.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.

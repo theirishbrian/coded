@@ -1,0 +1,12 @@
+{
+  "id": 123,
+  "type": "User",
+  "login": "sample-dev",
+  "name": "Sample Developer",
+  "bio": "Synthetic test fixture",
+  "avatar_url": "https://avatars.githubusercontent.com/u/123?v=4",
+  "html_url": "https://github.com/sample-dev",
+  "public_repos": 5,
+  "followers": 0,
+  "following": 2
+}
