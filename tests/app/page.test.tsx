@@ -1,8 +1,12 @@
 import { render, screen, within } from "@testing-library/react";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import Home from "@/app/page";
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }),
+  usePathname: () => "/",
+}));
 
-test("introduces Coded and makes the foundation status clear", () => {
+test("introduces Coded and offers a public username lookup", () => {
   render(<Home />);
 
   expect(
@@ -11,7 +15,12 @@ test("introduces Coded and makes the foundation status clear", () => {
       name: /^Your work\.\s*Your progress\.\s*Proven\.$/,
     }),
   ).toBeInTheDocument();
-  expect(screen.getByText("Public profiles are coming later.")).toBeVisible();
+  expect(
+    screen.getByRole("textbox", { name: "GitHub username" }),
+  ).toBeVisible();
+  expect(
+    screen.getByText("Activity and repository insights are coming later."),
+  ).toBeVisible();
 });
 
 test("directs visitors to the public project repository", () => {

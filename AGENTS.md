@@ -25,7 +25,7 @@ Licence selection remains an owner decision; do not add LICENSE by assumption.
 
 - Next.js App Router, TypeScript with strict mode, and Tailwind CSS.
 - Use shadcn/ui selectively when a component is needed. Vitest is the unit/integration
-  test choice; Playwright is planned later in v0.1. Zod and charts belong to the
+  test choice; Playwright covers the public lookup journey. Zod and charts belong to the
   relevant validation/visualisation issues, not the initial scaffold.
 - Prefer Server Components. Add client boundaries only for browser interaction.
 - Keep routes/composition in app/, reusable UI in components/, GitHub access in

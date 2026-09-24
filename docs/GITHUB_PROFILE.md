@@ -1,7 +1,8 @@
 # Public GitHub profile boundary
 
 Issue #14 adds `getPublicProfile(input)` in `lib/profile/get-profile.ts`. It is a
-server-only function, not a public route or a homepage feature. It returns a
+server-only function. Issue #16 connects it to `/u/[username]` through the
+`lookupProfile` cache/request-policy wrapper. The base function returns a
 discriminated result: `success` with a Coded-owned profile, or a failure `kind`.
 The transport lives in `lib/github/get-user.ts`; runtime payload validation lives
 in `lib/github/user.ts`. The `server-only` marker prevents client imports in Next.js.
@@ -58,11 +59,13 @@ denied. No raw upstream error bodies or exception messages reach callers.
 
 ## Freshness and coverage
 
-Every request explicitly uses `cache: "no-store"`; there is no application cache,
-failure cache or stale fallback. Successful results record the source endpoint,
-retrieval completion time and `coverage: "public-api-reported"`. This is a deliberate
-initial boundary policy, not a high-traffic production strategy. Add a reviewed
-cache/rate-limit policy before wiring a public lookup interface.
+Every adapter request explicitly uses `cache: "no-store"`. The public route's
+wrapper caches only successful Coded models for five minutes, preserving the
+source endpoint, retrieval completion time and `coverage: "public-api-reported"`.
+There is no stale fallback or cached failure. The wrapper shares same-username
+in-flight requests and bounds upstream starts/concurrency, including a cooldown
+after rate limits. See [decision 0002](decisions/0002-public-lookup-cache.md) for
+exact limits and the lack of cross-instance coordination.
 
 Unauthenticated GitHub requests share a primary allowance of 60 per hour per
 originating IP; secondary limits also apply. Shared hosting may share this allowance.
@@ -77,8 +80,8 @@ metrics. No private data, repositories or activity history are retrieved.
 fixture in `tests/fixtures/github/user.json`, mocked fetch and controlled timers.
 Tests and builds never call GitHub and need no credentials. The test-only mock of
 `server-only` allows ordinary Node execution; Next.js enforces that marker in app
-builds. This module is not wired into any route yet, so a successful preview does
-not prove live GitHub retrieval. On 24 September 2026, a separate one-off local
+builds. Fixture browser tests cover the route but cannot prove live GitHub
+retrieval. On 24 September 2026, a separate one-off local
 check called the actual function against the public `theirishbrian` account and
 verified successful mapping and the expected username/profile URL. It used no
 token; the temporary live test was removed afterward. This confirms local live

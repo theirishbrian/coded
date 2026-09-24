@@ -7,6 +7,11 @@ published release; no release tags have been created.
 
 ### Added
 
+- Public username form and shareable basic profile pages with loading/error states,
+  source/freshness labels, missing-data handling and keyboard/mobile support.
+- Five-minute success cache, duplicate-request sharing and bounded per-instance
+  requests/cooldown, with explicit multi-instance limitations.
+- Deterministic cache/UI tests and fixture-backed Playwright browser checks in CI.
 - Server-only public GitHub account retrieval with runtime validation, explicit
   failures, Coded profile mapping, coverage metadata and deterministic fixture tests.
 - Initial Vercel production deployment and configuration, live verification,

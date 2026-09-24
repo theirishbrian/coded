@@ -5,16 +5,20 @@ The workflow is named **CI** and its single job/check is **Quality checks**
 (shown in PR checks as `CI / Quality checks`). It installs dependencies once,
 then runs these named steps in order:
 
-| Step             | Command                |
-| ---------------- | ---------------------- |
-| Check formatting | `npm run format:check` |
-| Lint             | `npm run lint`         |
-| Check types      | `npm run typecheck`    |
-| Test             | `npm test`             |
-| Build            | `npm run build`        |
+| Step             | Command                                       |
+| ---------------- | --------------------------------------------- |
+| Check formatting | `npm run format:check`                        |
+| Lint             | `npm run lint`                                |
+| Check types      | `npm run typecheck`                           |
+| Test             | `npm test`                                    |
+| Build            | `npm run build`                               |
+| Install browser  | `npx playwright install --with-deps chromium` |
+| Browser tests    | `npm run test:e2e`                            |
 
 A failed command fails the job and skips later steps. Tests run once; empty and
-failing suites return non-zero. Use the Checks tab on a PR or the repository's
+failing suites return non-zero. Browser tests start the production build with a
+test-only synthetic GitHub transport; they require no live profile data or secrets.
+Use the Checks tab on a PR or the repository's
 [Actions page](https://github.com/theirishbrian/coded/actions/workflows/ci.yml)
 to inspect the failed step and its logs. Reproduce it locally using the same
 runtime and commands. Fix the cause and push a commit to trigger a new PR run.

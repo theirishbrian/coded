@@ -18,15 +18,16 @@ Issues #1–#6 are delivered and merged. The initial Vercel deployment is live;
 its configuration and [verification](DEPLOYMENT.md) are recorded in the repository.
 GitHub issues are the source of truth for current open/closed status.
 
-The next scoped task is [public account retrieval (#14)](https://github.com/theirishbrian/coded/issues/14):
-a tested server-only data boundary, with no profile pages or repository/activity
-analysis. Its completion is tracked in its PR/issue. See [the contract](GITHUB_PROFILE.md).
+[Public account retrieval (#14)](https://github.com/theirishbrian/coded/issues/14)
+is merged. [Public lookup and basic profile pages (#16)](https://github.com/theirishbrian/coded/issues/16)
+connect that boundary to a shareable profile with cache/request controls and browser
+tests. Its PR/issue tracks review and deployment. See [the contract](GITHUB_PROFILE.md).
 
 ## Later v0.1 work
 
-Scope later issues as the foundation lands: GitHub access and error handling,
-cache/data coverage policies, transformation into Coded models, transparent
-repository ranking, profile UI, responsive/accessibility checks and end-to-end tests.
+Scope later issues for repository/activity coverage, pagination, useful public
+insights and transparent repository ranking. Extend the existing profile UI,
+responsive/accessibility checks and end-to-end tests alongside each feature.
 Do not create or implement a speculative backlog during foundation setup.
 
 Completing the six foundation issues does not complete v0.1. Release requires the
