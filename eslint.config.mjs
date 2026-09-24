@@ -20,6 +20,8 @@ export default defineConfig([
     "out/**",
     "build/**",
     "coverage/**",
+    "playwright-report/**",
+    "test-results/**",
     ".vercel/**",
     "next-env.d.ts",
   ]),

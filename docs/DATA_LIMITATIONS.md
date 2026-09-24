@@ -1,8 +1,8 @@
 # Data and metric limitations
 
-Coded has a server-only public account retrieval boundary, currently disconnected
-from the homepage. It does not retrieve activity or calculate metrics. These are
-constraints for the profile feature, not claims of complete coverage.
+Coded shows basic public account details through a server-only retrieval boundary.
+It does not retrieve activity or calculate quality metrics. A result is an account
+snapshot, not a complete record of someone's work.
 
 The [current boundary](GITHUB_PROFILE.md) preserves missing optional values as null
 and labels counts as public API reports. GitHub can return zero follower/following
@@ -13,10 +13,13 @@ counts for private profiles; reported zero does not prove the actual total is ze
   public record must not be presented as evidence that no work occurred.
 - Missing, unavailable and zero are distinct states. Rate limits, failed requests,
   pagination bounds and account/repository visibility can limit a result. Future
-  profiles must expose those limits rather than silently showing zero or a complete history.
+  profiles must continue to expose those limits rather than silently showing zero or a complete history.
 - Record the source, retrieval time, time window and any sampling/pagination limits
   for displayed data. Cached information needs a visible freshness policy. Exact
-  coverage and retention policies are still to be decided.
+  account snapshots are reused for up to five minutes and show their original
+  retrieval time. Failures are not cached. Cache and request budgets are local to
+  each server process; cold starts, multiple workers and regions do not share them.
+  They cannot guarantee GitHub's IP-wide allowance on shared hosting.
 - Repository language usage describes code in repositories. It is not a measure
   of a person's proficiency, and does not by itself establish authorship.
 - Commit counts, stars and other activity/popularity signals are not direct

@@ -7,11 +7,11 @@ activity into a clear, shareable profile.
 
 ## Status
 
-A minimal Next.js homepage is live at <https://coded-beryl.vercel.app/> and runs
-locally. It identifies Coded and links to this repository; public profile pages
-are not implemented. A tested server-only GitHub account retrieval
-boundary is available but is not connected to the homepage. GitHub Actions runs quality checks
-on pull requests and main. No versioned release has been published.
+The application accepts a public GitHub username and shows basic account details
+at a shareable `/u/username` address. Results include attribution, retrieval time,
+missing-data labels and a five-minute freshness policy. Repository/activity analysis
+is not implemented. The production URL is <https://coded-beryl.vercel.app/>;
+open PRs run on previews until merged. No versioned release has been published.
 
 ## v0.1 direction
 
@@ -23,8 +23,8 @@ Language usage describes repositories, not developer proficiency.
 No accounts, database, AI, payments, social features or private repositories in v0.1.
 Any example custom domain in planning is illustrative; the live URL is listed above.
 
-Implemented stack: Next.js App Router, strict TypeScript, Tailwind CSS and Vitest.
-Vercel hosts the foundation. Selective shadcn/ui components and Playwright are planned later.
+Implemented stack: Next.js App Router, strict TypeScript, Tailwind CSS, Vitest and Playwright.
+Vercel hosts the application. Selective shadcn/ui components are planned later.
 Install dependencies only when the current issue requires them.
 
 ## Getting started
@@ -43,9 +43,9 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. No environment variables, tokens or external services
-are required to run the application. Installation requires internet access to
-download packages. Stop the server with Ctrl+C. Keep the terminal/server running
+Open http://localhost:3000. No environment variables or tokens are required.
+Profile lookup requires access to the public GitHub API; installation downloads
+packages. Stop the server with Ctrl+C. Keep the terminal/server running
 while viewing the page; closing it makes localhost unavailable.
 
 If port 3000 is occupied, use `npm run dev -- --port 3001` and open
@@ -61,6 +61,8 @@ Validate and run the production build:
 ```sh
 npm run typecheck
 npm run build
+npx playwright install chromium
+npm run test:e2e
 npm start
 ```
 
@@ -95,8 +97,10 @@ consistency. TypeScript strict mode remains enabled.
 
 The configuration follows the [Next.js ESLint guide](https://nextjs.org/docs/app/api-reference/config/eslint)
 and [Prettier setup guide](https://prettier.io/docs/install).
-Vitest now runs deterministic homepage smoke tests with React Testing Library and
-jsdom. `npm test` runs once and fails for failing or empty suites;
+Vitest runs deterministic account-boundary, cache-policy and UI tests.
+Playwright checks the full browser flow against an isolated fixture server,
+including keyboard use, narrow screens and the no-JavaScript form fallback.
+`npm test` runs once and fails for failing or empty suites;
 `npm run test:watch` watches for changes. See [testing guidance](docs/TESTING.md)
 for test locations, fixture/mock conventions and Server Component limitations.
 [CI](docs/CI.md) runs these checks in the **Quality checks** job on pull requests
@@ -106,21 +110,26 @@ recommended branch-protection checks.
 ## Application structure
 
 - app/layout.tsx: shared document and metadata.
-- app/page.tsx: the single, server-rendered homepage.
+- app/page.tsx: server-rendered homepage with an interactive username form.
+- app/u/[username]/: request-time profile page, loading and error boundaries.
+- app/lookup/route.ts: native GET form redirect when JavaScript is unavailable.
+- components/: shared shell, username form and attributed profile/error UI.
 - app/globals.css: Tailwind import and global styles.
 - app/icon.svg: local application icon.
 - postcss.config.mjs and tsconfig.json: styling and strict TypeScript configuration.
 - tests/app/page.test.tsx and tests/setup.ts: homepage smoke tests and shared isolation.
 - vitest.config.mts: test discovery, jsdom and source alias configuration.
+- playwright.config.ts and tests/e2e/: isolated production-build browser checks.
 - eslint.config.mjs and .prettierrc.json: lint and formatting policy.
 - .github/workflows/ci.yml: automated quality checks.
 - lib/github/ and lib/profile/: validated public account retrieval and Coded model mapping.
 - docs/: architecture, data limitations, roadmap, testing and CI guidance.
 
-No client components, API calls, remote fonts or UI libraries are needed for this
-page. Future components/ and additional lib/ modules will be added only when an issue needs
-them. Dependencies use exact versions; TypeScript stays on the established 5.9
-line for this initial scaffold. See package.json and the lockfile for exact versions.
+Only the form and error recovery need client interaction; GitHub access remains
+server-side. The process-local cache and request limits are documented in
+[the lookup decision](docs/decisions/0002-public-lookup-cache.md). They do not
+guarantee an IP-wide quota across Vercel instances. Dependencies use exact versions;
+see package.json and the lockfile.
 
 Installation follows the [Next.js manual setup](https://nextjs.org/docs/app/getting-started/installation)
 and [Tailwind Next.js guide](https://tailwindcss.com/docs/installation/framework-guides/nextjs).

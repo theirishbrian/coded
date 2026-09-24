@@ -46,7 +46,7 @@ explicit mock. Do not add production API logic just to exercise this setup.
 ## What the homepage tests prove
 
 The smoke tests render the existing synchronous homepage and check its accessible
-heading, honest foundation status, repository link and skip-link target. There are
+heading, username form, honest scope, repository link and skip-link target. There are
 no snapshots or artificial coverage targets.
 
 This follows the [Next.js Vitest guide](https://nextjs.org/docs/app/guides/testing/vitest).
@@ -54,5 +54,35 @@ Vitest does not currently support async Server Components. jsdom also does not
 prove Next.js routing, server rendering, hydration, visual layout or browser
 fragment-navigation behaviour. The focus assertion checks that the skip target
 can receive focus; keyboard and responsive browser checks remain separate.
-Playwright coverage for full browser flows is planned later in v0.1.
+The component suite also checks form validation/navigation and profile/error
+presentation. The lookup-policy suite uses a controlled clock and deferred
+promises to check cache expiry, success-only caching, deduplication, concurrency,
+rolling request budgets and rate-limit cooldowns.
 [CI](CI.md) runs the non-interactive suite alongside lint, formatting, types and build.
+
+## Browser flows
+
+```sh
+npm run build
+npx playwright install chromium
+npm run test:e2e
+```
+
+The suite starts the production build on `127.0.0.1:3100`; keep that port free.
+On Windows with Edge installed, `$env:PLAYWRIGHT_CHANNEL='msedge'` in PowerShell
+can select Edge instead of downloading Chromium. CI installs Chromium and its
+Linux dependencies. Playwright report/trace output is ignored by Git.
+
+The server starts with the explicit test-only Node preload
+`tests/e2e/mock-github.mjs`. It substitutes synthetic API responses and rejects
+unexpected external fetches; browser avatar requests are intercepted too.
+Production code never imports this preload, and ordinary dev/start/deployment
+commands do not enable fixtures. As with the unit guard, this is transport
+isolation for the current application, not a general network sandbox.
+
+Browser cases cover submission, canonical shareable URLs, attribution, reload,
+invalid form/direct-route input, unavailable accounts, upstream failures, narrow
+layout, keyboard skip-link focus and the native form without JavaScript.
+Browser page errors are checked on the successful journey. Manual visual checks
+and an actual public-account lookup on the deployed preview remain required;
+fixture success alone does not prove deployment-host GitHub connectivity.
