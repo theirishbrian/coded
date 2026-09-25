@@ -4,7 +4,8 @@ Issue #14 adds `getPublicProfile(input)` in `lib/profile/get-profile.ts`. It is 
 server-only function. Issue #16 connects it to `/u/[username]` through the
 `lookupProfile` cache/request-policy wrapper. The base function returns a
 discriminated result: `success` with a Coded-owned profile, or a failure `kind`.
-The transport lives in `lib/github/get-user.ts`; runtime payload validation lives
+The adapter lives in `lib/github/get-user.ts`, with shared HTTP transport in
+`lib/github/get-json.ts`; runtime payload validation lives
 in `lib/github/user.ts`. The `server-only` marker prevents client imports in Next.js.
 
 ## Request contract

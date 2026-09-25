@@ -45,6 +45,12 @@ explicit mock. Do not add production API logic just to exercise this setup.
 
 ## What the homepage tests prove
 
+`tests/lib/profile/get-repositories.test.ts` uses synthetic repository fixtures
+to cover page limits, continuation validation, deduplication, null/zero semantics,
+partial failures and response-body deadlines. The existing account suite also
+guards the shared transport. Repository retrieval is not yet connected to a
+page; browser tests currently exercise account lookup only.
+
 The smoke tests render the existing synchronous homepage and check its accessible
 heading, username form, honest scope, repository link and skip-link target. There are
 no snapshots or artificial coverage targets.

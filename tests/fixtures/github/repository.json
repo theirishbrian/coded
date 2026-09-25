@@ -1,0 +1,17 @@
+{
+  "id": 501,
+  "name": "example-project",
+  "full_name": "sample-dev/example-project",
+  "owner": { "login": "sample-dev", "type": "User" },
+  "private": false,
+  "visibility": "public",
+  "html_url": "https://github.com/sample-dev/example-project",
+  "description": "Synthetic repository fixture",
+  "language": "TypeScript",
+  "stargazers_count": 0,
+  "forks_count": 2,
+  "fork": false,
+  "archived": false,
+  "updated_at": "2026-09-20T12:00:00Z",
+  "pushed_at": "2026-09-19T10:00:00Z"
+}

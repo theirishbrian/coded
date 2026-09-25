@@ -4,6 +4,13 @@ Coded shows basic public account details through a server-only retrieval boundar
 It does not retrieve activity or calculate quality metrics. A result is an account
 snapshot, not a complete record of someone's work.
 
+The separate [repository loader](GITHUB_REPOSITORIES.md), not yet shown in the UI,
+retrieves at most 300 owned public repositories. Forks and archives are preserved.
+It labels capped/interrupted coverage and deduplicates IDs, but pagination can
+still miss changes made during traversal. Owned repositories are not a complete
+contribution history; their primary language and timestamps do not prove personal
+proficiency or activity.
+
 The [current boundary](GITHUB_PROFILE.md) preserves missing optional values as null
 and labels counts as public API reports. GitHub can return zero follower/following
 counts for private profiles; reported zero does not prove the actual total is zero.

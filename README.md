@@ -9,8 +9,9 @@ activity into a clear, shareable profile.
 
 The application accepts a public GitHub username and shows basic account details
 at a shareable `/u/username` address. Results include attribution, retrieval time,
-missing-data labels and a five-minute freshness policy. Repository/activity analysis
-is not implemented. The production URL is <https://coded-beryl.vercel.app/>;
+missing-data labels and a five-minute freshness policy. A bounded server-only
+repository loader is available separately; repository display and activity analysis
+are not implemented. The production URL is <https://coded-beryl.vercel.app/>;
 open PRs run on previews until merged. No versioned release has been published.
 
 ## v0.1 direction
@@ -148,6 +149,7 @@ owner-approved licence; public repository visibility alone is not a licence gran
 - [Architecture](docs/ARCHITECTURE.md): existing application and planned data flow.
 - [Deployment](docs/DEPLOYMENT.md): live URL, configuration, verification and rollback.
 - [GitHub profile boundary](docs/GITHUB_PROFILE.md): server-only retrieval, errors and coverage.
+- [Repository boundary](docs/GITHUB_REPOSITORIES.md): bounded pagination, validation and partial results.
 - [Data limitations](docs/DATA_LIMITATIONS.md): coverage, attribution and metric constraints.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.
