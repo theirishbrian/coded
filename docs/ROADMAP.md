@@ -21,7 +21,11 @@ GitHub issues are the source of truth for current open/closed status.
 [Public account retrieval (#14)](https://github.com/theirishbrian/coded/issues/14)
 is merged. [Public lookup and basic profile pages (#16)](https://github.com/theirishbrian/coded/issues/16)
 connect that boundary to a shareable profile with cache/request controls and browser
-tests. Its PR/issue tracks review and deployment. See [the contract](GITHUB_PROFILE.md).
+tests; #16 is merged and production verified. See [the contract](GITHUB_PROFILE.md).
+
+[Bounded repository retrieval (#18)](https://github.com/theirishbrian/coded/issues/18)
+adds the next server-only data boundary. Its PR tracks review; repository display
+and combined request/cache policy remain a subsequent scoped task.
 
 ## Later v0.1 work
 

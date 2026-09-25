@@ -7,6 +7,8 @@ published release; no release tags have been created.
 
 ### Added
 
+- Server-only owned public repository retrieval with bounded pagination, validated
+  Coded models, explicit partial/capped coverage and deterministic tests. UI integration remains separate.
 - Public username form and shareable basic profile pages with loading/error states,
   source/freshness labels, missing-data handling and keyboard/mobile support.
 - Five-minute success cache, duplicate-request sharing and bounded per-instance
