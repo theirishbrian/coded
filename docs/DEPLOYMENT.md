@@ -20,7 +20,7 @@ Vercel GitHub App, with repository access limited to `coded`.
 Local development and GitHub CI use Node 24.14.0. Vercel manages the patch version
 within the selected Node major; do not claim an exact platform patch without
 checking the build logs. npm is explicitly pinned for installation. No GitHub
-token or other application secret is required by this static foundation.
+token or other application secret is required. The homepage is prerendered; public profiles and repository requests run on the server at request time. Shared budgets and process-local caches are described in [decision 0004](decisions/0004-repository-display-policy.md).
 
 ## Deployment record
 
@@ -40,7 +40,7 @@ The initial production deployment was verified on 23 September 2026:
   `main`, and the repository link received visible focus with the correct URL.
 
 No application environment variables or custom domain were added. This deploys
-the existing static foundation; public profiles are not implemented. Rollback
+the original static foundation. Subsequent merged changes added public account lookup; repository display is delivered through Issue #20 and its preview until merged. Rollback
 is documented below but was not exercised against the initial production site.
 
 ## Preview and production workflow
@@ -48,7 +48,7 @@ is documented below but was not exercised against the initial production site.
 With the Git integration connected, pushes to non-production branches create
 preview deployments and pushes to `main` create production deployments. Preview
 URLs may require Vercel authentication; preserve that protection. The production
-URL is intended to show the public foundation homepage.
+URL serves the latest merged application. A feature in an open PR is only available on its preview.
 
 GitHub's Quality checks and Vercel builds are separate checks. Do not assume a
 successful Vercel build proves lint or tests passed, or that Vercel automatically
@@ -81,8 +81,10 @@ the old build's configuration; it does not pick up new environment-variable valu
 - Use the keyboard to reveal the skip link, activate it and verify focus reaches
   the main content; verify the repository link can receive visible focus.
 - Check for browser errors and inspect available deployment/build logs.
-- Keep product limitations explicit: this is a foundation, not public profiles or
-  a completed v0.1 release.
+- Submit a real personal GitHub username on the preview and check account and
+  repository data, links, loading feedback and console errors. Fixture tests do
+  not prove deployment-host GitHub access.
+- Keep coverage and freshness limits explicit; this is not a completed v0.1 release.
 
 References: [Git deployments](https://vercel.com/docs/git),
 [Node versions](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions),

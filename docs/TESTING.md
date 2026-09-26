@@ -48,8 +48,7 @@ explicit mock. Do not add production API logic just to exercise this setup.
 `tests/lib/profile/get-repositories.test.ts` uses synthetic repository fixtures
 to cover page limits, continuation validation, deduplication, null/zero semantics,
 partial failures and response-body deadlines. The existing account suite also
-guards the shared transport. Repository retrieval is not yet connected to a
-page; browser tests currently exercise account lookup only.
+guards the shared transport. Service tests exercise account eligibility, canonical names, every-page budgets, nested cooldowns and independent caches. Repository component tests distinguish coverage, null/zero values and disclosure.
 
 The smoke tests render the existing synchronous homepage and check its accessible
 heading, username form, honest scope, repository link and skip-link target. There are
@@ -88,7 +87,7 @@ isolation for the current application, not a general network sandbox.
 
 Browser cases cover submission, canonical shareable URLs, attribution, reload,
 invalid form/direct-route input, unavailable accounts, upstream failures, narrow
-layout, keyboard skip-link focus and the native form without JavaScript.
+layout, keyboard skip-link focus and the native form without JavaScript. Repository cases cover deferred loading after account display, keyboard disclosure without another network request, retained accounts on repository failure, and distinct empty/partial states.
 Browser page errors are checked on the successful journey. Manual visual checks
 and an actual public-account lookup on the deployed preview remain required;
 fixture success alone does not prove deployment-host GitHub connectivity.

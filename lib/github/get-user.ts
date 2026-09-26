@@ -1,7 +1,11 @@
 import "server-only";
 import { normalizeUsername } from "./username";
 import { parseGitHubUser, type GitHubUser } from "./user";
-import { getGitHubJson, type GitHubFailure } from "./get-json";
+import {
+  getGitHubJson,
+  type GitHubFailure,
+  type GitHubRequest,
+} from "./get-json";
 export type { GitHubFailure } from "./get-json";
 
 export type GitHubUserResult =
@@ -13,11 +17,14 @@ export type GitHubUserResult =
     }
   | GitHubFailure;
 
-export async function getGitHubUser(input: unknown): Promise<GitHubUserResult> {
+export async function getGitHubUser(
+  input: unknown,
+  request: GitHubRequest = getGitHubJson,
+): Promise<GitHubUserResult> {
   const username = normalizeUsername(input);
   if (!username) return { kind: "invalid_input" };
   const sourceUrl = `https://api.github.com/users/${username}`;
-  const result = await getGitHubJson(sourceUrl);
+  const result = await request(sourceUrl);
   if (result.kind !== "success") return result;
   const parsed = parseGitHubUser(result.payload);
   if (parsed.kind !== "user") return parsed;

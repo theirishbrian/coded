@@ -1,31 +1,70 @@
 // Loaded only by the explicit browser-test server command, never by the app.
 import { readFileSync } from "node:fs";
-const fixture = JSON.parse(
-  readFileSync(
-    new URL("../fixtures/github/user.json", import.meta.url),
-    "utf8",
-  ),
-);
+const readFixture = (name) =>
+  JSON.parse(
+    readFileSync(
+      new URL(`../fixtures/github/${name}.json`, import.meta.url),
+      "utf8",
+    ),
+  );
+const user = readFixture("user");
+const repository = readFixture("repository");
 const nativeFetch = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
   const url = new URL(
     typeof input === "string" || input instanceof URL ? input : input.url,
   );
   if (url.hostname === "api.github.com") {
-    const username = url.pathname.split("/").at(-1);
-    if (username === "missing-user")
-      return Response.json({ message: "Not Found" }, { status: 404 });
+    const username = url.pathname.split("/")[2];
+    if (username === "missing-user") return Response.json({}, { status: 404 });
     if (username === "broken-user") return Response.json({}, { status: 503 });
-    if (username === "rate-user")
-      return Response.json(
-        {},
-        { status: 429, headers: { "retry-after": "60" } },
-      );
-    if (username !== "sample-dev")
+    if (
+      !["sample-dev", "repo-failure", "empty-dev", "partial-dev"].includes(
+        username,
+      )
+    )
       throw new Error("Unexpected fixture username");
-    // Make the loading state observable without depending on external latency.
+    if (url.pathname.endsWith("/repos")) {
+      // Separate account and repository loading must be observable in a browser.
+      await new Promise((resolve) => setTimeout(resolve, 900));
+      if (
+        username === "repo-failure" ||
+        (username === "partial-dev" && url.searchParams.get("page") === "2")
+      )
+        return Response.json({}, { status: 503 });
+      if (username === "empty-dev") return Response.json([]);
+      const repositories = Array.from(
+        { length: username === "partial-dev" ? 1 : 14 },
+        (_, i) => {
+          const name = `repo-${String(i + 1).padStart(2, "0")}`;
+          return {
+            ...repository,
+            id: i + 1,
+            name,
+            full_name: `${username}/${name}`,
+            owner: { login: username, type: "User" },
+            html_url: `https://github.com/${username}/${name}`,
+            description: i === 0 ? null : repository.description,
+            fork: i === 0,
+            archived: i === 0,
+          };
+        },
+      );
+      const headers = {};
+      if (username === "partial-dev") {
+        const next = new URL(url);
+        next.searchParams.set("page", "2");
+        headers.Link = `<${next}>; rel="next"`;
+      }
+      return Response.json(repositories, { headers });
+    }
     await new Promise((resolve) => setTimeout(resolve, 350));
-    return Response.json(fixture);
+    return Response.json({
+      ...user,
+      login: username,
+      html_url: `https://github.com/${username}`,
+      public_repos: username === "empty-dev" ? 0 : 14,
+    });
   }
   if (url.hostname === "127.0.0.1" || url.hostname === "localhost")
     return nativeFetch(input, init);

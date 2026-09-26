@@ -65,7 +65,7 @@ wrapper caches only successful Coded models for five minutes, preserving the
 source endpoint, retrieval completion time and `coverage: "public-api-reported"`.
 There is no stale fallback or cached failure. The wrapper shares same-username
 in-flight requests and bounds upstream starts/concurrency, including a cooldown
-after rate limits. See [decision 0002](decisions/0002-public-lookup-cache.md) for
+after rate limits. Account and repository calls now share the gate; see [decision 0004](decisions/0004-repository-display-policy.md) for
 exact limits and the lack of cross-instance coordination.
 
 Unauthenticated GitHub requests share a primary allowance of 60 per hour per
@@ -73,7 +73,7 @@ originating IP; secondary limits also apply. Shared hosting may share this allow
 Private profiles can return zero follower/following counts to unauthenticated
 callers. Those values cannot establish actual totals or absence of work. Public
 repository counts are not repository enumeration, contribution counts or quality
-metrics. No private data, repositories or activity history are retrieved.
+metrics. This account adapter retrieves no repository inventory or activity history; the separate repository adapter now supplies the profile repository section. No private data is retrieved.
 
 ## Validation
 

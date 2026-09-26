@@ -24,8 +24,7 @@ connect that boundary to a shareable profile with cache/request controls and bro
 tests; #16 is merged and production verified. See [the contract](GITHUB_PROFILE.md).
 
 [Bounded repository retrieval (#18)](https://github.com/theirishbrian/coded/issues/18)
-adds the next server-only data boundary. Its PR tracks review; repository display
-and combined request/cache policy remain a subsequent scoped task.
+is merged. [Repository display (#20)](https://github.com/theirishbrian/coded/issues/20) connects it with shared request controls, separate success caches, honest coverage states and accessible cards. Its PR tracks review and preview verification; production changes only after merge.
 
 ## Later v0.1 work
 

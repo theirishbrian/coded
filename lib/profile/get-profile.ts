@@ -1,5 +1,6 @@
 import "server-only";
 import { getGitHubUser, type GitHubFailure } from "../github/get-user";
+import type { GitHubRequest } from "../github/get-json";
 
 export interface PublicProfile {
   accountId: number;
@@ -22,8 +23,9 @@ export type ProfileResult =
 
 export async function getPublicProfile(
   username: unknown,
+  request?: GitHubRequest,
 ): Promise<ProfileResult> {
-  const result = await getGitHubUser(username);
+  const result = await getGitHubUser(username, request);
   if (result.kind !== "success") return result;
   const user = result.user;
   return {

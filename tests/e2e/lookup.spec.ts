@@ -33,7 +33,10 @@ test("keyboard submit leads to a shareable attributed profile", async ({
   await expect(
     page.getByRole("link", { name: "View on GitHub" }),
   ).toHaveAttribute("href", "https://github.com/sample-dev");
-  await expect(page.getByText(/Retrieved/)).toBeVisible();
+  await expect(page.getByText(/Retrieved/).first()).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "repo-01", exact: true }),
+  ).toBeVisible();
   await page.reload();
   await expect(
     page.getByRole("heading", { name: "Sample Developer", exact: true }),
@@ -80,6 +83,9 @@ test("mobile profile stays within the viewport", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Sample Developer", exact: true }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "repo-12", exact: true }),
+  ).toBeVisible();
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -103,5 +109,72 @@ test("native form works without JavaScript", async ({ browser }) => {
   await expect(
     page.getByRole("heading", { name: "Sample Developer", exact: true }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", {
+      name: "view repositories on GitHub",
+      exact: true,
+    }),
+  ).toHaveAttribute("href", "https://github.com/sample-dev?tab=repositories");
   await context.close();
+});
+
+test("repository disclosure works by keyboard without another request", async ({
+  page,
+}) => {
+  await page.goto("/u/sample-dev");
+  await expect(
+    page.getByRole("link", { name: "repo-01", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "repo-13", exact: true }),
+  ).not.toBeVisible();
+  const summary = page.locator("summary");
+  await summary.focus();
+  await expect(summary).toBeFocused();
+  const requests: string[] = [];
+  page.on("request", (request) => requests.push(request.url()));
+  await summary.press("Enter");
+  await expect(
+    page.getByRole("link", { name: "repo-14", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "repo-14", exact: true }),
+  ).toHaveAttribute("href", "https://github.com/sample-dev/repo-14");
+  expect(requests).toEqual([]);
+});
+
+test("account remains usable while repositories load and after they fail", async ({
+  page,
+}) => {
+  await page.goto("/u/repo-failure", { waitUntil: "commit" });
+  await expect(
+    page.getByRole("heading", { name: "Sample Developer", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("status").filter({ hasText: "Loading public repositories" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Repository data unavailable" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "View on GitHub" }),
+  ).toHaveAttribute("href", "https://github.com/repo-failure");
+  await expect(page.getByRole("textbox")).toBeEnabled();
+});
+
+test("empty and interrupted repository views are distinct", async ({
+  page,
+}) => {
+  await page.goto("/u/empty-dev");
+  await expect(
+    page.getByText("No owned public repositories were returned by GitHub."),
+  ).toBeVisible();
+  await page.goto("/u/partial-dev");
+  await expect(page.getByText(/Incomplete results:/)).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "repo-01", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/This incomplete result is not cached/),
+  ).toBeVisible();
 });

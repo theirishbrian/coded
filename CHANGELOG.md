@@ -7,8 +7,11 @@ published release; no release tags have been created.
 
 ### Added
 
+- Profile repository cards with source/freshness labels, independent loading and failure states, native disclosure after 12 cards, and fork/archive and missing-data labels.
+- Shared limits for account requests and each repository page, independent success caches, and integration/browser coverage for interruptions and disclosure.
+
 - Server-only owned public repository retrieval with bounded pagination, validated
-  Coded models, explicit partial/capped coverage and deterministic tests. UI integration remains separate.
+  Coded models, explicit partial/capped coverage and deterministic tests.
 - Public username form and shareable basic profile pages with loading/error states,
   source/freshness labels, missing-data handling and keyboard/mobile support.
 - Five-minute success cache, duplicate-request sharing and bounded per-instance

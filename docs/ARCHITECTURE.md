@@ -17,8 +17,7 @@ caller-facing model and lookup policy.
 
 A separate [repository loader](GITHUB_REPOSITORIES.md) retrieves up to three pages
 of owned public repositories with validated models and explicit capped/partial
-coverage. It is not connected to the profile page. Both adapters share safe
-HTTP/JSON transport; existing public account lookup behavior is unchanged.
+coverage. After account validation, a separate Suspense section renders repositories. Both adapters share a per-request budget and cooldown, with independent success caches.
 
 The request path is browser → Next.js profile route → lookup policy → GitHub
 adapter → validated Coded model → attributed profile. `connection()` keeps the
@@ -66,7 +65,7 @@ its narrow contract is documented in [GITHUB_PROFILE.md](GITHUB_PROFILE.md).
 The public route adds a five-minute success cache, same-key request sharing and
 per-instance request limits; see [decision 0002](decisions/0002-public-lookup-cache.md).
 Repository pagination is bounded by [decision 0003](decisions/0003-bounded-repository-retrieval.md).
-Repository UI integration, combined request budgets, other endpoints and ranking remain unimplemented.
+Repository display and combined budgets are defined in [decision 0004](decisions/0004-repository-display-policy.md). Other endpoints and ranking remain unimplemented.
 Record material decisions in `docs/decisions/`
 when made; do not create speculative architecture or claim a finished scoring model.
 Use the [data limitations](DATA_LIMITATIONS.md) as requirements for later work.
