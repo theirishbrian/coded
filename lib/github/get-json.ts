@@ -2,6 +2,7 @@ import "server-only";
 import { isRateLimitMessage } from "./user";
 
 export type GitHubFailure =
+  | { kind: "busy"; retryAfterSeconds: number }
   | {
       kind:
         | "invalid_input"
@@ -19,7 +20,7 @@ export type GitHubFailure =
       resetAt: string | null;
     };
 
-type GitHubJsonResult =
+export type GitHubJsonResult =
   | {
       kind: "success";
       payload: unknown;
@@ -27,6 +28,8 @@ type GitHubJsonResult =
       retrievedAt: string;
     }
   | GitHubFailure;
+
+export type GitHubRequest = (url: string) => Promise<GitHubJsonResult>;
 
 function seconds(header: string | null): number | null {
   if (header === null || !/^\d+$/.test(header)) return null;

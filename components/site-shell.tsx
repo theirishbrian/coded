@@ -30,7 +30,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
       </main>
       <footer className="flex flex-col gap-2 border-t border-white/15 py-6 text-sm text-[#b9beb6] sm:flex-row sm:justify-between">
         <p>Public data. A starting point.</p>
-        <p>Activity and repository insights are coming later.</p>
+        <p>
+          Public profiles and repositories. Deeper insights are coming later.
+        </p>
       </footer>
     </div>
   );

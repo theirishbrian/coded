@@ -9,9 +9,7 @@ activity into a clear, shareable profile.
 
 The application accepts a public GitHub username and shows basic account details
 at a shareable `/u/username` address. Results include attribution, retrieval time,
-missing-data labels and a five-minute freshness policy. A bounded server-only
-repository loader is available separately; repository display and activity analysis
-are not implemented. The production URL is <https://coded-beryl.vercel.app/>;
+missing-data labels and a five-minute freshness policy. Profiles also display owned public repositories, with explicit capped/interrupted coverage and keyboard-accessible disclosure. Activity analysis is not implemented. The production URL is <https://coded-beryl.vercel.app/>;
 open PRs run on previews until merged. No versioned release has been published.
 
 ## v0.1 direction
@@ -128,7 +126,7 @@ recommended branch-protection checks.
 
 Only the form and error recovery need client interaction; GitHub access remains
 server-side. The process-local cache and request limits are documented in
-[the lookup decision](docs/decisions/0002-public-lookup-cache.md). They do not
+[the lookup decision](docs/decisions/0004-repository-display-policy.md). They do not
 guarantee an IP-wide quota across Vercel instances. Dependencies use exact versions;
 see package.json and the lockfile.
 

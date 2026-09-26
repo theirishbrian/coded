@@ -1,7 +1,7 @@
 # Public repository retrieval
 
 Issue #18 adds server-only `getPublicRepositories(input)` in
-`lib/profile/get-repositories.ts`. No public route calls it yet. Both account and
+`lib/profile/get-repositories.ts`. Issue #20 connects it through the shared profile service. Both account and
 repository loaders share `lib/github/get-json.ts` for HTTP/JSON handling.
 
 ## Requests and validation
@@ -11,7 +11,7 @@ Normalize usernames using the existing policy. Request
 `direction=asc`, `per_page=100` and successive page numbers. Fetch at most three
 pages sequentially (300 items before deduplication), with five seconds per request
 including response-body reading. Headers/API version match the account boundary.
-No credentials, redirects, retries, framework cache or application cache are used.
+The raw loader uses no credentials, redirects, retries or cache. The public service supplies the shared request gate and a separate success cache.
 Invalid input makes no request.
 
 The Link header controls continuation even for a short page. No next link means
@@ -27,7 +27,7 @@ update/push timestamps, and required fork/archive flags. Preserve missing values
 as null and reported zero as zero; discard unrelated fields. Malformed items
 reject their entire page. Forks and archives remain labelled, without ranking.
 
-The future caller must verify personal-account eligibility using the existing
+The public service verifies personal-account eligibility using the existing
 account boundary. An empty repository list cannot identify account type;
 non-User or mismatched owners in returned items are rejected.
 
@@ -53,19 +53,18 @@ history. These are owned public repositories, not all work the person contribute
 to. Stars, forks and timestamps do not prove skill, authorship or personal activity.
 Primary language is reported metadata, not a language breakdown or proficiency.
 
-## Public integration gate
+## Public integration
 
-Before wiring this loader into a page, budget all account/repository requests
-together, honor cooldown hints and define caching for complete/capped results
-separately from interrupted results. The current profile limiter does not cover
-this unused loader. Repeated calls are not globally rate-limited. No token,
-paid infrastructure, new dependency or persistence is added.
+The public service budgets account requests and every repository page together.
+Its independent account/repository caches retain only successes for five minutes;
+capped successes keep their labels, interrupted results and failures are not cached.
+Cooldown applies even when rate limiting interrupts a later page. See
+[decision 0004](decisions/0004-repository-display-policy.md) for exact controls and
+multi-instance limits. No token, paid infrastructure or persistence is added.
 
-Tests cover mapping, validation, empty results, pagination/cap/deduplication,
-hostile links, partial failures and timeouts including body reads. The existing
-account tests guard the shared transport extraction. CI uses synthetic fixtures.
-Any separate local live check is recorded in the PR; it does not prove deployment-
-host repository retrieval because this loader is not routed publicly.
+The UI shows 12 cards, with native disclosure for the remaining fetched items,
+explicit empty/unavailable/capped/partial states, source links and retrieval time.
+Normal tests use synthetic fixtures; live preview evidence is recorded in the PR.
 
 Official references checked 25 September 2026:
 [List repositories for a user](https://docs.github.com/en/rest/repos/repos#list-repositories-for-a-user),

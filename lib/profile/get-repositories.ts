@@ -1,5 +1,9 @@
 import "server-only";
-import { getGitHubJson, type GitHubFailure } from "../github/get-json";
+import {
+  getGitHubJson,
+  type GitHubFailure,
+  type GitHubRequest,
+} from "../github/get-json";
 import { normalizeUsername } from "../github/username";
 import {
   parseRepositories,
@@ -44,9 +48,10 @@ export type RepositoriesResult =
     })
   | { kind: "failure"; failure: GitHubFailure };
 
-/** Bounded server-only loader. Not exposed by a route; callers must budget/cache before wiring UI. */
+/** Bounded server-only loader. Public callers supply the shared service request gate. */
 export async function getPublicRepositories(
   input: unknown,
+  request: GitHubRequest = getGitHubJson,
 ): Promise<RepositoriesResult> {
   const username = normalizeUsername(input);
   if (!username) return { kind: "failure", failure: { kind: "invalid_input" } };
@@ -70,7 +75,7 @@ export async function getPublicRepositories(
       : { kind: "failure", failure };
   for (let page = 1; page <= 3; page++) {
     const url = repositoryPageUrl(username, page);
-    const response = await getGitHubJson(url);
+    const response = await request(url);
     if (response.kind !== "success") return failed(response);
     const items = parseRepositories(response.payload, username);
     if (items === null) return failed({ kind: "malformed_response" });
