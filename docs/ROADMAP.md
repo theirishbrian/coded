@@ -26,21 +26,24 @@ tests; #16 is merged and production verified. See [the contract](GITHUB_PROFILE.
 [Bounded repository retrieval (#18)](https://github.com/theirishbrian/coded/issues/18)
 is merged. [Repository display (#20)](https://github.com/theirishbrian/coded/issues/20) connects it with shared request controls, separate success caches, honest coverage states and accessible cards. Issue #20 is merged and production verified.
 
-## Later v0.1 work
+## Approved v0.1 release cut
 
-Scope later issues for repository/activity coverage, pagination, useful public
-insights and transparent repository ranking. Extend the existing profile UI,
-responsive/accessibility checks and end-to-end tests alongside each feature.
-Do not create or implement a speculative backlog during foundation setup.
+Issues #14, #16, #18, #20 and #22 deliver the approved public profile: account
+details, owned public repositories and primary-language counts. The final release
+audit and MIT licence are the remaining pre-publication work. See the
+[release checklist](V0_1_RELEASE_CHECKLIST.md).
 
 Completing the six foundation issues does not complete v0.1. Release requires the
 public-username-to-profile journey, useful verified public data, accurate missing-data
 states, appropriate tests, accessibility checks and a verified deployment.
 
-## Decisions still to make
+## After v0.1
 
-- Select and approve the licence before an open-source release.
-- Specify API coverage, caching and ranking behaviour in later scoped issues.
+- Validate the product with real users and trustworthy analytics before expanding scope.
+- Scope activity, contribution and ranking work only when evidence supports it.
+- Keep metric definitions and limitations transparent; do not introduce opaque skill scores.
+- Treat documentation, deployment history and measurable usage as product assets;
+  see [commercial readiness](COMMERCIAL_READINESS.md).
 
 Runtime versions are recorded in [README](../README.md) and package.json.
 Private vulnerability reporting is enabled; see [SECURITY.md](../SECURITY.md).
@@ -52,4 +55,6 @@ repositories are included in v0.1.
 
 ## Proposed release cut
 
-[Language summary (#22)](https://github.com/theirishbrian/coded/issues/22) is the current bounded feature. The [v0.1 release checklist](V0_1_RELEASE_CHECKLIST.md) proposes final audit, licence and release gates next, with activity/ranking deferred subject to owner approval. It takes precedence over adding a speculative feature backlog once approved.
+[Language summary (#22)](https://github.com/theirishbrian/coded/issues/22) is
+merged and production verified. The [v0.1 release checklist](V0_1_RELEASE_CHECKLIST.md)
+sets the final audit and publication gates. Activity and ranking are deferred.

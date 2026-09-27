@@ -18,10 +18,10 @@ currently published. Do not use an unverified contact address.
 
 ## Support and handling
 
-Coded is an unreleased application foundation. There are no supported release
-lines or published security-update guarantees. Reports against the latest `main`
-commit are welcome; include the exact commit tested. There is no response-time
-commitment or bug-bounty programme.
+Coded is preparing its first versioned release. Until v0.1.0 is published, reports
+against the latest `main` commit are welcome; include the exact commit tested.
+After publication, this policy will support the latest release and `main`. There
+is no response-time commitment or bug-bounty programme.
 
 The maintainer will use the private report to assess impact, discuss reproduction
 and coordinate any fix and disclosure. Reporters should avoid sharing details

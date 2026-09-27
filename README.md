@@ -2,8 +2,7 @@
 
 **Your work. Your progress. Proven.**
 
-Coded is a planned developer proof-of-work platform that turns public GitHub
-activity into a clear, shareable profile.
+Coded turns public GitHub data into a clear, shareable developer profile.
 
 ## Status
 
@@ -12,18 +11,19 @@ at a shareable `/u/username` address. Results include attribution, retrieval tim
 missing-data labels and a five-minute freshness policy. Profiles also display owned public repositories, with explicit capped/interrupted coverage and keyboard-accessible disclosure. The [primary-language summary](docs/LANGUAGE_SUMMARY.md) counts the retrieved repositories, including missing metadata and sample limits. Activity analysis is not implemented. The production URL is <https://coded-beryl.vercel.app/>;
 open PRs run on previews until merged. No versioned release has been published.
 
-## v0.1 direction
+## v0.1 scope
 
-Enter a public GitHub username and view a profile showing public account details,
-repositories, repository language usage, recent work and verifiable contributions.
-Unavailable data must be distinguished from zero, and coverage limits must be explicit.
-Language usage describes repositories, not developer proficiency.
+Enter a public GitHub username and view public account details, owned public
+repositories and primary-language counts. Unavailable data is distinguished from
+zero, and coverage limits are explicit. Language usage describes repositories,
+not developer proficiency. Activity feeds, contribution analysis and repository
+ranking are deferred until after v0.1.
 
 No accounts, database, AI, payments, social features or private repositories in v0.1.
 Any example custom domain in planning is illustrative; the live URL is listed above.
 
 Implemented stack: Next.js App Router, strict TypeScript, Tailwind CSS, Vitest and Playwright.
-Vercel hosts the application. Selective shadcn/ui components are planned later.
+Vercel hosts the application.
 Install dependencies only when the current issue requires them.
 
 ## Getting started
@@ -139,8 +139,7 @@ The first six issues establish the foundation, not the complete v0.1 product.
 
 ## Licence
 
-A licence has not yet been selected. The intended open-source release needs an
-owner-approved licence; public repository visibility alone is not a licence grant.
+Coded is available under the [MIT License](LICENSE).
 
 ## Documentation and reporting
 
@@ -149,12 +148,16 @@ owner-approved licence; public repository visibility alone is not a licence gran
 - [GitHub profile boundary](docs/GITHUB_PROFILE.md): server-only retrieval, errors and coverage.
 - [Repository boundary](docs/GITHUB_REPOSITORIES.md): bounded pagination, validation and partial results.
 - [Data limitations](docs/DATA_LIMITATIONS.md): coverage, attribution and metric constraints.
+- [Commercial readiness](docs/COMMERCIAL_READINESS.md): post-v0.1 evidence and due-diligence priorities.
+- [v0.1 release audit](docs/V0_1_RELEASE_AUDIT.md): checks, evidence and remaining publication gates.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.
 - [Changelog](CHANGELOG.md): delivered, unreleased changes.
 
 Core setup/check commands are verified from a fresh checkout for Issue #5;
 PR validation records the environment and results. Browser layout/keyboard checks
-are separate from jsdom tests. Licence selection remains an open decision.
+are separate from jsdom tests.
 
-The [proposed v0.1 release checklist](docs/V0_1_RELEASE_CHECKLIST.md) fixes the remaining release gates and separates later enhancements. Scope and licence still need owner approval.
+The [v0.1 release checklist](docs/V0_1_RELEASE_CHECKLIST.md) fixes the remaining
+release gates and separates later enhancements. Publication still requires a
+separate owner approval after the final audit PR is reviewed.

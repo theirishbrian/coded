@@ -2,13 +2,14 @@
 
 ## Purpose and current stage
 
-Coded turns public GitHub activity into a clear developer proof-of-work profile.
-The repository now has a minimal application foundation. The first six
-issues cover foundation work only; they do not constitute the full v0.1 release.
+Coded turns public GitHub data into a clear developer proof-of-work profile.
+The approved v0.1 release scope is account details, owned public repositories
+and repository primary-language counts. Activity feeds, contribution analysis
+and ranking are later work rather than unfinished v0.1 requirements.
 Implement only the currently assigned issue.
 Read [architecture](docs/ARCHITECTURE.md) and [data limitations](docs/DATA_LIMITATIONS.md)
 before feature work. Use [SECURITY.md](SECURITY.md) for private vulnerability reports.
-Licence selection remains an owner decision; do not add LICENSE by assumption.
+The owner selected the MIT licence; keep licence notices and package metadata aligned.
 
 ## Scope
 

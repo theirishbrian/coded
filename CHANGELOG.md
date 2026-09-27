@@ -7,6 +7,7 @@ published release; no release tags have been created.
 
 ### Added
 
+- MIT licence and release/commercial-readiness documentation for the approved v0.1 scope.
 - Repository primary-language counts across the fetched inventory, with missing-language totals and explicit capped/interrupted sample labels. No extra API requests.
 
 - Profile repository cards with source/freshness labels, independent loading and failure states, native disclosure after 12 cards, and fork/archive and missing-data labels.
