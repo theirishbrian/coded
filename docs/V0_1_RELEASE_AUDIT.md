@@ -26,9 +26,10 @@ This document records evidence; it does not authorize publication.
 | Playwright with local Edge | All 9 scenarios passed; the local Windows command lingered during process teardown and was stopped manually |
 | `npm audit --json`         | Passed against npm advisory service: 0 known vulnerabilities across 566 dependencies                        |
 
-GitHub CI remains the authoritative clean-run check for Playwright because it
-installs its own Chromium browser and controls process teardown. The release PR
-must not merge unless that job completes successfully.
+GitHub CI run #19 completed successfully for PR #25 in 1 minute 15 seconds. Its
+quality-check job passed all 9 test files and all 164 test results, and provides
+the authoritative clean-run result because it installs its own Chromium browser
+and controls process teardown.
 
 ## Live baseline check
 
@@ -41,9 +42,20 @@ before the release-audit preview existed:
 - the keyboard skip link received focus and moved focus to `main`; and
 - the deployed page exposed no fabricated activity, ranking or proficiency claim.
 
-The preview deployment still needs desktop and narrow-viewport review, console
-inspection and a live lookup after the branch is pushed. Production must be
-rechecked against the release commit after the approved PR is merged.
+The PR #25 preview at
+<https://coded-git-chore-24-v0-1-release-audit-brian-6dd4.vercel.app/> was also
+checked after Vercel reported it ready:
+
+- a real `theirishbrian` lookup reached `/u/theirishbrian` and rendered the
+  expected account, repository and language information;
+- source links, retrieval time and coverage limits were present;
+- no browser warnings or errors were recorded during the lookup;
+- activating the keyboard skip link moved focus to `main`; and
+- at a 390 by 844 pixel viewport the profile remained readable with no
+  horizontal overflow.
+
+Production must be rechecked against the release commit after the approved PR
+is merged.
 
 ## Deployment and recovery
 
@@ -56,9 +68,10 @@ tested operational drill.
 
 ## Remaining gates
 
-- GitHub issue and PR are published and linked to this audit.
-- CI and Vercel preview checks complete successfully.
-- Preview desktop, narrow-screen, keyboard and live-GitHub checks are recorded.
+- Issue #24 and PR #25 are published and linked to this audit.
+- CI run #19 and the Vercel preview completed successfully.
+- Preview desktop, 390-pixel narrow-screen, keyboard, console and live-GitHub
+  checks are recorded above.
 - The audit PR is reviewed and merged with owner approval.
 - A separate release change updates the package version and changelog, creates
   `v0.1.0`, verifies production at that commit and closes the milestone only after

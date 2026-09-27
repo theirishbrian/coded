@@ -39,7 +39,7 @@ added to this release without an explicit scope decision.
 
 - [x] Owner approves the release cut and MIT licence.
 - [x] Language-summary PR merged; production checked.
-- [ ] Release audit completed with results and any remaining limits recorded.
+- [x] Release audit completed with results and any remaining limits recorded.
 - [ ] Release-blocking fixes merged; final CI passes.
 - [ ] Documentation/version/changelog match the release commit.
 - [ ] Owner authorizes release publication; v0.1.0 exists and production is verified.
