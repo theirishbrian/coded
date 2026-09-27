@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Coded — Your work. Your progress. Proven.",
   description:
-    "Coded is taking shape: a clear, shareable record of what developers build.",
+    "Turn public GitHub profiles and repositories into a clear, shareable developer snapshot.",
 };
 
 export default function RootLayout({

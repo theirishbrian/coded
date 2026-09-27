@@ -25,7 +25,7 @@ profile below the request-time boundary; builds do not request GitHub data.
 No credentials or environment variables are required. CI uses fixtures for both
 unit/component tests and full browser flows; see [testing](TESTING.md) and [CI](CI.md).
 
-## v0.1 flow — account details connected, analysis still planned
+## v0.1 flow
 
 1. A visitor submits a public GitHub username through the profile UI.
 2. Server-side input validation accepts a valid username or returns a useful error.
@@ -33,18 +33,18 @@ unit/component tests and full browser flows; see [testing](TESTING.md) and [CI](
    rate limits and unavailable responses. Any token stays on the server.
 4. Validation and transformation produce Coded-owned profile models with explicit
    missing-data and coverage information.
-5. Pure, separately testable calculations derive any agreed metrics or ranking.
+5. A pure, separately testable calculation summarizes repository primary languages.
 6. The profile UI presents the result, sources, coverage and loading/error/empty states.
 
 These boundaries guide the full flow; account lookup and basic profile UI exist:
 
-| Location       | Responsibility                                                  |
-| -------------- | --------------------------------------------------------------- |
-| `app/`         | Routes, page composition and server orchestration               |
-| `components/`  | Reusable UI when real reuse appears                             |
-| `lib/github/`  | GitHub transport and external payload validation                |
-| `lib/profile/` | Transformation into internal profile models                     |
-| `lib/scoring/` | Documented, deterministic calculations independent of transport |
+| Location       | Responsibility                                    |
+| -------------- | ------------------------------------------------- |
+| `app/`         | Routes, page composition and server orchestration |
+| `components/`  | Reusable UI when real reuse appears               |
+| `lib/github/`  | GitHub transport and external payload validation  |
+| `lib/profile/` | Transformation into internal profile models       |
+| `lib/scoring/` | Later transparent ranking, if separately scoped   |
 
 `app/`, `components/`, `lib/github/` and `lib/profile/` exist today. Add scoring only when scoped.
 Do not let raw GitHub payloads or server credentials cross directly into UI
@@ -55,7 +55,7 @@ browser interaction requires them.
 ## Decisions and limits
 
 Use strict TypeScript, npm's committed lockfile, Vitest and selective UI dependencies.
-Playwright verifies browser flows; Zod, charts and shadcn/ui are future tools.
+Playwright verifies browser flows. Add dependencies only for scoped work.
 Vercel hosts the application; see [deployment details](DEPLOYMENT.md).
 Authentication, private repositories, a database,
 AI, payments and social features are outside v0.1.

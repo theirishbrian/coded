@@ -1,9 +1,9 @@
 # v0.1 release checklist
 
-Proposed release cut, 27 September 2026, following the owner's request to move
-Coded toward completion. The owner must approve this cut before publishing v0.1.
-The earlier direction included recent work and contribution insights; moving those
-to a later version is an explicit scope decision, not a claim they are complete.
+Approved release cut, 27 September 2026. The owner approved account details,
+owned public repositories and primary-language counts for v0.1, selected the MIT
+licence, and deferred recent work, contribution insights and ranking. Publishing
+v0.1.0 still requires separate approval after the final audit is reviewed.
 
 ## Release product
 
@@ -14,17 +14,15 @@ Public data is not a proficiency score or complete contribution history.
 
 ## Remaining work, in order
 
-1. **Finish the language summary (#22).** Review the PR, require green checks and
-   real preview evidence, then obtain owner approval to merge and verify production.
+1. **Language summary (#22): complete.** PR #23 passed its checks, was approved and
+   merged, and the production deployment was verified.
 2. **One final release audit.** Check homepage-to-profile and direct URLs, another
    lookup/back navigation, desktop/mobile/keyboard operation, long names and text,
    empty/unavailable/capped/partial fixtures, disclosure and no-JavaScript fallback.
    Check the documented deployment/rollback path and dependency/security findings.
    Fix release-blocking defects in one focused PR; avoid adding new features.
-3. **Licence and release approval.** Owner selects the licence and approves this
-   release scope. Add the selected licence and align README, roadmap and release
-   notes with what actually ships. Do not assume a licence or call it open source
-   before this decision is made.
+3. **Licence and scope: approved.** Add the selected MIT licence and align README,
+   roadmap and release notes with what actually ships.
 4. **Publish v0.1.0.** From an approved, tested main commit: update the version and
    changelog, publish the tag/release, verify production against that commit, and
    close the milestone only after the above gates pass.
@@ -39,8 +37,8 @@ added to this release without an explicit scope decision.
 
 ## Completion evidence
 
-- [ ] Owner approves the proposed release cut and licence.
-- [ ] Language-summary PR merged; production checked.
+- [x] Owner approves the release cut and MIT licence.
+- [x] Language-summary PR merged; production checked.
 - [ ] Release audit completed with results and any remaining limits recorded.
 - [ ] Release-blocking fixes merged; final CI passes.
 - [ ] Documentation/version/changelog match the release commit.

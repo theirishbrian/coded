@@ -39,9 +39,9 @@ The initial production deployment was verified on 23 September 2026:
 - Keyboard checks passed: visible skip-link focus, activation moved focus to
   `main`, and the repository link received visible focus with the correct URL.
 
-No application environment variables or custom domain were added. This deploys
-the original static foundation. Subsequent merged changes added public account lookup; repository display is delivered through Issue #20 and its preview until merged. Rollback
-is documented below but was not exercised against the initial production site.
+No application environment variables or custom domain were added. Subsequent
+merged changes added public account lookup, repository display and primary-language
+counts. Rollback is documented below but has not been exercised in production.
 
 ## Preview and production workflow
 
@@ -84,7 +84,7 @@ the old build's configuration; it does not pick up new environment-variable valu
 - Submit a real personal GitHub username on the preview and check account and
   repository data, links, loading feedback and console errors. Fixture tests do
   not prove deployment-host GitHub access.
-- Keep coverage and freshness limits explicit; this is not a completed v0.1 release.
+- Keep coverage and freshness limits explicit and confirm they match the release notes.
 
 References: [Git deployments](https://vercel.com/docs/git),
 [Node versions](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions),
