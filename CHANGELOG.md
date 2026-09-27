@@ -1,9 +1,10 @@
 # Changelog
 
-Only delivered changes are listed here. Unreleased does not mean a deployed or
-published release; no release tags have been created.
+Only delivered changes are listed here. The v0.1.0 entry is prepared for
+publication; the Git tag and GitHub release do not exist until the owner gives
+separate publication approval.
 
-## Unreleased
+## [0.1.0] - 2026-09-27
 
 ### Added
 
