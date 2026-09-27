@@ -54,8 +54,10 @@ checked after Vercel reported it ready:
 - at a 390 by 844 pixel viewport the profile remained readable with no
   horizontal overflow.
 
-Production must be rechecked against the release commit after the approved PR
-is merged.
+PR #25 was merged into `main` as `02cac5b`. Vercel reported the resulting
+production deployment successful, and a fresh production `theirishbrian` lookup
+rendered the expected account, repository and language information without
+browser warnings or errors.
 
 ## Deployment and recovery
 
@@ -72,7 +74,7 @@ tested operational drill.
 - CI run #19 and the Vercel preview completed successfully.
 - Preview desktop, 390-pixel narrow-screen, keyboard, console and live-GitHub
   checks are recorded above.
-- The audit PR is reviewed and merged with owner approval.
+- PR #25 was reviewed and merged with owner approval.
 - A separate release change updates the package version and changelog, creates
   `v0.1.0`, verifies production at that commit and closes the milestone only after
   explicit owner authorization.
