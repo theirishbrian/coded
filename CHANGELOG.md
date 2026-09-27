@@ -7,6 +7,8 @@ published release; no release tags have been created.
 
 ### Added
 
+- Repository primary-language counts across the fetched inventory, with missing-language totals and explicit capped/interrupted sample labels. No extra API requests.
+
 - Profile repository cards with source/freshness labels, independent loading and failure states, native disclosure after 12 cards, and fork/archive and missing-data labels.
 - Shared limits for account requests and each repository page, independent success caches, and integration/browser coverage for interruptions and disclosure.
 

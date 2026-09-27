@@ -24,7 +24,7 @@ connect that boundary to a shareable profile with cache/request controls and bro
 tests; #16 is merged and production verified. See [the contract](GITHUB_PROFILE.md).
 
 [Bounded repository retrieval (#18)](https://github.com/theirishbrian/coded/issues/18)
-is merged. [Repository display (#20)](https://github.com/theirishbrian/coded/issues/20) connects it with shared request controls, separate success caches, honest coverage states and accessible cards. Its PR tracks review and preview verification; production changes only after merge.
+is merged. [Repository display (#20)](https://github.com/theirishbrian/coded/issues/20) connects it with shared request controls, separate success caches, honest coverage states and accessible cards. Issue #20 is merged and production verified.
 
 ## Later v0.1 work
 
@@ -49,3 +49,7 @@ and [data limitations](DATA_LIMITATIONS.md) records the future reporting constra
 
 No accounts/authentication, database, AI, payments, social features or private
 repositories are included in v0.1.
+
+## Proposed release cut
+
+[Language summary (#22)](https://github.com/theirishbrian/coded/issues/22) is the current bounded feature. The [v0.1 release checklist](V0_1_RELEASE_CHECKLIST.md) proposes final audit, licence and release gates next, with activity/ranking deferred subject to owner approval. It takes precedence over adding a speculative feature backlog once approved.

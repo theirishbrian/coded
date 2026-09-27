@@ -45,6 +45,7 @@ globalThis.fetch = async (input, init) => {
             owner: { login: username, type: "User" },
             html_url: `https://github.com/${username}/${name}`,
             description: i === 0 ? null : repository.description,
+            language: i === 0 ? null : i >= 12 ? "JavaScript" : "TypeScript",
             fork: i === 0,
             archived: i === 0,
           };

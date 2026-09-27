@@ -4,7 +4,7 @@ Coded shows basic public account details through a server-only retrieval boundar
 It does not retrieve activity or calculate quality metrics. A result is an account
 snapshot, not a complete record of someone's work.
 
-The separate [repository loader](GITHUB_REPOSITORIES.md), not yet shown in the UI,
+The [repository loader](GITHUB_REPOSITORIES.md), displayed on profile pages,
 retrieves at most 300 owned public repositories. Forks and archives are preserved.
 It labels capped/interrupted coverage and deduplicates IDs, but pagination can
 still miss changes made during traversal. Owned repositories are not a complete
@@ -39,3 +39,5 @@ counts for private profiles; reported zero does not prove the actual total is ze
 Each implementation issue must verify actual GitHub API semantics and limits
 against current official documentation. Do not treat this page as an API contract
 or claim that a proposed metric is already available.
+
+Primary-language counts summarize this retrieved inventory, including forks and archives, with missing metadata counted separately. They do not measure code volume or every language used; see [language summary](LANGUAGE_SUMMARY.md).

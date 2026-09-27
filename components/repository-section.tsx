@@ -1,6 +1,7 @@
 import type { RepositoriesResult } from "@/lib/profile/get-repositories";
 import type { GitHubFailure } from "@/lib/github/get-json";
 import { RepositoryList } from "./repository-list";
+import { RepositoryLanguages } from "./repository-languages";
 
 function FailureNotice({ failure }: { failure: GitHubFailure }) {
   return (
@@ -58,7 +59,10 @@ export function RepositorySection({ result }: { result: RepositoriesResult }) {
             </>
           )}
           {result.repositories.length > 0 ? (
-            <RepositoryList repositories={result.repositories} />
+            <>
+              <RepositoryLanguages result={result} />
+              <RepositoryList repositories={result.repositories} />
+            </>
           ) : (
             <p className="my-6">
               {result.kind === "partial"
