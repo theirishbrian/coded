@@ -36,11 +36,12 @@ evidence matter more than adding a long speculative feature list.
 
 ## Product sequence
 
-1. Publish and verify v0.1 without adding activity feeds or ranking.
-2. Establish a small acquisition loop and privacy-conscious product analytics.
-3. Validate the public-profile use case with real users and document findings.
-4. Scope the smallest improvement supported by that evidence.
-5. Test monetisation only after the free product shows repeat value.
+v0.1 is published and verified without activity feeds or ranking. The next steps are:
+
+1. Establish a small acquisition loop and privacy-conscious product analytics.
+2. Validate the public-profile use case with real users and document findings.
+3. Scope the smallest improvement supported by that evidence.
+4. Test monetisation only after the free product shows repeat value.
 
 Possible later work includes profile ownership, selected-project presentation,
 custom URLs, resume export, profile analytics and recruiter views. Activity and

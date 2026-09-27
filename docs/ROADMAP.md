@@ -1,7 +1,8 @@
 # Foundation roadmap
 
-Milestone: [v0.1 — Public Developer Profiles](https://github.com/theirishbrian/coded/milestone/1).
-No delivery date has been committed.
+Milestone: [v0.1 — Public Developer Profiles](https://github.com/theirishbrian/coded/milestone/1),
+completed with the [v0.1.0 release](https://github.com/theirishbrian/coded/releases/tag/v0.1.0)
+on 27 September 2026.
 
 ## First six issues
 
@@ -29,8 +30,8 @@ is merged. [Repository display (#20)](https://github.com/theirishbrian/coded/iss
 ## Approved v0.1 release cut
 
 Issues #14, #16, #18, #20 and #22 deliver the approved public profile: account
-details, owned public repositories and primary-language counts. The final release
-audit and MIT licence are the remaining pre-publication work. See the
+details, owned public repositories and primary-language counts. The final audit,
+MIT licence and publication gates are complete; see the
 [release checklist](V0_1_RELEASE_CHECKLIST.md).
 
 Completing the six foundation issues does not complete v0.1. Release requires the
@@ -53,8 +54,8 @@ and [data limitations](DATA_LIMITATIONS.md) records the future reporting constra
 No accounts/authentication, database, AI, payments, social features or private
 repositories are included in v0.1.
 
-## Proposed release cut
+## Published release cut
 
 [Language summary (#22)](https://github.com/theirishbrian/coded/issues/22) is
 merged and production verified. The [v0.1 release checklist](V0_1_RELEASE_CHECKLIST.md)
-sets the final audit and publication gates. Activity and ranking are deferred.
+records the completed audit and publication gates. Activity and ranking remain deferred.

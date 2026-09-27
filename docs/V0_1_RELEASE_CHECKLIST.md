@@ -2,8 +2,9 @@
 
 Approved release cut, 27 September 2026. The owner approved account details,
 owned public repositories and primary-language counts for v0.1, selected the MIT
-licence, and deferred recent work, contribution insights and ranking. Publishing
-v0.1.0 still requires separate approval after the final audit is reviewed.
+licence, and deferred recent work, contribution insights and ranking. The owner
+authorized publication after reviewing the final audit; v0.1.0 was published and
+verified on 27 September 2026.
 
 ## Release product
 
@@ -12,20 +13,20 @@ account details, owned public repositories and a primary-language count summary.
 Every view explains sources, freshness, unavailable fields and coverage limits.
 Public data is not a proficiency score or complete contribution history.
 
-## Remaining work, in order
+## Release steps
 
 1. **Language summary (#22): complete.** PR #23 passed its checks, was approved and
    merged, and the production deployment was verified.
-2. **One final release audit.** Check homepage-to-profile and direct URLs, another
+2. **Final release audit: complete.** Checked homepage-to-profile and direct URLs,
    lookup/back navigation, desktop/mobile/keyboard operation, long names and text,
    empty/unavailable/capped/partial fixtures, disclosure and no-JavaScript fallback.
-   Check the documented deployment/rollback path and dependency/security findings.
-   Fix release-blocking defects in one focused PR; avoid adding new features.
-3. **Licence and scope: approved.** Add the selected MIT licence and align README,
+   Deployment, rollback, dependency and security findings were recorded; no
+   release-blocking defect was found.
+3. **Licence and scope: complete.** Added the selected MIT licence and aligned README,
    roadmap and release notes with what actually ships.
-4. **Publish v0.1.0.** From an approved, tested main commit: update the version and
-   changelog, publish the tag/release, verify production against that commit, and
-   close the milestone only after the above gates pass.
+4. **Publish v0.1.0: complete.** PR #26 updated the version and changelog and
+   merged as `c48250e`. Production was verified against that commit, the tag and
+   GitHub release were published, and the 100%-complete milestone was closed.
 
 ## Deliberately outside the proposed first release
 
@@ -41,7 +42,8 @@ added to this release without an explicit scope decision.
 - [x] Language-summary PR merged; production checked.
 - [x] Release audit completed with results and any remaining limits recorded.
 - [x] Release audit merged; no release blockers found; final CI passes.
-- [ ] Documentation/version/changelog match the release commit.
-- [ ] Owner authorizes release publication; v0.1.0 exists and production is verified.
+- [x] Documentation/version/changelog match the release commit.
+- [x] Owner authorized release publication; v0.1.0 exists and production is verified.
 
-A green build or closed foundation milestone alone is not release completion.
+All v0.1 release gates are complete. Later enhancements remain evidence-led
+post-release work rather than unfinished v0.1 scope.
