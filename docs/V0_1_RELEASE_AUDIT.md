@@ -1,7 +1,7 @@
 # v0.1 release audit
 
 Audit date: 27 September 2026. Release candidate work is tracked in Issue #24.
-This document records evidence; it does not authorize publication.
+This document records the evidence used to authorize and verify publication.
 
 ## Scope and documentation
 
@@ -68,13 +68,17 @@ deployment, followed by source reconciliation through a PR. Rollback has not bee
 exercised in production, so this remains a documented capability rather than a
 tested operational drill.
 
-## Remaining gates
+## Release completion
 
 - Issue #24 and PR #25 are published and linked to this audit.
 - CI run #19 and the Vercel preview completed successfully.
 - Preview desktop, 390-pixel narrow-screen, keyboard, console and live-GitHub
   checks are recorded above.
 - PR #25 was reviewed and merged with owner approval.
-- A separate release change updates the package version and changelog, creates
-  `v0.1.0`, verifies production at that commit and closes the milestone only after
-  explicit owner authorization.
+- PR #26 set the package and changelog to v0.1.0 and merged as `c48250e` after
+  all three checks passed.
+- Vercel deployed `c48250e` successfully; a fresh production lookup rendered the
+  expected account, repository and language data without browser warnings or errors.
+- The owner authorized publication. GitHub release
+  [v0.1.0](https://github.com/theirishbrian/coded/releases/tag/v0.1.0) points to
+  `c48250e`, and the 100%-complete v0.1 milestone is closed.

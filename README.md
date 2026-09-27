@@ -9,7 +9,8 @@ Coded turns public GitHub data into a clear, shareable developer profile.
 The application accepts a public GitHub username and shows basic account details
 at a shareable `/u/username` address. Results include attribution, retrieval time,
 missing-data labels and a five-minute freshness policy. Profiles also display owned public repositories, with explicit capped/interrupted coverage and keyboard-accessible disclosure. The [primary-language summary](docs/LANGUAGE_SUMMARY.md) counts the retrieved repositories, including missing metadata and sample limits. Activity analysis is not implemented. The production URL is <https://coded-beryl.vercel.app/>;
-open PRs run on previews until merged. No versioned release has been published.
+open PRs run on previews until merged. [v0.1.0](https://github.com/theirishbrian/coded/releases/tag/v0.1.0)
+is the current published release.
 
 ## v0.1 scope
 
@@ -149,15 +150,14 @@ Coded is available under the [MIT License](LICENSE).
 - [Repository boundary](docs/GITHUB_REPOSITORIES.md): bounded pagination, validation and partial results.
 - [Data limitations](docs/DATA_LIMITATIONS.md): coverage, attribution and metric constraints.
 - [Commercial readiness](docs/COMMERCIAL_READINESS.md): post-v0.1 evidence and due-diligence priorities.
-- [v0.1 release audit](docs/V0_1_RELEASE_AUDIT.md): checks, evidence and remaining publication gates.
+- [v0.1 release audit](docs/V0_1_RELEASE_AUDIT.md): checks, evidence and publication record.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.
-- [Changelog](CHANGELOG.md): delivered, unreleased changes.
+- [Changelog](CHANGELOG.md): delivered version history.
 
 Core setup/check commands are verified from a fresh checkout for Issue #5;
 PR validation records the environment and results. Browser layout/keyboard checks
 are separate from jsdom tests.
 
-The [v0.1 release checklist](docs/V0_1_RELEASE_CHECKLIST.md) fixes the remaining
-release gates and separates later enhancements. Publication still requires a
-separate owner approval after the final audit PR is reviewed.
+The completed [v0.1 release checklist](docs/V0_1_RELEASE_CHECKLIST.md) records
+the release gates and separates later enhancements.

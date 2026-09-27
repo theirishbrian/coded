@@ -1,8 +1,7 @@
 # Changelog
 
-Only delivered changes are listed here. The v0.1.0 entry is prepared for
-publication; the Git tag and GitHub release do not exist until the owner gives
-separate publication approval.
+Only delivered changes are listed here. v0.1.0 was published on 27 September
+2026 and is tagged at the verified production commit.
 
 ## [0.1.0] - 2026-09-27
 
