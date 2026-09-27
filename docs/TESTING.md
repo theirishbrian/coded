@@ -91,3 +91,5 @@ layout, keyboard skip-link focus and the native form without JavaScript. Reposit
 Browser page errors are checked on the successful journey. Manual visual checks
 and an actual public-account lookup on the deployed preview remain required;
 fixture success alone does not prove deployment-host GitHub connectivity.
+
+Language-summary tests exercise all fetched items, not just visible cards, missing/blank labels, duplicate IDs and partial/capped/empty results. The mixed-language mobile browser case confirms the rendered totals and no overflow.

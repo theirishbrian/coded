@@ -178,3 +178,24 @@ test("empty and interrupted repository views are distinct", async ({
     page.getByText(/This incomplete result is not cached/),
   ).toBeVisible();
 });
+
+test("language summary covers all fetched repositories before disclosure", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/u/sample-dev");
+  const summary = page.getByRole("region", { name: "Repository languages" });
+  await expect(summary).toContainText("Based on all 14 retrieved repositories");
+  await expect(summary).toContainText("11 repositories");
+  await expect(summary).toContainText("JavaScript");
+  await expect(summary).toContainText("2 repositories");
+  await expect(summary).toContainText("Primary language not reported: 1 of 14");
+  await expect(
+    page.getByRole("link", { name: "repo-14", exact: true }),
+  ).not.toBeVisible();
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+});

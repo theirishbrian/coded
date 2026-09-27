@@ -69,3 +69,5 @@ Repository display and combined budgets are defined in [decision 0004](decisions
 Record material decisions in `docs/decisions/`
 when made; do not create speculative architecture or claim a finished scoring model.
 Use the [data limitations](DATA_LIMITATIONS.md) as requirements for later work.
+
+The [language summary](LANGUAGE_SUMMARY.md) is a pure transformation of the already retrieved repository models, rendered as a Server Component. It introduces no fetching, storage or client boundary.

@@ -9,7 +9,7 @@ activity into a clear, shareable profile.
 
 The application accepts a public GitHub username and shows basic account details
 at a shareable `/u/username` address. Results include attribution, retrieval time,
-missing-data labels and a five-minute freshness policy. Profiles also display owned public repositories, with explicit capped/interrupted coverage and keyboard-accessible disclosure. Activity analysis is not implemented. The production URL is <https://coded-beryl.vercel.app/>;
+missing-data labels and a five-minute freshness policy. Profiles also display owned public repositories, with explicit capped/interrupted coverage and keyboard-accessible disclosure. The [primary-language summary](docs/LANGUAGE_SUMMARY.md) counts the retrieved repositories, including missing metadata and sample limits. Activity analysis is not implemented. The production URL is <https://coded-beryl.vercel.app/>;
 open PRs run on previews until merged. No versioned release has been published.
 
 ## v0.1 direction
@@ -156,3 +156,5 @@ owner-approved licence; public repository visibility alone is not a licence gran
 Core setup/check commands are verified from a fresh checkout for Issue #5;
 PR validation records the environment and results. Browser layout/keyboard checks
 are separate from jsdom tests. Licence selection remains an open decision.
+
+The [proposed v0.1 release checklist](docs/V0_1_RELEASE_CHECKLIST.md) fixes the remaining release gates and separates later enhancements. Scope and licence still need owner approval.

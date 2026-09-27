@@ -146,3 +146,63 @@ it("presents total failure as unavailable, never as zero repositories", () => {
   expect(screen.queryByRole("list")).not.toBeInTheDocument();
   expect(screen.queryByText(/No owned/)).not.toBeInTheDocument();
 });
+
+it("summarizes the full retrieved inventory, including items behind disclosure", () => {
+  const repositories = Array.from({ length: 14 }, (_, i) => ({
+    ...repository,
+    id: i,
+    primaryLanguage: i === 13 ? "Rust" : "TypeScript",
+  }));
+  render(<RepositorySection result={{ ...complete, repositories }} />);
+  const summary = screen.getByRole("region", { name: "Repository languages" });
+  expect(within(summary).getByText("13 repositories")).toBeInTheDocument();
+  expect(within(summary).getByText("Rust")).toBeInTheDocument();
+  expect(within(summary).getByText("1 repository")).toBeInTheDocument();
+  expect(summary).toHaveTextContent("Primary language not reported: 0 of 14");
+  expect(summary).toHaveTextContent("including forks and archived projects");
+});
+it("labels capped and interrupted language counts as samples", () => {
+  const { rerender } = render(
+    <RepositorySection result={{ ...complete, completeness: "page_limit" }} />,
+  );
+  expect(
+    screen.getByRole("region", { name: "Repository languages" }),
+  ).toHaveTextContent("Capped sample");
+  rerender(
+    <RepositorySection
+      result={{
+        ...complete,
+        kind: "partial",
+        completeness: "interrupted",
+        failure: { kind: "timeout" },
+      }}
+    />,
+  );
+  expect(
+    screen.getByRole("region", { name: "Repository languages" }),
+  ).toHaveTextContent("Incomplete sample");
+});
+it("reports all-missing languages without inventing a breakdown and hides summaries without inventory", () => {
+  const { rerender } = render(<RepositorySection result={complete} />);
+  expect(
+    screen.getByRole("region", { name: "Repository languages" }),
+  ).toHaveTextContent(
+    "GitHub did not report a primary language for any retrieved repository.",
+  );
+  for (const result of [
+    { ...complete, repositories: [] },
+    {
+      ...complete,
+      kind: "partial" as const,
+      completeness: "interrupted" as const,
+      repositories: [],
+      failure: { kind: "timeout" as const },
+    },
+    { kind: "failure" as const, failure: { kind: "timeout" as const } },
+  ]) {
+    rerender(<RepositorySection result={result} />);
+    expect(
+      screen.queryByRole("region", { name: "Repository languages" }),
+    ).not.toBeInTheDocument();
+  }
+});
