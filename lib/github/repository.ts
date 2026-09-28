@@ -125,9 +125,22 @@ export function repositoryContinuation(
     try {
       const actual = new URL(match[1]);
       const expected = new URL(repositoryPageUrl(username, nextPage));
+      const numericOwner = /^\/user\/([1-9]\d*)\/repos$/.exec(actual.pathname);
+      const numericOwnerId = numericOwner ? Number(numericOwner[1]) : null;
+      const validPath =
+        actual.pathname.toLowerCase() === expected.pathname.toLowerCase() ||
+        (numericOwnerId !== null && Number.isSafeInteger(numericOwnerId));
       actual.searchParams.sort();
       expected.searchParams.sort();
-      if (actual.href !== expected.href) return "invalid";
+      if (
+        actual.origin !== expected.origin ||
+        actual.username ||
+        actual.password ||
+        actual.hash ||
+        !validPath ||
+        actual.search !== expected.search
+      )
+        return "invalid";
     } catch {
       return "invalid";
     }

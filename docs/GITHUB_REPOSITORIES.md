@@ -15,10 +15,12 @@ The raw loader uses no credentials, redirects, retries or cache. The public serv
 Invalid input makes no request.
 
 The Link header controls continuation even for a short page. No next link means
-the endpoint is exhausted for this traversal. A next link must exactly match the
-expected endpoint, username, next page and query values; query order may vary.
-Unexpected syntax/relations and duplicate relations fail closed. Requests always
-use locally constructed URLs, never the upstream header's destination.
+the endpoint is exhausted for this traversal. GitHub may identify the owner in a
+continuation as either `/users/{username}` or its canonical `/user/{numeric-id}`
+form. A next link must use one of those API paths and exactly match the expected
+next page and query values; query order may vary. Unexpected syntax/relations and
+duplicate relations fail closed. Requests always use locally constructed username
+URLs, never the upstream header's destination.
 
 Validate consumed identity, owner, public visibility, safe GitHub URL, text,
 nonnegative counts, fork/archive flags and UTC timestamps. Map only Coded fields:

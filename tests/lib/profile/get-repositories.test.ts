@@ -252,6 +252,42 @@ describe("public repository retrieval", () => {
       source: { pagesFetched: 2 },
     });
   });
+  it("accepts GitHub's canonical numeric-owner continuation as a signal", async () => {
+    const request = respond();
+    request
+      .mockReset()
+      .mockResolvedValueOnce(
+        Response.json([fixture], {
+          headers: {
+            link: '<https://api.github.com/user/184/repos?type=owner&sort=full_name&direction=asc&per_page=100&page=2>; rel="next", <https://api.github.com/user/184/repos?type=owner&sort=full_name&direction=asc&per_page=100&page=2>; rel="last"',
+          },
+        }),
+      )
+      .mockResolvedValueOnce(Response.json([]));
+
+    expect(await getPublicRepositories("sample-dev")).toMatchObject({
+      kind: "success",
+      completeness: "endpoint_exhausted",
+      source: { pagesFetched: 2 },
+    });
+    expect(request.mock.calls.map((call) => call[0])).toEqual([
+      repositoryPageUrl("sample-dev", 1),
+      repositoryPageUrl("sample-dev", 2),
+    ]);
+  });
+  it.each(["not-a-number", "0", "9007199254740992"])(
+    "rejects an invalid canonical owner id %s",
+    async (ownerId) => {
+      const request = respond([fixture], {
+        link: `<https://api.github.com/user/${ownerId}/repos?type=owner&sort=full_name&direction=asc&per_page=100&page=2>; rel="next"`,
+      });
+      expect(await getPublicRepositories("sample-dev")).toMatchObject({
+        kind: "partial",
+        failure: { kind: "malformed_response" },
+      });
+      expect(request).toHaveBeenCalledTimes(1);
+    },
+  );
   it.each([
     [404, "not_found"],
     [401, "access_denied"],
