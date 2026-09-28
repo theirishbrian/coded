@@ -1,0 +1,61 @@
+name: Product feedback
+description: Tell us whether a Coded public profile helped and what remains unclear.
+title: "[Feedback]: "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us test whether Coded solves a useful problem.
+
+        Your response will be public on GitHub. Do not include private, sensitive or confidential information. Coded profiles use public GitHub data only.
+
+  - type: dropdown
+    id: perspective
+    attributes:
+      label: Your perspective
+      description: Choose the perspective closest to how you assessed Coded.
+      options:
+        - Developer presenting my work
+        - Recruiter or hiring manager
+        - Engineering leader or interviewer
+        - Open-source maintainer
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: intended-use
+    attributes:
+      label: What were you trying to learn or show?
+      description: Describe the decision or task that brought you to Coded.
+      placeholder: I wanted to understand whether...
+    validations:
+      required: true
+
+  - type: textarea
+    id: helpful
+    attributes:
+      label: What, if anything, helped?
+      description: Point to information that made the profile clearer or more useful.
+      placeholder: The repository summary helped because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: missing
+    attributes:
+      label: What remained unclear or missing?
+      description: Explain what prevented the profile from answering your question.
+      placeholder: I still could not tell...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: public-confirmation
+    attributes:
+      label: Public submission
+      options:
+        - label: I understand this response is public and contains no private, sensitive or confidential information.
+          required: true

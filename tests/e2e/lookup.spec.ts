@@ -33,6 +33,12 @@ test("keyboard submit leads to a shareable attributed profile", async ({
   await expect(
     page.getByRole("link", { name: "View on GitHub" }),
   ).toHaveAttribute("href", "https://github.com/sample-dev");
+  await expect(
+    page.getByRole("link", { name: "Share product feedback" }),
+  ).toHaveAttribute(
+    "href",
+    "https://github.com/theirishbrian/coded/issues/new?template=product_feedback.yml",
+  );
   await expect(page.getByText(/Retrieved/).first()).toBeVisible();
   await expect(
     page.getByRole("link", { name: "repo-01", exact: true }),
@@ -93,6 +99,9 @@ test("mobile profile stays within the viewport", async ({ page }) => {
   ).toBe(true);
   await expect(
     page.getByRole("button", { name: "View profile" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Share product feedback" }),
   ).toBeVisible();
 });
 
