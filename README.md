@@ -138,6 +138,10 @@ See the [foundation roadmap](docs/ROADMAP.md) and
 [v0.1 milestone](https://github.com/theirishbrian/coded/milestone/1).
 The first six issues establish the foundation, not the complete v0.1 product.
 
+Post-v0.1 product decisions use the privacy and measurement boundary in
+[the analytics guide](docs/ANALYTICS.md). Dynamic profile URLs are aggregated as
+`/u/[username]` before pageview data is sent.
+
 ## Licence
 
 Coded is available under the [MIT License](LICENSE).
