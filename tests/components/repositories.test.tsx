@@ -155,9 +155,13 @@ it("summarizes the full retrieved inventory, including items behind disclosure",
   }));
   render(<RepositorySection result={{ ...complete, repositories }} />);
   const summary = screen.getByRole("region", { name: "Repository languages" });
-  expect(within(summary).getByText("13 repositories")).toBeInTheDocument();
+  expect(
+    within(summary).getByText("13 of 14 repositories (93%)"),
+  ).toBeInTheDocument();
   expect(within(summary).getByText("Rust")).toBeInTheDocument();
-  expect(within(summary).getByText("1 repository")).toBeInTheDocument();
+  expect(
+    within(summary).getByText("1 of 14 repositories (7%)"),
+  ).toBeInTheDocument();
   expect(summary).toHaveTextContent("Primary language not reported: 0 of 14");
   expect(summary).toHaveTextContent("including forks and archived projects");
 });

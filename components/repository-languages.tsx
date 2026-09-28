@@ -35,19 +35,34 @@ export function RepositoryLanguages({
         </p>
       )}
       {summary.languages.length > 0 ? (
-        <dl className="mt-4 grid gap-3 sm:grid-cols-2">
-          {summary.languages.map((language) => (
-            <div
-              key={language.name}
-              className="flex min-w-0 justify-between gap-4 text-sm"
-            >
-              <dt className="min-w-0 break-words">{language.name}</dt>
-              <dd className="shrink-0 text-[#b9beb6]">
-                {language.repositories}{" "}
-                {language.repositories === 1 ? "repository" : "repositories"}
-              </dd>
-            </div>
-          ))}
+        <dl className="mt-5 grid gap-5">
+          {summary.languages.map((language) => {
+            const percentage = Math.round(
+              (language.repositories / summary.total) * 100,
+            );
+            return (
+              <div key={language.name} className="min-w-0 text-sm">
+                <div className="flex min-w-0 flex-wrap justify-between gap-x-4 gap-y-1">
+                  <dt className="min-w-0 break-words font-medium">
+                    {language.name}
+                  </dt>
+                  <dd className="text-[#b9beb6]">
+                    {language.repositories} of {summary.total} repositories (
+                    {percentage}%)
+                  </dd>
+                </div>
+                <div
+                  aria-hidden="true"
+                  className="mt-2 h-2 overflow-hidden rounded-full border border-white/15 bg-white/5"
+                >
+                  <div
+                    className="h-full rounded-full bg-[#d3ef8b]"
+                    style={{ width: `${percentage}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </dl>
       ) : (
         <p className="mt-4 text-sm">
