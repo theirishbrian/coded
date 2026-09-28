@@ -152,6 +152,45 @@ test("repository disclosure works by keyboard without another request", async ({
   expect(requests).toEqual([]);
 });
 
+test("repository explorer filters retrieved data without another request", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/u/sample-dev");
+  await page.waitForLoadState("networkidle");
+
+  const requests: string[] = [];
+  page.on("request", (request) => requests.push(request.url()));
+
+  const search = page.getByRole("searchbox", { name: "Search repositories" });
+  await search.fill("JavaScript");
+  await expect(
+    page.getByText(/Showing 2 of 14 retrieved repositories/),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "repo-13", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "repo-01", exact: true }),
+  ).not.toBeVisible();
+
+  await search.fill("");
+  await page.getByRole("checkbox", { name: "Include forks" }).uncheck();
+  await page.getByRole("checkbox", { name: "Include archived" }).uncheck();
+  await expect(
+    page.getByText(/Showing 13 of 14 retrieved repositories/),
+  ).toBeVisible();
+  await page.getByRole("combobox", { name: "Sort by" }).selectOption("stars");
+  await expect(page.getByText(/popularity is not proficiency/)).toBeVisible();
+
+  expect(requests).toEqual([]);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+});
+
 test("account remains usable while repositories load and after they fail", async ({
   page,
 }) => {

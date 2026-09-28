@@ -62,9 +62,16 @@ Cooldown applies even when rate limiting interrupts a later page. See
 [decision 0004](decisions/0004-repository-display-policy.md) for exact controls and
 multi-instance limits. No token, paid infrastructure or persistence is added.
 
-The UI shows 12 cards, with native disclosure for the remaining fetched items,
-explicit empty/unavailable/capped/partial states, source links and retrieval time.
-Normal tests use synthetic fixtures; live preview evidence is recorded in the PR.
+The UI initially shows 12 cards, with native disclosure for the remaining fetched
+items. Client-side controls search the already retrieved name, description and
+primary-language fields; include or exclude forks and archives; and sort by the
+source order, update time or star count. Controls never trigger another request.
+The visible result count and active sort explanation prevent filters or popularity
+ordering from being mistaken for complete coverage or proficiency. Without
+JavaScript, the original source-ordered list and native disclosure remain available.
+Explicit empty/unavailable/capped/partial states, source links and retrieval time
+remain visible. Normal tests use synthetic fixtures; live preview evidence is
+recorded in the PR.
 
 Official references checked 25 September 2026:
 [List repositories for a user](https://docs.github.com/en/rest/repos/repos#list-repositories-for-a-user),

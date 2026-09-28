@@ -125,8 +125,9 @@ recommended branch-protection checks.
 - lib/github/ and lib/profile/: validated public account retrieval and Coded model mapping.
 - docs/: architecture, data limitations, roadmap, testing and CI guidance.
 
-Only the form and error recovery need client interaction; GitHub access remains
-server-side. The process-local cache and request limits are documented in
+The form, error recovery and repository explorer controls use client interaction;
+GitHub access remains server-side. Repository search, filters and sorting operate
+only on the already retrieved public repository data. The process-local cache and request limits are documented in
 [the lookup decision](docs/decisions/0004-repository-display-policy.md). They do not
 guarantee an IP-wide quota across Vercel instances. Dependencies use exact versions;
 see package.json and the lockfile.
