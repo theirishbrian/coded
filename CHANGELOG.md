@@ -3,6 +3,13 @@
 Only delivered changes are listed here. v0.1.0 was published on 27 September
 2026 and is tagged at the verified production commit.
 
+## Unreleased
+
+### Added
+
+- Privacy-conscious Vercel page analytics with profile-username redaction,
+  automated coverage and documented measurement limits.
+
 ## [0.1.0] - 2026-09-27
 
 ### Added
