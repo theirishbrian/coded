@@ -45,12 +45,26 @@ profile links can open the profile directly, and automatic pageviews do not prov
 that a lookup succeeded or that a visitor found the result useful. Record dates
 and screenshots or exports when a product decision relies on the dashboard.
 
+## Verification record
+
+Web Analytics was enabled for the `coded` project on Brian's Vercel Hobby account
+on 28 September 2026. A controlled check against preview commit `fed21bd` visited
+`/` and `/u/octocat?source=privacy-check`. After processing, the Vercel dashboard
+reported one visitor and two pageviews under only these paths:
+
+- `/`
+- `/u/[username]`
+
+The dashboard did not expose the GitHub username or query string. This confirms
+that Vercel receives pageviews and that Coded applies its profile-path redaction
+before transmission. Production collection still depends on deploying this change
+to `main`.
+
 ## Operation and removal
 
-Web Analytics must be enabled for the `coded` project in Vercel before the
-component sends production data. After a production deployment, visit `/` and a
-profile route, confirm that the browser sends analytics requests, and confirm that
-Vercel reports only `/` and `/u/[username]` after processing.
+After deploying an analytics change, repeat the controlled homepage and profile
+route check. Confirm that Vercel reports only `/` and `/u/[username]` after
+processing and record any evidence used for a product decision.
 
 To stop collection, disable Web Analytics in the Vercel project and remove
 `PrivacySafeAnalytics` from `app/layout.tsx`. Removing the package is optional only
