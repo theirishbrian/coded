@@ -33,6 +33,17 @@ test("directs visitors to the public project repository", () => {
   ).toHaveAttribute("href", "https://github.com/theirishbrian/coded");
 });
 
+test("offers a public, structured product-feedback path", () => {
+  render(<Home />);
+
+  expect(
+    screen.getByRole("link", { name: "Share product feedback" }),
+  ).toHaveAttribute(
+    "href",
+    "https://github.com/theirishbrian/coded/issues/new?template=product_feedback.yml",
+  );
+});
+
 test("provides a skip link to the focusable main content", () => {
   render(<Home />);
 

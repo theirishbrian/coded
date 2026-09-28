@@ -28,11 +28,19 @@ export function SiteShell({ children }: { children: ReactNode }) {
       >
         {children}
       </main>
-      <footer className="flex flex-col gap-2 border-t border-white/15 py-6 text-sm text-[#b9beb6] sm:flex-row sm:justify-between">
+      <footer className="flex flex-col gap-3 border-t border-white/15 py-6 text-sm text-[#b9beb6] sm:flex-row sm:items-start sm:justify-between">
         <p>Public data. A starting point.</p>
-        <p>
-          Public profiles and repositories. Deeper insights are coming later.
-        </p>
+        <div className="flex flex-col gap-2 sm:items-end sm:text-right">
+          <p>
+            Public profiles and repositories. Deeper insights are coming later.
+          </p>
+          <a
+            href="https://github.com/theirishbrian/coded/issues/new?template=product_feedback.yml"
+            className="inline-flex min-h-11 items-center underline underline-offset-4 hover:text-[#d3ef8b]"
+          >
+            Share product feedback <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </footer>
     </div>
   );

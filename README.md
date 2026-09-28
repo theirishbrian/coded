@@ -140,7 +140,9 @@ The first six issues establish the foundation, not the complete v0.1 product.
 
 Post-v0.1 product decisions use the privacy and measurement boundary in
 [the analytics guide](docs/ANALYTICS.md). Dynamic profile URLs are aggregated as
-`/u/[username]` before pageview data is sent.
+`/u/[username]` before pageview data is sent. Visitors can submit public,
+structured observations through the shared feedback link; see the
+[feedback review guidance](docs/PRODUCT_FEEDBACK.md).
 
 ## Licence
 
@@ -154,6 +156,7 @@ Coded is available under the [MIT License](LICENSE).
 - [Repository boundary](docs/GITHUB_REPOSITORIES.md): bounded pagination, validation and partial results.
 - [Data limitations](docs/DATA_LIMITATIONS.md): coverage, attribution and metric constraints.
 - [Commercial readiness](docs/COMMERCIAL_READINESS.md): post-v0.1 evidence and due-diligence priorities.
+- [Product feedback](docs/PRODUCT_FEEDBACK.md): public submission boundary and evidence-review method.
 - [v0.1 release audit](docs/V0_1_RELEASE_AUDIT.md): checks, evidence and publication record.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.

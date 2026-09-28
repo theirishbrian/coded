@@ -41,7 +41,8 @@ states, appropriate tests, accessibility checks and a verified deployment.
 ## After v0.1
 
 - [v0.2 — Product Validation](https://github.com/theirishbrian/coded/milestone/2)
-  begins with [privacy-conscious product analytics (#28)](https://github.com/theirishbrian/coded/issues/28).
+  begins with [privacy-conscious product analytics (#28)](https://github.com/theirishbrian/coded/issues/28)
+  and a [public product-feedback pathway (#30)](https://github.com/theirishbrian/coded/issues/30).
 - Validate the product with real users and trustworthy analytics before expanding scope.
 - Scope activity, contribution and ranking work only when evidence supports it.
 - Keep metric definitions and limitations transparent; do not introduce opaque skill scores.
