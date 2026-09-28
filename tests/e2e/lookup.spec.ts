@@ -195,9 +195,9 @@ test("language summary covers all fetched repositories before disclosure", async
   await page.goto("/u/sample-dev");
   const summary = page.getByRole("region", { name: "Repository languages" });
   await expect(summary).toContainText("Based on all 14 retrieved repositories");
-  await expect(summary).toContainText("11 repositories");
+  await expect(summary).toContainText("11 of 14 repositories (79%)");
   await expect(summary).toContainText("JavaScript");
-  await expect(summary).toContainText("2 repositories");
+  await expect(summary).toContainText("2 of 14 repositories (14%)");
   await expect(summary).toContainText("Primary language not reported: 1 of 14");
   await expect(
     page.getByRole("link", { name: "repo-14", exact: true }),

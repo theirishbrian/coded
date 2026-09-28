@@ -11,6 +11,8 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
   automated coverage and documented measurement limits.
 - A public product-feedback pathway with structured GitHub prompts, privacy
   warnings and evidence-review guidance.
+- Accessible repository-language distribution bars with exact counts,
+  percentages and explicit interpretation limits.
 
 ## [0.1.0] - 2026-09-27
 
