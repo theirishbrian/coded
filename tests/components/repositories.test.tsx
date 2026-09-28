@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { expect, it } from "vitest";
 import { RepositorySection } from "@/components/repository-section";
 import type {
@@ -44,7 +44,7 @@ it("shows safe attributed cards, missing values, reported zero and fork/archive 
     repository.url,
   );
   expect(screen.getByText("No description provided.")).toBeInTheDocument();
-  expect(screen.getAllByText("Unavailable")).toHaveLength(2);
+  expect(screen.getAllByText("Unavailable")).toHaveLength(3);
   expect(screen.getByText("0")).toBeInTheDocument();
   expect(screen.getByText("Fork")).toBeInTheDocument();
   expect(screen.getByText("Archived")).toBeInTheDocument();
@@ -71,7 +71,91 @@ it("places only the remaining fetched items in a native disclosure", () => {
     2,
   );
   expect(screen.getByText("Show 2 more repositories").tagName).toBe("SUMMARY");
-  expect(screen.getByText(/First 12 of 14/)).toBeInTheDocument();
+  expect(screen.getByText(/Showing 14 of 14/)).toBeInTheDocument();
+});
+it("searches, filters and transparently sorts the retrieved repositories", () => {
+  const repositories = [
+    {
+      ...repository,
+      id: 1,
+      name: "alpha",
+      description: "API client",
+      stars: 10,
+      updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+      ...repository,
+      id: 2,
+      name: "beta",
+      description: "Web application",
+      primaryLanguage: "TypeScript",
+      stars: 5,
+      isFork: false,
+      isArchived: false,
+      updatedAt: "2026-01-01T00:00:00Z",
+    },
+    {
+      ...repository,
+      id: 3,
+      name: "gamma",
+      description: "Command line tool",
+      stars: 2,
+      isFork: false,
+      updatedAt: "2025-01-01T00:00:00Z",
+    },
+  ];
+  render(<RepositorySection result={{ ...complete, repositories }} />);
+
+  const search = screen.getByRole("searchbox", {
+    name: "Search repositories",
+  });
+  fireEvent.change(search, { target: { value: "TypeScript" } });
+  expect(
+    screen.getByText(/Showing 1 of 3 retrieved repositories/),
+  ).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "beta" })).toBeInTheDocument();
+  expect(screen.queryByRole("link", { name: "alpha" })).not.toBeInTheDocument();
+
+  fireEvent.change(search, { target: { value: "" } });
+  fireEvent.click(screen.getByRole("checkbox", { name: "Include forks" }));
+  fireEvent.click(screen.getByRole("checkbox", { name: "Include archived" }));
+  expect(
+    screen.getByText(/Showing 1 of 3 retrieved repositories/),
+  ).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "beta" })).toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole("checkbox", { name: "Include forks" }));
+  fireEvent.click(screen.getByRole("checkbox", { name: "Include archived" }));
+  fireEvent.change(screen.getByRole("combobox", { name: "Sort by" }), {
+    target: { value: "stars" },
+  });
+  expect(screen.getByText(/Most stars first/)).toHaveTextContent(
+    "popularity is not proficiency",
+  );
+  const cardLinks = within(
+    screen.getByRole("region", { name: "Public repositories" }),
+  )
+    .getAllByRole("link")
+    .filter((link) =>
+      ["alpha", "beta", "gamma"].includes(link.textContent ?? ""),
+    );
+  expect(cardLinks.map((link) => link.textContent)).toEqual([
+    "alpha",
+    "beta",
+    "gamma",
+  ]);
+  fireEvent.change(screen.getByRole("combobox", { name: "Sort by" }), {
+    target: { value: "updated" },
+  });
+  expect(screen.getByText(/Most recently updated first/)).toBeInTheDocument();
+  expect(
+    within(screen.getByRole("region", { name: "Public repositories" }))
+      .getAllByRole("link")
+      .filter((link) =>
+        ["alpha", "beta", "gamma"].includes(link.textContent ?? ""),
+      )
+      .map((link) => link.textContent),
+  ).toEqual(["beta", "gamma", "alpha"]);
 });
 it("labels capped success without claiming complete coverage", () => {
   render(

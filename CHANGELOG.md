@@ -13,6 +13,8 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
   warnings and evidence-review guidance.
 - Accessible repository-language distribution bars with exact counts,
   percentages and explicit interpretation limits.
+- Repository search, fork/archive filters, transparent sorting and visible
+  matching-result counts, using the already retrieved public inventory.
 
 ## [0.1.0] - 2026-09-27
 
