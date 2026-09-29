@@ -19,6 +19,8 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
   continuing to fetch only locally constructed username URLs.
 - Profile-specific social metadata, generated 1200×630 preview cards and a
   browser share button with a copy-link fallback.
+- Downloadable and file-shareable PNG profile cards with visually aligned names
+  and handles.
 
 ## [0.1.0] - 2026-09-27
 

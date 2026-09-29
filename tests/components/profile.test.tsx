@@ -100,6 +100,87 @@ it("copies the canonical profile URL when native sharing is unavailable", async 
   );
   expect(screen.getByRole("status")).toHaveTextContent("Profile link copied.");
 });
+it("shares the generated PNG with a caption containing the profile URL", async () => {
+  const share = vi.fn().mockResolvedValue(undefined);
+  const canShare = vi.fn().mockReturnValue(true);
+  const fetchMock = vi.fn().mockResolvedValue({
+    ok: true,
+    blob: () => Promise.resolve(new Blob(["png"], { type: "image/png" })),
+  });
+  Object.defineProperty(navigator, "share", {
+    configurable: true,
+    value: share,
+  });
+  Object.defineProperty(navigator, "canShare", {
+    configurable: true,
+    value: canShare,
+  });
+  vi.stubGlobal("fetch", fetchMock);
+
+  render(
+    <ProfileResultView result={{ kind: "success", profile: sampleProfile }} />,
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Share card" }));
+
+  await waitFor(() => expect(share).toHaveBeenCalledOnce());
+  const data = share.mock.calls[0][0];
+  expect(data.files).toHaveLength(1);
+  expect(data.files[0]).toBeInstanceOf(File);
+  expect(data.files[0].name).toBe("coded-sample-dev.png");
+  expect(data.text).toContain("http://localhost:3000/u/sample-dev");
+  expect(canShare).toHaveBeenCalledWith(data);
+  expect(fetchMock).toHaveBeenCalledWith(
+    "http://localhost:3000/u/sample-dev/opengraph-image",
+  );
+  expect(screen.getByRole("status")).toHaveTextContent(
+    "Profile card shared with the profile link.",
+  );
+});
+it("downloads the generated PNG when Share card cannot share files", async () => {
+  const fileUrl = "blob:profile-card";
+  const createObjectURL = vi.fn().mockReturnValue(fileUrl);
+  const revokeObjectURL = vi.fn();
+  const click = vi
+    .spyOn(HTMLAnchorElement.prototype, "click")
+    .mockImplementation(() => undefined);
+  Object.defineProperty(URL, "createObjectURL", {
+    configurable: true,
+    value: createObjectURL,
+  });
+  Object.defineProperty(URL, "revokeObjectURL", {
+    configurable: true,
+    value: revokeObjectURL,
+  });
+  Object.defineProperty(navigator, "share", {
+    configurable: true,
+    value: undefined,
+  });
+  Object.defineProperty(navigator, "canShare", {
+    configurable: true,
+    value: undefined,
+  });
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue({
+      ok: true,
+      blob: () => Promise.resolve(new Blob(["png"], { type: "image/png" })),
+    }),
+  );
+
+  render(
+    <ProfileResultView result={{ kind: "success", profile: sampleProfile }} />,
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Share card" }));
+
+  await waitFor(() => expect(click).toHaveBeenCalledOnce());
+  const file = createObjectURL.mock.calls[0][0] as File;
+  expect(file.name).toBe("coded-sample-dev.png");
+  expect(file.type).toBe("image/png");
+  expect(revokeObjectURL).toHaveBeenCalledWith(fileUrl);
+  expect(screen.getByRole("status")).toHaveTextContent(
+    "Profile card downloaded as a PNG.",
+  );
+});
 it.each([
   ["not_found", "Profile unavailable"],
   ["unsupported_account", "Personal accounts only, for now"],
