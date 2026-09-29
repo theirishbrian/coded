@@ -90,6 +90,21 @@ test("profile metadata publishes a social card and copyable canonical URL", asyn
   );
 });
 
+test("downloads the generated profile card with a useful filename", async ({
+  page,
+}) => {
+  await page.goto("/u/sample-dev");
+  const downloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Download card" }).click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe("coded-sample-dev.png");
+  await expect(
+    page.getByRole("status").filter({
+      hasText: "Profile card downloaded as a PNG.",
+    }),
+  ).toBeVisible();
+});
+
 test("invalid form and direct URL inputs show validation", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("textbox").fill("not/a/username");
@@ -142,6 +157,10 @@ test("mobile profile stays within the viewport", async ({ page }) => {
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Share profile" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Share card" })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Download card" }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Share product feedback" }),

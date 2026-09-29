@@ -77,7 +77,7 @@ export default async function ProfileOpenGraphImage({
         <div
           style={{
             display: "flex",
-            alignItems: "baseline",
+            alignItems: "center",
             gap: 22,
             overflow: "hidden",
           }}
@@ -88,6 +88,7 @@ export default async function ProfileOpenGraphImage({
               fontSize: 70,
               fontWeight: 700,
               letterSpacing: -3,
+              lineHeight: 1,
               whiteSpace: "nowrap",
               textOverflow: "ellipsis",
               overflow: "hidden",
@@ -96,7 +97,15 @@ export default async function ProfileOpenGraphImage({
           >
             {name}
           </div>
-          <div style={{ display: "flex", color: "#d3ef8b", fontSize: 28 }}>
+          <div
+            style={{
+              display: "flex",
+              color: "#d3ef8b",
+              fontSize: 28,
+              lineHeight: 1,
+              whiteSpace: "nowrap",
+            }}
+          >
             @{handle}
           </div>
         </div>

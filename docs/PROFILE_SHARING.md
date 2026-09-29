@@ -6,6 +6,12 @@ use that image when a public profile URL is shared. The image contains Coded's
 branding, the account name and username, the public biography when available,
 and the account counts reported by GitHub.
 
+The display name and handle are visually centred on the same line. Visitors can
+use **Share card** to send the PNG and a caption containing the profile link
+when their browser supports file sharing. Browsers without file sharing download
+the PNG instead. **Download card** always saves it as
+`coded-<username>.png`.
+
 The image and metadata use the same validated public account boundary as the
 visible profile. Failed or invalid lookups receive a generic Coded card rather
 than an error response. Repository details are deliberately excluded so social
@@ -16,6 +22,8 @@ available. Otherwise it copies the canonical `/u/[username]` URL to the
 clipboard. Coded does not choose a destination, post on a visitor's behalf,
 store a share, or attach tracking parameters. When neither browser capability
 is available, the interface asks the visitor to copy the address manually.
+Sharing or downloading a card is initiated only by the visitor and is not
+recorded by Coded.
 
 The root metadata base uses Vercel's production project URL in production and
 the active Vercel deployment URL as a fallback. Local development uses
