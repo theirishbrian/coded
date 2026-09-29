@@ -50,6 +50,46 @@ test("keyboard submit leads to a shareable attributed profile", async ({
   expect(errors).toEqual([]);
 });
 
+test("profile metadata publishes a social card and copyable canonical URL", async ({
+  context,
+  page,
+}) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, "share", {
+      configurable: true,
+      value: undefined,
+    });
+  });
+  await page.goto("/u/sample-dev");
+
+  await expect(page).toHaveTitle("Sample Developer (@sample-dev) | Coded");
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    "content",
+    "summary_large_image",
+  );
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "http://127.0.0.1:3100/u/sample-dev",
+  );
+
+  const imageUrl = await page
+    .locator('meta[property="og:image"]')
+    .getAttribute("content");
+  expect(imageUrl).toBeTruthy();
+  const image = await page.request.get(imageUrl!);
+  expect(image.ok()).toBe(true);
+  expect(image.headers()["content-type"]).toBe("image/png");
+
+  await page.getByRole("button", { name: "Share profile" }).click();
+  await expect(
+    page.getByRole("status").filter({ hasText: "Profile link copied." }),
+  ).toBeVisible();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+    "http://127.0.0.1:3100/u/sample-dev",
+  );
+});
+
 test("invalid form and direct URL inputs show validation", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("textbox").fill("not/a/username");
@@ -99,6 +139,9 @@ test("mobile profile stays within the viewport", async ({ page }) => {
   ).toBe(true);
   await expect(
     page.getByRole("button", { name: "View profile" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Share profile" }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Share product feedback" }),

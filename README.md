@@ -132,6 +132,10 @@ only on the already retrieved public repository data. The process-local cache an
 guarantee an IP-wide quota across Vercel instances. Dependencies use exact versions;
 see package.json and the lockfile.
 
+Profile pages also provide dynamic social metadata, a generated sharing image
+and a browser-native share/copy action. See [profile sharing](docs/PROFILE_SHARING.md)
+for the data and fallback behaviour.
+
 Installation follows the [Next.js manual setup](https://nextjs.org/docs/app/getting-started/installation)
 and [Tailwind Next.js guide](https://tailwindcss.com/docs/installation/framework-guides/nextjs).
 
@@ -158,6 +162,7 @@ Coded is available under the [MIT License](LICENSE).
 - [Data limitations](docs/DATA_LIMITATIONS.md): coverage, attribution and metric constraints.
 - [Commercial readiness](docs/COMMERCIAL_READINESS.md): post-v0.1 evidence and due-diligence priorities.
 - [Product feedback](docs/PRODUCT_FEEDBACK.md): public submission boundary and evidence-review method.
+- [Profile sharing](docs/PROFILE_SHARING.md): social cards, metadata and browser share behaviour.
 - [v0.1 release audit](docs/V0_1_RELEASE_AUDIT.md): checks, evidence and publication record.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.

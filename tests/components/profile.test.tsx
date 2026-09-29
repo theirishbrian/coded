@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { beforeEach, expect, it, vi } from "vitest";
 import { UsernameForm } from "@/components/username-form";
 import { ProfileResultView } from "@/components/profile-result";
@@ -49,6 +55,50 @@ it("shows reported zero, unavailable values, attribution and freshness distinctl
   expect(
     screen.getByRole("link", { name: "View source data on GitHub" }),
   ).toHaveAttribute("href", sampleProfile.source.url);
+});
+it("opens the native share sheet with the canonical profile URL", async () => {
+  const share = vi.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, "share", {
+    configurable: true,
+    value: share,
+  });
+
+  render(
+    <ProfileResultView result={{ kind: "success", profile: sampleProfile }} />,
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Share profile" }));
+
+  await waitFor(() =>
+    expect(share).toHaveBeenCalledWith({
+      title: "Sample Developer on Coded",
+      text: "View @sample-dev's public developer profile on Coded.",
+      url: "http://localhost:3000/u/sample-dev",
+    }),
+  );
+  expect(screen.getByRole("status")).toHaveTextContent("Profile shared.");
+});
+it("copies the canonical profile URL when native sharing is unavailable", async () => {
+  const writeText = vi.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, "share", {
+    configurable: true,
+    value: undefined,
+  });
+  Object.defineProperty(navigator, "clipboard", {
+    configurable: true,
+    value: { writeText },
+  });
+
+  render(
+    <ProfileResultView result={{ kind: "success", profile: sampleProfile }} />,
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Share profile" }));
+
+  await waitFor(() =>
+    expect(writeText).toHaveBeenCalledWith(
+      "http://localhost:3000/u/sample-dev",
+    ),
+  );
+  expect(screen.getByRole("status")).toHaveTextContent("Profile link copied.");
 });
 it.each([
   ["not_found", "Profile unavailable"],

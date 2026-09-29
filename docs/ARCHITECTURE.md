@@ -7,6 +7,10 @@ The username form is a Client Component for validation and pending feedback; its
 native GET fallback uses `/lookup` to redirect to the same profile route.
 The shared shell includes the skip link, header and footer. Profile rendering
 stays on the server, including error states and data attribution.
+Each successful profile also exposes dynamic page metadata and a generated
+1200×630 social card from the same validated account model. A small client
+boundary invokes the browser share sheet or copies the canonical profile URL;
+it does not send data or add a Coded social network.
 
 The separate server-only [public profile boundary](GITHUB_PROFILE.md) now validates
 username input, retrieves one public GitHub account, validates the external payload
