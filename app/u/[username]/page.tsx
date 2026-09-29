@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { ProfileRepositories } from "@/components/profile-repositories";
@@ -5,15 +6,35 @@ import { SiteShell } from "@/components/site-shell";
 import { UsernameForm } from "@/components/username-form";
 import { ProfileResultView } from "@/components/profile-result";
 import { lookupProfile } from "@/lib/profile/lookup";
-export const metadata = {
-  title: "Public profile | Coded",
-  robots: { index: false, follow: false },
-};
-export default async function ProfilePage({
+
+type ProfilePageProps = { params: Promise<{ username: string }> };
+
+export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ username: string }>;
-}) {
+}: ProfilePageProps): Promise<Metadata> {
+  const { username } = await params;
+  const result = await lookupProfile(username);
+  const profile = result.kind === "success" ? result.profile : null;
+  const handle = profile?.username ?? username.slice(0, 39);
+  const name = profile?.displayName || handle;
+  const title = profile
+    ? `${name} (@${handle}) | Coded`
+    : "Public profile | Coded";
+  const description = profile?.biography
+    ? `${profile.biography.slice(0, 150)} — public GitHub snapshot on Coded.`
+    : `Explore @${handle}'s public GitHub profile, repositories and languages on Coded.`;
+
+  return {
+    title,
+    description,
+    robots: { index: false, follow: false },
+    alternates: { canonical: `/u/${encodeURIComponent(handle)}` },
+    openGraph: { title, description, type: "website" },
+    twitter: { card: "summary_large_image", title, description },
+  };
+}
+
+export default async function ProfilePage({ params }: ProfilePageProps) {
   await connection();
   const { username } = await params;
   const result = await lookupProfile(username);

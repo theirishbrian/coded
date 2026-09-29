@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ShareProfileButton } from "@/components/share-profile-button";
 import type { LookupResult } from "@/lib/profile/lookup-policy";
 const failures = {
   invalid_input: [
@@ -104,15 +105,21 @@ export function ProfileResultView({ result }: { result: LookupResult }) {
       <p className="mt-6 max-w-2xl whitespace-pre-wrap break-words text-lg leading-relaxed text-[#b9beb6]">
         {profile.biography || "No public biography provided."}
       </p>
-      <a
-        href={profile.profileUrl}
-        className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-[#d3ef8b] underline underline-offset-4"
-      >
-        View on GitHub{" "}
-        <span aria-hidden="true" className="ml-2">
-          ↗
-        </span>
-      </a>
+      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+        <a
+          href={profile.profileUrl}
+          className="inline-flex min-h-11 items-center text-sm font-semibold text-[#d3ef8b] underline underline-offset-4"
+        >
+          View on GitHub{" "}
+          <span aria-hidden="true" className="ml-2">
+            ↗
+          </span>
+        </a>
+        <ShareProfileButton
+          username={profile.username}
+          displayName={profile.displayName || profile.username}
+        />
+      </div>
       <dl className="my-8 grid gap-3 sm:grid-cols-3">
         {counts.map(([label, count]) => (
           <div

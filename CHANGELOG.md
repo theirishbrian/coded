@@ -17,6 +17,8 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
   matching-result counts, using the already retrieved public inventory.
 - Repository pagination now accepts GitHub's canonical numeric-owner links while
   continuing to fetch only locally constructed username URLs.
+- Profile-specific social metadata, generated 1200×630 preview cards and a
+  browser share button with a copy-link fallback.
 
 ## [0.1.0] - 2026-09-27
 
