@@ -19,6 +19,10 @@ counts for private profiles; reported zero does not prove the actual total is ze
 - Public activity is only a partial record of someone's work. Private, offline,
   non-GitHub and inaccessible contributions are outside this scope. A missing
   public record must not be presented as evidence that no work occurred.
+- The 30-day activity timeline groups retrieved API events by UTC calendar day.
+  Bar height is event count, not commit count, effort, consistency or quality;
+  capped and interrupted retrieval can undercount every displayed day, and the
+  first and last UTC calendar days can be partial.
 - Missing, unavailable and zero are distinct states. Rate limits, failed requests,
   pagination bounds and account/repository visibility can limit a result. Future
   profiles must continue to expose those limits rather than silently showing zero or a complete history.

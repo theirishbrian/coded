@@ -57,6 +57,12 @@ test("keyboard submit leads to a shareable attributed profile", async ({
   await expect(activity).toContainText("Merged a pull request");
   await expect(activity).toContainText("Published a release");
   await expect(
+    activity.getByRole("heading", { name: "30-day public-event timeline" }),
+  ).toBeVisible();
+  await expect(activity).toContainText("Activity appears on 1 of 30 UTC days");
+  await activity.getByText("View exact daily counts").press("Enter");
+  await expect(activity.getByText("29 Sept 2026").last()).toBeVisible();
+  await expect(
     activity
       .getByRole("link", {
         name: "View sample-dev/repo-02 on GitHub",
@@ -251,7 +257,9 @@ test("repository disclosure works by keyboard without another request", async ({
   await expect(
     page.getByRole("link", { name: "repo-13", exact: true }),
   ).not.toBeVisible();
-  const summary = page.locator("summary");
+  const summary = page
+    .locator("summary")
+    .filter({ hasText: "Show 2 more repositories" });
   await summary.focus();
   await expect(summary).toBeFocused();
   const requests: string[] = [];

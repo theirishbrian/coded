@@ -4,6 +4,7 @@ import type {
   PublicActivityEvent,
 } from "@/lib/profile/get-activity";
 import { summarizeActivity } from "@/lib/profile/summarize-activity";
+import { ActivityTimeline } from "./activity-timeline";
 import { BackToProfileTop } from "./profile-section-navigation";
 
 function failureMessage(failure: GitHubFailure) {
@@ -121,6 +122,10 @@ export function ActivitySection({ result }: { result: ActivityResult }) {
             </p>
           ) : (
             <>
+              <ActivityTimeline
+                events={result.events}
+                retrievedAt={result.source.retrievedAt}
+              />
               <dl className="my-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {summary.map(({ kind, label, count }) => (
                   <div

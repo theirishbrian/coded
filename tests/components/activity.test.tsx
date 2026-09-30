@@ -51,6 +51,24 @@ it("renders a transparent summary and readable source-linked timeline", () => {
   expect(section).toHaveTextContent("previous 30 days");
   expect(section).toHaveTextContent("30 seconds to 6 hours late");
   expect(section).toHaveTextContent("not a complete contribution history");
+  expect(
+    within(section).getByRole("heading", {
+      name: "30-day public-event timeline",
+    }),
+  ).toBeInTheDocument();
+  expect(section).toHaveTextContent("API event volume rather than commits");
+  expect(section).toHaveTextContent(
+    "first and last calendar days can be partial",
+  );
+  expect(section).toHaveTextContent("Activity appears on 1 of 30 UTC days");
+  expect(
+    within(section).getByText("View exact daily counts"),
+  ).toBeInTheDocument();
+  expect(
+    within(section).getByRole("list", {
+      name: "Retrieved public events by UTC day",
+    }).children,
+  ).toHaveLength(30);
   expect(section).toHaveTextContent("Pushes1");
   expect(section).toHaveTextContent("Pull requests1");
   expect(section).toHaveTextContent("Pushed 3 commits");
