@@ -75,3 +75,9 @@ when made; do not create speculative architecture or claim a finished scoring mo
 Use the [data limitations](DATA_LIMITATIONS.md) as requirements for later work.
 
 The [language summary](LANGUAGE_SUMMARY.md) is a pure transformation of the already retrieved repository models and introduces no fetching or storage. The repository list uses a client boundary for local search, inclusion filters and sorting. Those controls receive the bounded server result and never call GitHub themselves.
+
+The [project highlight selection](PROJECT_HIGHLIGHTS.md) is another pure
+transformation of that repository inventory. It runs in the server-rendered
+repository section, excludes forks and archives, and exposes its deterministic
+order and sample limits without introducing a score, request, client state or
+storage boundary.

@@ -43,6 +43,22 @@ test("keyboard submit leads to a shareable attributed profile", async ({
   await expect(
     page.getByRole("link", { name: "repo-01", exact: true }),
   ).toBeVisible();
+  const highlights = page.getByRole("region", {
+    name: "Project proof highlights",
+  });
+  await expect(highlights).toBeVisible();
+  await expect(highlights).toContainText(
+    "Stars indicate public interest and push dates indicate repository updates",
+  );
+  await expect(
+    highlights.getByRole("link", { name: "repo-02", exact: true }),
+  ).toBeVisible();
+  await expect(
+    highlights.getByRole("link", { name: "repo-04", exact: true }),
+  ).toBeVisible();
+  await expect(
+    highlights.getByRole("link", { name: "repo-05", exact: true }),
+  ).toHaveCount(0);
   await page.reload();
   await expect(
     page.getByRole("heading", { name: "Sample Developer", exact: true }),
@@ -161,6 +177,9 @@ test("mobile profile stays within the viewport", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Share card" })).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Download card" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Project proof highlights" }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Share product feedback" }),

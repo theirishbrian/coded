@@ -136,6 +136,12 @@ Profile pages also provide dynamic social metadata, a generated sharing image
 and a browser-native share/copy action. See [profile sharing](docs/PROFILE_SHARING.md)
 for the data and fallback behaviour.
 
+The repository section highlights up to three original, non-archived projects
+using a published stars/last-push/name order. Cards add validated homepage, topic
+and detected-licence metadata from the existing repository response without more
+requests. See [project proof highlights](docs/PROJECT_HIGHLIGHTS.md) for the exact
+selection and interpretation limits.
+
 Installation follows the [Next.js manual setup](https://nextjs.org/docs/app/getting-started/installation)
 and [Tailwind Next.js guide](https://tailwindcss.com/docs/installation/framework-guides/nextjs).
 
@@ -163,6 +169,7 @@ Coded is available under the [MIT License](LICENSE).
 - [Commercial readiness](docs/COMMERCIAL_READINESS.md): post-v0.1 evidence and due-diligence priorities.
 - [Product feedback](docs/PRODUCT_FEEDBACK.md): public submission boundary and evidence-review method.
 - [Profile sharing](docs/PROFILE_SHARING.md): social cards, metadata and browser share behaviour.
+- [Project proof highlights](docs/PROJECT_HIGHLIGHTS.md): deterministic selection, evidence fields and limits.
 - [v0.1 release audit](docs/V0_1_RELEASE_AUDIT.md): checks, evidence and publication record.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.

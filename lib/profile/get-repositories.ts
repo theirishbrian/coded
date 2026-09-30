@@ -24,6 +24,9 @@ export interface PublicRepository {
   isArchived: boolean;
   updatedAt: string | null;
   pushedAt: string | null;
+  homepageUrl: string | null;
+  topics: string[];
+  license: { name: string; spdxId: string | null } | null;
 }
 interface RepositorySnapshot {
   repositories: PublicRepository[];
@@ -100,6 +103,12 @@ export async function getPublicRepositories(
         isArchived: item.archived,
         updatedAt: item.updated_at,
         pushedAt: item.pushed_at,
+        homepageUrl: item.homepage,
+        topics: item.topics,
+        license:
+          item.license === null
+            ? null
+            : { name: item.license.name, spdxId: item.license.spdx_id },
       });
     }
     urls.push(url);

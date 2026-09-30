@@ -13,6 +13,9 @@ export interface GitHubRepository {
   archived: boolean;
   updated_at: string | null;
   pushed_at: string | null;
+  homepage: string | null;
+  topics: string[];
+  license: { name: string; spdx_id: string | null } | null;
 }
 
 function record(value: unknown): value is Record<string, unknown> {
@@ -35,6 +38,48 @@ function timestamp(value: unknown): value is string | null | undefined {
   return (
     Number.isFinite(date.getTime()) &&
     date.toISOString() === value.replace("Z", ".000Z")
+  );
+}
+
+function homepage(value: unknown): value is string | null | undefined {
+  if (value == null || value === "") return true;
+  if (typeof value !== "string" || value.length > 2048) return false;
+  try {
+    const url = new URL(value);
+    return (
+      (url.protocol === "https:" || url.protocol === "http:") &&
+      !url.username &&
+      !url.password
+    );
+  } catch {
+    return false;
+  }
+}
+
+function topics(value: unknown): value is string[] | undefined {
+  return (
+    value === undefined ||
+    (Array.isArray(value) &&
+      value.length <= 20 &&
+      value.every(
+        (topic) =>
+          typeof topic === "string" && /^[a-z0-9][a-z0-9-]{0,49}$/.test(topic),
+      ))
+  );
+}
+
+function license(
+  value: unknown,
+): value is { name: string; spdx_id: string | null } | null | undefined {
+  if (value == null) return true;
+  return (
+    record(value) &&
+    typeof value.name === "string" &&
+    value.name.length > 0 &&
+    value.name.length <= 100 &&
+    (value.spdx_id === null ||
+      value.spdx_id === undefined ||
+      (typeof value.spdx_id === "string" && value.spdx_id.length <= 50))
   );
 }
 
@@ -68,6 +113,9 @@ export function parseRepositories(
       !count(item.forks_count) ||
       !timestamp(item.updated_at) ||
       !timestamp(item.pushed_at) ||
+      !homepage(item.homepage) ||
+      !topics(item.topics) ||
+      !license(item.license) ||
       typeof item.html_url !== "string"
     )
       return null;
@@ -98,6 +146,15 @@ export function parseRepositories(
       archived: item.archived,
       updated_at: item.updated_at ?? null,
       pushed_at: item.pushed_at ?? null,
+      homepage: item.homepage || null,
+      topics: item.topics ?? [],
+      license:
+        item.license == null
+          ? null
+          : {
+              name: item.license.name,
+              spdx_id: item.license.spdx_id ?? null,
+            },
     });
   }
   return repositories;
