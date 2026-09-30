@@ -9,6 +9,7 @@ const readFixture = (name) =>
   );
 const user = readFixture("user");
 const repository = readFixture("repository");
+const event = readFixture("event");
 const nativeFetch = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
   const url = new URL(
@@ -19,11 +20,53 @@ globalThis.fetch = async (input, init) => {
     if (username === "missing-user") return Response.json({}, { status: 404 });
     if (username === "broken-user") return Response.json({}, { status: 503 });
     if (
-      !["sample-dev", "repo-failure", "empty-dev", "partial-dev"].includes(
-        username,
-      )
+      ![
+        "sample-dev",
+        "repo-failure",
+        "activity-failure",
+        "empty-dev",
+        "partial-dev",
+      ].includes(username)
     )
       throw new Error("Unexpected fixture username");
+    if (url.pathname.endsWith("/events/public")) {
+      await new Promise((resolve) => setTimeout(resolve, 700));
+      if (username === "activity-failure")
+        return Response.json({}, { status: 503 });
+      if (username === "empty-dev") return Response.json([]);
+      const base = {
+        ...event,
+        actor: { login: username },
+        repo: { name: `${username}/repo-02` },
+      };
+      return Response.json([
+        base,
+        {
+          ...base,
+          id: "555000112",
+          type: "PullRequestEvent",
+          payload: { action: "closed", pull_request: { merged: true } },
+        },
+        {
+          ...base,
+          id: "555000113",
+          type: "IssuesEvent",
+          payload: { action: "opened" },
+        },
+        {
+          ...base,
+          id: "555000114",
+          type: "ReleaseEvent",
+          payload: { action: "published" },
+        },
+        {
+          ...base,
+          id: "555000115",
+          type: "WatchEvent",
+          payload: { action: "started" },
+        },
+      ]);
+    }
     if (url.pathname.endsWith("/repos")) {
       // Separate account and repository loading must be observable in a browser.
       await new Promise((resolve) => setTimeout(resolve, 900));

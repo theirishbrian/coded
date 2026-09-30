@@ -8,6 +8,7 @@ import {
   type RepositoriesResult,
 } from "./get-repositories";
 import { createSuccessCache } from "./lookup-policy";
+import { getPublicActivity, type ActivityResult } from "./get-activity";
 
 export function createProfileServices(
   transport: GitHubRequest = getGitHubJson,
@@ -20,6 +21,10 @@ export function createProfileServices(
   );
   const repositories = createSuccessCache(
     (username) => getPublicRepositories(username, request),
+    now,
+  );
+  const activity = createSuccessCache(
+    (username) => getPublicActivity(username, request),
     now,
   );
   return {
@@ -35,6 +40,13 @@ export function createProfileServices(
       if (!username)
         return { kind: "failure", failure: { kind: "invalid_input" } };
       return repositories(username);
+    },
+    async activityFor(result: ProfileResult): Promise<ActivityResult | null> {
+      if (result.kind !== "success") return null;
+      const username = normalizeUsername(result.profile.username);
+      if (!username)
+        return { kind: "failure", failure: { kind: "invalid_input" } };
+      return activity(username);
     },
   };
 }

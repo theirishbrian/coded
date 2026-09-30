@@ -24,6 +24,9 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
 - Transparent project proof highlights for up to three original, non-archived
   repositories, with validated homepage, topic and detected-licence metadata and
   explicit selection and coverage limits.
+- A bounded recent-public-activity snapshot with readable event categories,
+  source links, independent failure handling and explicit 30-day, latency and
+  sampling limits.
 
 ## [0.1.0] - 2026-09-27
 

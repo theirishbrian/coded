@@ -8,7 +8,11 @@ Coded turns public GitHub data into a clear, shareable developer profile.
 
 The application accepts a public GitHub username and shows basic account details
 at a shareable `/u/username` address. Results include attribution, retrieval time,
-missing-data labels and a five-minute freshness policy. Profiles also display owned public repositories, with explicit capped/interrupted coverage and keyboard-accessible disclosure. The [primary-language summary](docs/LANGUAGE_SUMMARY.md) counts the retrieved repositories, including missing metadata and sample limits. Activity analysis is not implemented. The production URL is <https://coded-beryl.vercel.app/>;
+missing-data labels and a five-minute freshness policy. Profiles also display a
+bounded [recent public-activity snapshot](docs/PUBLIC_ACTIVITY.md) and owned public
+repositories, with explicit capped/interrupted coverage and keyboard-accessible
+disclosure. The [primary-language summary](docs/LANGUAGE_SUMMARY.md) counts the
+retrieved repositories, including missing metadata and sample limits. The production URL is <https://coded-beryl.vercel.app/>;
 open PRs run on previews until merged. [v0.1.0](https://github.com/theirishbrian/coded/releases/tag/v0.1.0)
 is the current published release.
 
@@ -17,8 +21,9 @@ is the current published release.
 Enter a public GitHub username and view public account details, owned public
 repositories and primary-language counts. Unavailable data is distinguished from
 zero, and coverage limits are explicit. Language usage describes repositories,
-not developer proficiency. Activity feeds, contribution analysis and repository
-ranking are deferred until after v0.1.
+not developer proficiency. The post-v0.1 activity snapshot covers GitHub's
+available 30-day public-event window. Complete contribution analysis and
+repository ranking remain deferred.
 
 No accounts, database, AI, payments, social features or private repositories in v0.1.
 Any example custom domain in planning is illustrative; the live URL is listed above.
@@ -142,6 +147,11 @@ and detected-licence metadata from the existing repository response without more
 requests. See [project proof highlights](docs/PROJECT_HIGHLIGHTS.md) for the exact
 selection and interpretation limits.
 
+The recent-public-activity section summarizes up to 300 validated events from
+GitHub's available 30-day window and shows the newest 12. It publishes GitHub's
+latency and coverage limits and does not calculate a streak, effort estimate or
+developer score. See [recent public activity](docs/PUBLIC_ACTIVITY.md).
+
 Installation follows the [Next.js manual setup](https://nextjs.org/docs/app/getting-started/installation)
 and [Tailwind Next.js guide](https://tailwindcss.com/docs/installation/framework-guides/nextjs).
 
@@ -170,6 +180,7 @@ Coded is available under the [MIT License](LICENSE).
 - [Product feedback](docs/PRODUCT_FEEDBACK.md): public submission boundary and evidence-review method.
 - [Profile sharing](docs/PROFILE_SHARING.md): social cards, metadata and browser share behaviour.
 - [Project proof highlights](docs/PROJECT_HIGHLIGHTS.md): deterministic selection, evidence fields and limits.
+- [Recent public activity](docs/PUBLIC_ACTIVITY.md): bounded event retrieval, display categories and limits.
 - [v0.1 release audit](docs/V0_1_RELEASE_AUDIT.md): checks, evidence and publication record.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
 - [Security policy](SECURITY.md): private vulnerability reporting; do not post sensitive details in issues.

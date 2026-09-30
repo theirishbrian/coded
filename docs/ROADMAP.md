@@ -47,6 +47,7 @@ states, appropriate tests, accessibility checks and a verified deployment.
 - Scope activity, contribution and ranking work only when evidence supports it.
 - Keep metric definitions and limitations transparent; do not introduce opaque skill scores.
 - Surface original public projects through deterministic, source-backed highlights before adding broader activity analysis.
+- Add a bounded, source-linked 30-day public-activity snapshot before considering deeper contribution analysis or ranking (#44).
 - Treat documentation, deployment history and measurable usage as product assets;
   see [commercial readiness](COMMERCIAL_READINESS.md).
 
@@ -62,4 +63,6 @@ repositories are included in v0.1.
 
 [Language summary (#22)](https://github.com/theirishbrian/coded/issues/22) is
 merged and production verified. The [v0.1 release checklist](V0_1_RELEASE_CHECKLIST.md)
-records the completed audit and publication gates. Activity and ranking remain deferred.
+records the completed audit and publication gates. The post-v0.1
+recent-public-activity snapshot (#44) adds bounded recency evidence; complete
+contribution analysis and ranking remain deferred.

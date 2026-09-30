@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { ProfileRepositories } from "@/components/profile-repositories";
+import { ProfileActivity } from "@/components/profile-activity";
 import { SiteShell } from "@/components/site-shell";
 import { UsernameForm } from "@/components/username-form";
 import { ProfileResultView } from "@/components/profile-result";
@@ -22,7 +23,7 @@ export async function generateMetadata({
     : "Public profile | Coded";
   const description = profile?.biography
     ? `${profile.biography.slice(0, 150)} — public GitHub snapshot on Coded.`
-    : `Explore @${handle}'s public GitHub profile, repositories and languages on Coded.`;
+    : `Explore @${handle}'s public GitHub profile, recent activity, repositories and languages on Coded.`;
 
   return {
     title,
@@ -43,28 +44,40 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       <ProfileResultView result={result} />
       <UsernameForm initialValue={username} />
       {result.kind === "success" && (
-        <Suspense
-          key={result.profile.username}
-          fallback={
-            <div className="my-12 text-[#b9beb6]">
-              <p role="status">Loading public repositories…</p>
-              <noscript>
-                <p className="mt-3">
-                  Showing repositories here requires JavaScript. You can also{" "}
-                  <a
-                    className="underline underline-offset-4"
-                    href={`${result.profile.profileUrl}?tab=repositories`}
-                  >
-                    view repositories on GitHub
-                  </a>
-                  .
-                </p>
-              </noscript>
-            </div>
-          }
-        >
-          <ProfileRepositories profile={result} />
-        </Suspense>
+        <>
+          <Suspense
+            key={`activity-${result.profile.username}`}
+            fallback={
+              <div className="my-12 text-[#b9beb6]">
+                <p role="status">Loading recent public activity…</p>
+              </div>
+            }
+          >
+            <ProfileActivity profile={result} />
+          </Suspense>
+          <Suspense
+            key={`repositories-${result.profile.username}`}
+            fallback={
+              <div className="my-12 text-[#b9beb6]">
+                <p role="status">Loading public repositories…</p>
+                <noscript>
+                  <p className="mt-3">
+                    Showing repositories here requires JavaScript. You can also{" "}
+                    <a
+                      className="underline underline-offset-4"
+                      href={`${result.profile.profileUrl}?tab=repositories`}
+                    >
+                      view repositories on GitHub
+                    </a>
+                    .
+                  </p>
+                </noscript>
+              </div>
+            }
+          >
+            <ProfileRepositories profile={result} />
+          </Suspense>
+        </>
       )}
     </SiteShell>
   );

@@ -5,6 +5,7 @@ import type { GitHubRequest } from "@/lib/github/get-json";
 import { repositoryPageUrl } from "@/lib/github/repository";
 import user from "../../fixtures/github/user.json";
 import repository from "../../fixtures/github/repository.json";
+import event from "../../fixtures/github/event.json";
 vi.mock("server-only", () => ({}));
 const response = (payload: unknown, link: string | null = null) => ({
   kind: "success" as const,
@@ -29,6 +30,13 @@ describe("public profile service integration", () => {
       "upstream_error",
     ] as const)
       expect(await service.repositoriesFor({ kind })).toBeNull();
+    for (const kind of [
+      "invalid_input",
+      "not_found",
+      "unsupported_account",
+      "upstream_error",
+    ] as const)
+      expect(await service.activityFor({ kind })).toBeNull();
     expect(transport).not.toHaveBeenCalled();
     const account = await service.lookupProfile("old-name");
     transport.mockResolvedValue(response([repository]));
@@ -36,6 +44,24 @@ describe("public profile service integration", () => {
     expect(transport).toHaveBeenLastCalledWith(
       repositoryPageUrl("sample-dev", 1),
     );
+  });
+  it("normalizes and independently caches public activity", async () => {
+    const transport = vi
+      .fn<GitHubRequest>()
+      .mockResolvedValueOnce(response(user))
+      .mockResolvedValue(response([event]));
+    const service = createProfileServices(transport);
+    const account = await service.lookupProfile("sample-dev");
+    const [first, same] = await Promise.all([
+      service.activityFor(account),
+      service.activityFor(account),
+    ]);
+    expect(first).toEqual(same);
+    expect(first).toMatchObject({
+      kind: "success",
+      events: [{ id: event.id, kind: "push" }],
+    });
+    expect(transport).toHaveBeenCalledTimes(2);
   });
   it("normalizes and deduplicates account and repository work in separate caches", async () => {
     const transport = vi
