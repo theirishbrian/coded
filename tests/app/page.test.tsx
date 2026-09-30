@@ -19,9 +19,7 @@ test("introduces Coded and offers a public username lookup", () => {
     screen.getByRole("textbox", { name: "GitHub username" }),
   ).toBeVisible();
   expect(
-    screen.getByText(
-      "Public profiles and repositories. Deeper insights are coming later.",
-    ),
+    screen.getByText("Public profiles, recent activity and repositories."),
   ).toBeVisible();
 });
 

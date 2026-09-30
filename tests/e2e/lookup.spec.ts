@@ -40,6 +40,21 @@ test("keyboard submit leads to a shareable attributed profile", async ({
     "https://github.com/theirishbrian/coded/issues/new?template=product_feedback.yml",
   );
   await expect(page.getByText(/Retrieved/).first()).toBeVisible();
+  const activity = page.getByRole("region", {
+    name: "Recent public activity",
+  });
+  await expect(activity).toBeVisible();
+  await expect(activity).toContainText("previous 30 days");
+  await expect(activity).toContainText("Pushed 3 commits");
+  await expect(activity).toContainText("Merged a pull request");
+  await expect(activity).toContainText("Published a release");
+  await expect(
+    activity
+      .getByRole("link", {
+        name: "View sample-dev/repo-02 on GitHub",
+      })
+      .first(),
+  ).toHaveAttribute("href", "https://github.com/sample-dev/repo-02");
   await expect(
     page.getByRole("link", { name: "repo-01", exact: true }),
   ).toBeVisible();
@@ -182,6 +197,9 @@ test("mobile profile stays within the viewport", async ({ page }) => {
     page.getByRole("region", { name: "Project proof highlights" }),
   ).toBeVisible();
   await expect(
+    page.getByRole("region", { name: "Recent public activity" }),
+  ).toBeVisible();
+  await expect(
     page.getByRole("link", { name: "Share product feedback" }),
   ).toBeVisible();
 });
@@ -289,6 +307,21 @@ test("account remains usable while repositories load and after they fail", async
     page.getByRole("link", { name: "View on GitHub" }),
   ).toHaveAttribute("href", "https://github.com/repo-failure");
   await expect(page.getByRole("textbox")).toBeEnabled();
+});
+
+test("account and repositories remain usable when activity is unavailable", async ({
+  page,
+}) => {
+  await page.goto("/u/activity-failure", { waitUntil: "commit" });
+  await expect(
+    page.getByRole("heading", { name: "Sample Developer", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Activity data unavailable" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "repo-01", exact: true }),
+  ).toBeVisible();
 });
 
 test("empty and interrupted repository views are distinct", async ({

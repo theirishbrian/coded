@@ -1,8 +1,9 @@
 # Data and metric limitations
 
-Coded shows basic public account details through a server-only retrieval boundary.
-It does not retrieve activity or calculate quality metrics. A result is an account
-snapshot, not a complete record of someone's work.
+Coded shows public account details, a bounded public-activity window and owned
+repositories through server-only retrieval boundaries. It does not calculate
+quality metrics. A result is a collection of public snapshots, not a complete
+record of someone's work.
 
 The [repository loader](GITHUB_REPOSITORIES.md), displayed on profile pages,
 retrieves at most 300 owned public repositories. Forks and archives are preserved.
@@ -47,3 +48,9 @@ repositories. Their stars/last-push/name order helps discovery; it is not a
 quality, authorship, effort or proficiency ranking. Homepage, topic and licence
 fields are GitHub-reported repository metadata and may be absent, owner supplied
 or inconclusive. See [project proof highlights](PROJECT_HIGHLIGHTS.md).
+
+Recent activity contains at most 300 events from GitHub's available 30-day public
+window and can lag by 30 seconds to 6 hours. Event counts are not unique
+contribution counts, and an empty response does not establish inactivity. The UI
+shows only the newest 12 retrieved events while its category counts cover the
+whole retrieved sample. See [recent public activity](PUBLIC_ACTIVITY.md).

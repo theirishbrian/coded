@@ -1,0 +1,9 @@
+{
+  "id": "555000111",
+  "type": "PushEvent",
+  "actor": { "login": "sample-dev" },
+  "repo": { "name": "sample-dev/example-project" },
+  "payload": { "size": 3 },
+  "public": true,
+  "created_at": "2026-09-29T14:30:00Z"
+}
