@@ -41,18 +41,24 @@ function timestamp(value: unknown): value is string | null | undefined {
   );
 }
 
-function homepage(value: unknown): value is string | null | undefined {
-  if (value == null || value === "") return true;
-  if (typeof value !== "string" || value.length > 2048) return false;
+function homepage(
+  value: unknown,
+): { valid: true; value: string | null } | { valid: false } {
+  if (value == null || value === "") return { valid: true, value: null };
+  if (typeof value !== "string" || value.length > 2048) return { valid: false };
   try {
     const url = new URL(value);
-    return (
-      (url.protocol === "https:" || url.protocol === "http:") &&
-      !url.username &&
-      !url.password
-    );
+    return {
+      valid: true,
+      value:
+        (url.protocol === "https:" || url.protocol === "http:") &&
+        !url.username &&
+        !url.password
+          ? value
+          : null,
+    };
   } catch {
-    return false;
+    return { valid: true, value: null };
   }
 }
 
@@ -91,8 +97,11 @@ export function parseRepositories(
   if (!Array.isArray(value) || value.length > 100) return null;
   const repositories: GitHubRepository[] = [];
   for (const item of value) {
+    const safeHomepage = record(item) ? homepage(item.homepage) : null;
     if (
       !record(item) ||
+      safeHomepage === null ||
+      !safeHomepage.valid ||
       !record(item.owner) ||
       !Number.isSafeInteger(item.id) ||
       Number(item.id) <= 0 ||
@@ -113,7 +122,6 @@ export function parseRepositories(
       !count(item.forks_count) ||
       !timestamp(item.updated_at) ||
       !timestamp(item.pushed_at) ||
-      !homepage(item.homepage) ||
       !topics(item.topics) ||
       !license(item.license) ||
       typeof item.html_url !== "string"
@@ -146,7 +154,7 @@ export function parseRepositories(
       archived: item.archived,
       updated_at: item.updated_at ?? null,
       pushed_at: item.pushed_at ?? null,
-      homepage: item.homepage || null,
+      homepage: safeHomepage.value,
       topics: item.topics ?? [],
       license:
         item.license == null

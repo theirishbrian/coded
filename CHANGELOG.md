@@ -32,6 +32,11 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
 - Profile section navigation with direct links to recent activity and public
   repositories, plus return-to-profile links after both long sections.
 
+### Fixed
+
+- Repository pages now keep otherwise valid public repositories when GitHub
+  returns an unusable optional homepage, while discarding that unsafe link.
+
 ## [0.1.0] - 2026-09-27
 
 ### Added
