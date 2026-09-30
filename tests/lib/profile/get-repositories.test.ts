@@ -139,8 +139,7 @@ describe("public repository retrieval", () => {
     { forks_count: "0" },
     { updated_at: "2026-02-30T00:00:00Z" },
     { pushed_at: "yesterday" },
-    { homepage: "javascript:alert(1)" },
-    { homepage: "https://user@example.test/project" },
+    { homepage: 42 },
     { topics: ["valid", "Bad topic"] },
     { topics: Array.from({ length: 21 }, () => "topic") },
     { license: { name: "" } },
@@ -156,6 +155,20 @@ describe("public repository retrieval", () => {
       failure: { kind: "malformed_response" },
     });
   });
+  it.each([
+    "blog.theamazingrando.com",
+    "javascript:alert(1)",
+    "https://user@example.test/project",
+  ])(
+    "drops unusable optional homepage %s without losing the repository",
+    async (homepage) => {
+      respond([{ ...fixture, homepage }]);
+      expect(await getPublicRepositories("sample-dev")).toMatchObject({
+        kind: "success",
+        repositories: [{ id: fixture.id, homepageUrl: null }],
+      });
+    },
+  );
   it.each([{}, null, [null], Array.from({ length: 101 }, () => fixture)])(
     "rejects malformed pages",
     async (payload) => {
