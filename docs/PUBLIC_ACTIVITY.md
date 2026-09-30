@@ -22,8 +22,10 @@ from 30 seconds to 6 hours. Coded publishes both limits beside the result. See
 
 Every page is validated before its events enter the Coded model. IDs, actor,
 repository name, timestamp, visibility and the small set of payload fields Coded
-uses must be safe and well formed. Pagination destinations are reconstructed
-locally and fail closed if GitHub returns an unexpected origin, path or query.
+uses must be safe and well formed. GitHub canonicalizes pagination links to the
+validated numeric account ID; Coded accepts only that ID or the validated username.
+Pagination destinations are reconstructed locally and fail closed if GitHub
+returns an unexpected origin, account, path or query.
 Validated earlier pages remain visible as an explicitly interrupted sample.
 
 ## Display and interpretation

@@ -14,7 +14,7 @@ const success = (payload: unknown, link: string | null = null) => ({
   retrievedAt: "2026-09-30T12:00:00Z",
 });
 const next = (page: number) =>
-  `<${publicEventsPageUrl("sample-dev", page)}>; rel="next"`;
+  `<https://api.github.com/user/123/events/public?per_page=100&page=${page}>; rel="next"`;
 
 describe("public activity retrieval", () => {
   it("retrieves bounded pages, deduplicates events and maps validated fields", async () => {
@@ -33,7 +33,9 @@ describe("public activity retrieval", () => {
           },
         ]),
       );
-    await expect(getPublicActivity(" SAMPLE-DEV ", request)).resolves.toEqual({
+    await expect(
+      getPublicActivity(" SAMPLE-DEV ", request, 123),
+    ).resolves.toEqual({
       kind: "success",
       completeness: "endpoint_exhausted",
       events: [
@@ -80,7 +82,7 @@ describe("public activity retrieval", () => {
       .mockResolvedValueOnce(success([fixture], next(2)))
       .mockResolvedValueOnce({ kind: "timeout" });
     await expect(
-      getPublicActivity("sample-dev", request),
+      getPublicActivity("sample-dev", request, 123),
     ).resolves.toMatchObject({
       kind: "partial",
       completeness: "interrupted",
@@ -134,6 +136,24 @@ describe("public activity retrieval", () => {
       );
     await expect(
       getPublicActivity("sample-dev", request),
+    ).resolves.toMatchObject({
+      kind: "partial",
+      failure: { kind: "malformed_response" },
+    });
+    expect(request).toHaveBeenCalledTimes(1);
+  });
+
+  it("rejects a canonical continuation for a different account id", async () => {
+    const request = vi
+      .fn<GitHubRequest>()
+      .mockResolvedValue(
+        success(
+          [fixture],
+          '<https://api.github.com/user/999/events/public?per_page=100&page=2>; rel="next"',
+        ),
+      );
+    await expect(
+      getPublicActivity("sample-dev", request, 123),
     ).resolves.toMatchObject({
       kind: "partial",
       failure: { kind: "malformed_response" },

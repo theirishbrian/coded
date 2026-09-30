@@ -23,10 +23,12 @@ export function createProfileServices(
     (username) => getPublicRepositories(username, request),
     now,
   );
-  const activity = createSuccessCache(
-    (username) => getPublicActivity(username, request),
-    now,
-  );
+  const activity = createSuccessCache((key) => {
+    const separator = key.indexOf(":");
+    const accountId = Number(key.slice(0, separator));
+    const username = key.slice(separator + 1);
+    return getPublicActivity(username, request, accountId);
+  }, now);
   return {
     async lookupProfile(input: unknown): Promise<ProfileResult> {
       const username = normalizeUsername(input);
@@ -46,7 +48,7 @@ export function createProfileServices(
       const username = normalizeUsername(result.profile.username);
       if (!username)
         return { kind: "failure", failure: { kind: "invalid_input" } };
-      return activity(username);
+      return activity(`${result.profile.accountId}:${username}`);
     },
   };
 }

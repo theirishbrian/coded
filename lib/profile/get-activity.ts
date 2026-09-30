@@ -89,6 +89,7 @@ function kind(type: string): ActivityKind {
 export async function getPublicActivity(
   input: unknown,
   request: GitHubRequest = getGitHubJson,
+  accountId: number | null = null,
 ): Promise<ActivityResult> {
   const username = normalizeUsername(input);
   if (!username) return { kind: "failure", failure: { kind: "invalid_input" } };
@@ -121,6 +122,7 @@ export async function getPublicActivity(
       response.link,
       username,
       page + 1,
+      accountId,
     );
     for (const item of items) {
       if (events.has(item.id)) continue;

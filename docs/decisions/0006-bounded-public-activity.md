@@ -16,7 +16,9 @@ limited to the previous 30 days, can lag by up to six hours and can paginate.
 Add a third server-only adapter with its own five-minute success cache. Retrieve
 at most three 100-event pages through the shared request policy. Validate every
 page and locally reconstruct accepted pagination URLs. Preserve validated earlier
-pages as partial data if a later request or continuation fails.
+pages as partial data if a later request or continuation fails. GitHub's links
+may use its canonical `/user/{id}` route; accept only the numeric ID already
+validated with the account, or the validated username route.
 
 Render activity in an independent Suspense boundary before repositories. Summarize
 all retrieved categories and show the newest 12 events. Link each visible item to

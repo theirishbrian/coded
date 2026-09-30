@@ -115,6 +115,7 @@ export function publicEventsContinuation(
   link: string | null,
   username: string,
   nextPage: number,
+  accountId: number | null = null,
 ): "next" | "end" | "invalid" {
   if (link === null) return "end";
   const relations = new Set<string>();
@@ -130,12 +131,15 @@ export function publicEventsContinuation(
       const expected = new URL(publicEventsPageUrl(username, nextPage));
       actual.searchParams.sort();
       expected.searchParams.sort();
+      const usernamePath = expected.pathname.toLowerCase();
+      const accountPath =
+        accountId === null ? null : `/user/${accountId}/events/public`;
       if (
         actual.origin !== expected.origin ||
         actual.username ||
         actual.password ||
         actual.hash ||
-        actual.pathname.toLowerCase() !== expected.pathname.toLowerCase() ||
+        ![usernamePath, accountPath].includes(actual.pathname.toLowerCase()) ||
         actual.search !== expected.search
       )
         return "invalid";
