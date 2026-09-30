@@ -10,8 +10,9 @@ export function RepositoryLanguages({
   if (summary.total === 0) return null;
   return (
     <section
+      id="repository-languages"
       aria-labelledby="repository-languages-heading"
-      className="my-6 rounded-sm border border-white/15 p-5"
+      className="my-6 scroll-mt-6 rounded-sm border border-white/15 p-5"
     >
       <h3 id="repository-languages-heading" className="text-lg font-semibold">
         Repository languages

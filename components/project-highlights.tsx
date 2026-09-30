@@ -36,8 +36,9 @@ export function ProjectHighlights({
 
   return (
     <section
+      id="project-highlights"
       aria-labelledby="project-highlights-heading"
-      className="my-8 rounded-sm border border-[#d3ef8b]/35 bg-[#d3ef8b]/[0.035] p-5 sm:p-6"
+      className="my-8 scroll-mt-6 rounded-sm border border-[#d3ef8b]/35 bg-[#d3ef8b]/[0.035] p-5 sm:p-6"
     >
       <p className="font-mono text-xs uppercase tracking-widest text-[#d3ef8b]">
         Transparent selection
