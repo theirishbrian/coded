@@ -4,6 +4,7 @@ import type {
   PublicActivityEvent,
 } from "@/lib/profile/get-activity";
 import { summarizeActivity } from "@/lib/profile/summarize-activity";
+import { BackToProfileTop } from "./profile-section-navigation";
 
 function failureMessage(failure: GitHubFailure) {
   if (failure.kind === "rate_limited")
@@ -71,8 +72,9 @@ export function ActivitySection({ result }: { result: ActivityResult }) {
     result.kind === "failure" ? [] : summarizeActivity(result.events);
   return (
     <section
+      id="recent-activity"
       aria-labelledby="activity-heading"
-      className="my-12 border-t border-white/15 pt-10"
+      className="my-12 scroll-mt-6 border-t border-white/15 pt-10"
     >
       <p className="font-mono text-xs uppercase tracking-widest text-[#d3ef8b]">
         A time-bounded public snapshot
@@ -198,6 +200,7 @@ export function ActivitySection({ result }: { result: ActivityResult }) {
           </ul>
         </>
       )}
+      <BackToProfileTop />
     </section>
   );
 }

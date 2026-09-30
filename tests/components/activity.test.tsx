@@ -44,6 +44,10 @@ it("renders a transparent summary and readable source-linked timeline", () => {
   const section = screen.getByRole("region", {
     name: "Recent public activity",
   });
+  expect(section).toHaveAttribute("id", "recent-activity");
+  expect(
+    within(section).getByRole("link", { name: "Back to profile" }),
+  ).toHaveAttribute("href", "#profile-top");
   expect(section).toHaveTextContent("previous 30 days");
   expect(section).toHaveTextContent("30 seconds to 6 hours late");
   expect(section).toHaveTextContent("not a complete contribution history");

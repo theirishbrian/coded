@@ -3,6 +3,7 @@ import type { GitHubFailure } from "@/lib/github/get-json";
 import { RepositoryList } from "./repository-list";
 import { RepositoryLanguages } from "./repository-languages";
 import { ProjectHighlights } from "./project-highlights";
+import { BackToProfileTop } from "./profile-section-navigation";
 
 function FailureNotice({ failure }: { failure: GitHubFailure }) {
   return (
@@ -23,8 +24,9 @@ function FailureNotice({ failure }: { failure: GitHubFailure }) {
 export function RepositorySection({ result }: { result: RepositoriesResult }) {
   return (
     <section
+      id="public-repositories"
       aria-labelledby="repositories-heading"
-      className="my-12 border-t border-white/15 pt-10"
+      className="my-12 scroll-mt-6 border-t border-white/15 pt-10"
     >
       <h2
         id="repositories-heading"
@@ -102,6 +104,7 @@ export function RepositorySection({ result }: { result: RepositoriesResult }) {
           </ul>
         </>
       )}
+      <BackToProfileTop />
     </section>
   );
 }

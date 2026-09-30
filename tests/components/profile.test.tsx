@@ -44,6 +44,7 @@ it("shows reported zero, unavailable values, attribution and freshness distinctl
   expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
     "Sample Developer",
   );
+  expect(screen.getByRole("article")).toHaveAttribute("id", "profile-top");
   expect(screen.getByText("No public biography provided.")).toBeVisible();
   const followers = screen.getByText("Followers").parentElement!;
   expect(within(followers).getByRole("definition")).toHaveTextContent("0");
@@ -55,6 +56,16 @@ it("shows reported zero, unavailable values, attribution and freshness distinctl
   expect(
     screen.getByRole("link", { name: "View source data on GitHub" }),
   ).toHaveAttribute("href", sampleProfile.source.url);
+  const navigation = screen.getByRole("navigation", {
+    name: "Profile sections",
+  });
+  expect(
+    within(navigation).getByRole("link", { name: "Recent activity" }),
+  ).toHaveAttribute("href", "#recent-activity");
+  expect(
+    within(navigation).getByRole("link", { name: "Public repositories" }),
+  ).toHaveAttribute("href", "#public-repositories");
+  expect(within(navigation).getAllByRole("link")).toHaveLength(2);
 });
 it("opens the native share sheet with the canonical profile URL", async () => {
   const share = vi.fn().mockResolvedValue(undefined);

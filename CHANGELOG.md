@@ -27,6 +27,8 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
 - A bounded recent-public-activity snapshot with readable event categories,
   source links, independent failure handling and explicit 30-day, latency and
   sampling limits.
+- Profile section navigation with direct links to recent activity and public
+  repositories, plus return-to-profile links after both long sections.
 
 ## [0.1.0] - 2026-09-27
 

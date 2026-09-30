@@ -44,6 +44,14 @@ test("keyboard submit leads to a shareable attributed profile", async ({
     name: "Recent public activity",
   });
   await expect(activity).toBeVisible();
+  const sectionNavigation = page.getByRole("navigation", {
+    name: "Profile sections",
+  });
+  await sectionNavigation
+    .getByRole("link", { name: "Recent activity" })
+    .press("Enter");
+  await expect(page).toHaveURL(/\/u\/sample-dev#recent-activity$/);
+  await expect(activity).toHaveAttribute("id", "recent-activity");
   await expect(activity).toContainText("previous 30 days");
   await expect(activity).toContainText("Pushed 3 commits");
   await expect(activity).toContainText("Merged a pull request");
@@ -58,6 +66,13 @@ test("keyboard submit leads to a shareable attributed profile", async ({
   await expect(
     page.getByRole("link", { name: "repo-01", exact: true }),
   ).toBeVisible();
+  await sectionNavigation
+    .getByRole("link", { name: "Public repositories" })
+    .press("Enter");
+  await expect(page).toHaveURL(/\/u\/sample-dev#public-repositories$/);
+  await expect(
+    page.getByRole("region", { name: "Public repositories" }),
+  ).toHaveAttribute("id", "public-repositories");
   const highlights = page.getByRole("region", {
     name: "Project proof highlights",
   });

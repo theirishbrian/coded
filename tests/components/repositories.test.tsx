@@ -42,6 +42,13 @@ it("shows safe attributed cards, missing values, reported zero and fork/archive 
   expect(
     screen.getByRole("region", { name: "Public repositories" }),
   ).toBeInTheDocument();
+  const section = screen.getByRole("region", {
+    name: "Public repositories",
+  });
+  expect(section).toHaveAttribute("id", "public-repositories");
+  expect(
+    within(section).getByRole("link", { name: "Back to profile" }),
+  ).toHaveAttribute("href", "#profile-top");
   expect(screen.getByRole("link", { name: "example-project" })).toHaveAttribute(
     "href",
     repository.url,
@@ -194,6 +201,7 @@ it("shows deterministic project proof with source-backed metadata", () => {
   const highlights = screen.getByRole("region", {
     name: "Project proof highlights",
   });
+  expect(highlights).toHaveAttribute("id", "project-highlights");
   expect(highlights).toHaveTextContent("Selected 1 of 1 eligible repositories");
   expect(highlights).toHaveTextContent(
     "neither measures code quality, effort, authorship or developer skill",
@@ -317,6 +325,7 @@ it("summarizes the full retrieved inventory, including items behind disclosure",
   }));
   render(<RepositorySection result={{ ...complete, repositories }} />);
   const summary = screen.getByRole("region", { name: "Repository languages" });
+  expect(summary).toHaveAttribute("id", "repository-languages");
   expect(
     within(summary).getByText("13 of 14 repositories (93%)"),
   ).toBeInTheDocument();

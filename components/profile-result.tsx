@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ProfileSectionNavigation } from "@/components/profile-section-navigation";
 import { ShareProfileButton } from "@/components/share-profile-button";
 import type { LookupResult } from "@/lib/profile/lookup-policy";
 const failures = {
@@ -77,7 +78,11 @@ export function ProfileResultView({ result }: { result: LookupResult }) {
     ["Following", profile.counts.following],
   ] as const;
   return (
-    <article className="mb-12" aria-labelledby="profile-heading">
+    <article
+      id="profile-top"
+      className="mb-12 scroll-mt-6"
+      aria-labelledby="profile-heading"
+    >
       <p className="mb-6 font-mono text-xs uppercase tracking-widest text-[#d3ef8b]">
         A public snapshot
       </p>
@@ -159,6 +164,7 @@ export function ProfileResultView({ result }: { result: LookupResult }) {
           View source data on GitHub
         </a>
       </div>
+      <ProfileSectionNavigation />
     </article>
   );
 }
