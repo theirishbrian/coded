@@ -18,6 +18,9 @@ const repository: PublicRepository = {
   isArchived: true,
   updatedAt: null,
   pushedAt: null,
+  homepageUrl: null,
+  topics: [],
+  license: null,
 };
 const complete = {
   kind: "success",
@@ -110,11 +113,16 @@ it("searches, filters and transparently sorts the retrieved repositories", () =>
     name: "Search repositories",
   });
   fireEvent.change(search, { target: { value: "TypeScript" } });
+  const explorer = screen.getByRole("region", { name: "Repository explorer" });
   expect(
     screen.getByText(/Showing 1 of 3 retrieved repositories/),
   ).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "beta" })).toBeInTheDocument();
-  expect(screen.queryByRole("link", { name: "alpha" })).not.toBeInTheDocument();
+  expect(
+    within(explorer).getByRole("link", { name: "beta" }),
+  ).toBeInTheDocument();
+  expect(
+    within(explorer).queryByRole("link", { name: "alpha" }),
+  ).not.toBeInTheDocument();
 
   fireEvent.change(search, { target: { value: "" } });
   fireEvent.click(screen.getByRole("checkbox", { name: "Include forks" }));
@@ -122,7 +130,9 @@ it("searches, filters and transparently sorts the retrieved repositories", () =>
   expect(
     screen.getByText(/Showing 1 of 3 retrieved repositories/),
   ).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "beta" })).toBeInTheDocument();
+  expect(
+    within(explorer).getByRole("link", { name: "beta" }),
+  ).toBeInTheDocument();
 
   fireEvent.click(screen.getByRole("checkbox", { name: "Include forks" }));
   fireEvent.click(screen.getByRole("checkbox", { name: "Include archived" }));
@@ -132,9 +142,7 @@ it("searches, filters and transparently sorts the retrieved repositories", () =>
   expect(screen.getByText(/Most stars first/)).toHaveTextContent(
     "popularity is not proficiency",
   );
-  const cardLinks = within(
-    screen.getByRole("region", { name: "Public repositories" }),
-  )
+  const cardLinks = within(explorer)
     .getAllByRole("link")
     .filter((link) =>
       ["alpha", "beta", "gamma"].includes(link.textContent ?? ""),
@@ -149,13 +157,83 @@ it("searches, filters and transparently sorts the retrieved repositories", () =>
   });
   expect(screen.getByText(/Most recently updated first/)).toBeInTheDocument();
   expect(
-    within(screen.getByRole("region", { name: "Public repositories" }))
+    within(explorer)
       .getAllByRole("link")
       .filter((link) =>
         ["alpha", "beta", "gamma"].includes(link.textContent ?? ""),
       )
       .map((link) => link.textContent),
   ).toEqual(["beta", "gamma", "alpha"]);
+});
+it("shows deterministic project proof with source-backed metadata", () => {
+  const repositories = [
+    {
+      ...repository,
+      id: 1,
+      name: "forked",
+      stars: 100,
+      isFork: true,
+      isArchived: false,
+    },
+    {
+      ...repository,
+      id: 2,
+      name: "proof-project",
+      description: "A documented public project",
+      primaryLanguage: "TypeScript",
+      stars: 12,
+      isFork: false,
+      isArchived: false,
+      pushedAt: "2026-09-25T12:00:00Z",
+      homepageUrl: "https://example.test/proof-project",
+      topics: ["developer-tools", "portfolio"],
+      license: { name: "MIT License", spdxId: "MIT" },
+    },
+  ];
+  render(<RepositorySection result={{ ...complete, repositories }} />);
+  const highlights = screen.getByRole("region", {
+    name: "Project proof highlights",
+  });
+  expect(highlights).toHaveTextContent("Selected 1 of 1 eligible repositories");
+  expect(highlights).toHaveTextContent(
+    "neither measures code quality, effort, authorship or developer skill",
+  );
+  expect(
+    within(highlights).getByRole("link", { name: "proof-project" }),
+  ).toHaveAttribute("href", "https://github.com/sample-dev/example-project");
+  expect(
+    within(highlights).queryByRole("link", { name: "forked" }),
+  ).not.toBeInTheDocument();
+  expect(within(highlights).getByText("developer-tools")).toBeInTheDocument();
+  expect(within(highlights).getByText("MIT")).toBeInTheDocument();
+  expect(
+    within(highlights).getByRole("link", { name: /Visit project site/ }),
+  ).toHaveAttribute("href", "https://example.test/proof-project");
+});
+it("labels highlight coverage and explains an ineligible inventory", () => {
+  const { rerender } = render(
+    <RepositorySection result={{ ...complete, completeness: "page_limit" }} />,
+  );
+  expect(
+    screen.getByRole("region", { name: "Project proof highlights" }),
+  ).toHaveTextContent("capped sample");
+  expect(
+    screen.getByText(/No original, non-archived repository/),
+  ).toBeInTheDocument();
+
+  rerender(
+    <RepositorySection
+      result={{
+        ...complete,
+        kind: "partial",
+        completeness: "interrupted",
+        failure: { kind: "timeout" },
+      }}
+    />,
+  );
+  expect(
+    screen.getByRole("region", { name: "Project proof highlights" }),
+  ).toHaveTextContent("interrupted");
 });
 it("labels capped success without claiming complete coverage", () => {
   render(

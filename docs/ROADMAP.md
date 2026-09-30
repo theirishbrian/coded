@@ -46,6 +46,7 @@ states, appropriate tests, accessibility checks and a verified deployment.
 - Validate the product with real users and trustworthy analytics before expanding scope.
 - Scope activity, contribution and ranking work only when evidence supports it.
 - Keep metric definitions and limitations transparent; do not introduce opaque skill scores.
+- Surface original public projects through deterministic, source-backed highlights before adding broader activity analysis.
 - Treat documentation, deployment history and measurable usage as product assets;
   see [commercial readiness](COMMERCIAL_READINESS.md).
 

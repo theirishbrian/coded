@@ -2,6 +2,7 @@ import type { RepositoriesResult } from "@/lib/profile/get-repositories";
 import type { GitHubFailure } from "@/lib/github/get-json";
 import { RepositoryList } from "./repository-list";
 import { RepositoryLanguages } from "./repository-languages";
+import { ProjectHighlights } from "./project-highlights";
 
 function FailureNotice({ failure }: { failure: GitHubFailure }) {
   return (
@@ -60,6 +61,7 @@ export function RepositorySection({ result }: { result: RepositoriesResult }) {
           )}
           {result.repositories.length > 0 ? (
             <>
+              <ProjectHighlights result={result} />
               <RepositoryLanguages result={result} />
               <RepositoryList repositories={result.repositories} />
             </>

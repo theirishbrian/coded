@@ -19,6 +19,9 @@ const repo = (
   isArchived: false,
   updatedAt: null,
   pushedAt: null,
+  homepageUrl: null,
+  topics: [],
+  license: null,
   ...flags,
 });
 it("counts primary languages alphabetically, including forks and archives without mutating input", () => {

@@ -21,6 +21,9 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
   browser share button with a copy-link fallback.
 - Downloadable and file-shareable PNG profile cards with visually aligned names
   and handles.
+- Transparent project proof highlights for up to three original, non-archived
+  repositories, with validated homepage, topic and detected-licence metadata and
+  explicit selection and coverage limits.
 
 ## [0.1.0] - 2026-09-27
 

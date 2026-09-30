@@ -13,5 +13,8 @@
   "fork": false,
   "archived": false,
   "updated_at": "2026-09-20T12:00:00Z",
-  "pushed_at": "2026-09-19T10:00:00Z"
+  "pushed_at": "2026-09-19T10:00:00Z",
+  "homepage": "https://example.test/example-project",
+  "topics": ["developer-tools", "portfolio"],
+  "license": { "name": "MIT License", "spdx_id": "MIT" }
 }

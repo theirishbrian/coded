@@ -113,7 +113,7 @@ export function RepositoryList({
   const viewKey = `${query}:${includeForks}:${includeArchived}:${sort}`;
 
   return (
-    <div>
+    <div role="region" aria-label="Repository explorer">
       <div className="mb-5 grid gap-4 rounded-sm border border-white/15 bg-white/[0.025] p-5 lg:grid-cols-[minmax(0,1fr)_auto]">
         <div>
           <label className="text-sm font-semibold" htmlFor="repository-search">

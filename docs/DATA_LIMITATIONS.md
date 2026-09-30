@@ -41,3 +41,9 @@ against current official documentation. Do not treat this page as an API contrac
 or claim that a proposed metric is already available.
 
 Primary-language counts summarize this retrieved inventory, including forks and archives, with missing metadata counted separately. They do not measure code volume or every language used; see [language summary](LANGUAGE_SUMMARY.md).
+
+Project highlights use the same bounded inventory and exclude forks and archived
+repositories. Their stars/last-push/name order helps discovery; it is not a
+quality, authorship, effort or proficiency ranking. Homepage, topic and licence
+fields are GitHub-reported repository metadata and may be absent, owner supplied
+or inconclusive. See [project proof highlights](PROJECT_HIGHLIGHTS.md).
