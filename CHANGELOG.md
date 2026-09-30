@@ -7,6 +7,8 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
 
 ### Added
 
+- An accessible 30-day UTC public-event timeline with exact daily and category
+  counts, busiest retrieved days and explicit interpretation limits.
 - Privacy-conscious Vercel page analytics with profile-username redaction,
   automated coverage and documented measurement limits.
 - A public product-feedback pathway with structured GitHub prompts, privacy

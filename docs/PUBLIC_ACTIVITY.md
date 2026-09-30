@@ -30,14 +30,25 @@ Validated earlier pages remain visible as an explicitly interrupted sample.
 
 ## Display and interpretation
 
-The section counts retrieved event categories and displays the newest 12 events.
+The section counts retrieved event categories, groups them into a 30-day UTC
+calendar timeline ending on the retrieval date, and displays the newest 12 events.
 Categories include pushes, pull requests, issues, releases, stars, forks,
 repository/ref creation, reviews, comments and an `other` bucket for safe future
 GitHub event types. Each visible event links to its public repository because
 GitHub event payloads do not provide one stable browser URL for every event type.
+
+The timeline has one bar per UTC calendar day. It exposes exact daily totals in
+the accessible list and a native disclosure, preserves per-day category counts
+for assistive descriptions and identifies up to three busiest retrieved days.
+It is a pure transformation of the already retrieved, deduplicated events: it
+does not make another request, add client JavaScript or store history. Events
+outside the 30-day calendar window are ignored defensively. Because GitHub's
+limit is a rolling window and retrieval can happen part-way through a day, the
+first and last UTC calendar days can be partial.
 
 The counts describe API events, not unique contributions. One action can produce
 multiple events, push events can contain multiple commits, and public event data
 can omit private, organization-limited, older, deleted, offline and non-GitHub
 work. A zero or empty response does not establish inactivity. Coded does not turn
 events into a streak, rank, quality score, effort estimate or proficiency claim.
+Bar height represents only the number of retrieved API events on that day.
