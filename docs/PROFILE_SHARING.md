@@ -25,6 +25,15 @@ is available, the interface asks the visitor to copy the address manually.
 Sharing or downloading a card is initiated only by the visitor and is not
 recorded by Coded.
 
+Successful profiles also link to a dedicated printable snapshot at
+`/u/[username]/snapshot`. It reuses the same validated account, repository and
+activity services but omits the full repository explorer and interactive profile
+controls. The snapshot contains up to three transparently selected projects, the
+five most common reported primary languages and a bounded activity summary. Its
+**Print or save as PDF** control opens the browser print dialog; Coded does not
+generate, store or transmit a PDF. Print styles target a concise output on common
+A4 and Letter settings while preserving source, freshness and coverage notices.
+
 The root metadata base uses Vercel's production project URL in production and
 the active Vercel deployment URL as a fallback. Local development uses
 `http://localhost:3000`; no custom environment variable is required. Isolated

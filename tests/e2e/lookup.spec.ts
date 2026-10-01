@@ -142,6 +142,74 @@ test("profile metadata publishes a social card and copyable canonical URL", asyn
   );
 });
 
+test("print snapshot is concise, printable and usable on a narrow screen", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "print", {
+      configurable: true,
+      value: () =>
+        document.documentElement.setAttribute("data-print-called", "true"),
+    });
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/u/sample-dev");
+  await page.getByRole("link", { name: "Print snapshot" }).press("Enter");
+  await expect(page).toHaveURL(/\/u\/sample-dev\/snapshot$/);
+
+  await expect(
+    page.getByRole("heading", { name: "Sample Developer" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Project proof highlights" }),
+  ).toContainText("repo-02");
+  await expect(
+    page.getByRole("heading", { name: "Leading repository languages" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Recent public activity" }),
+  ).toBeVisible();
+  await expect(page.getByRole("searchbox")).toHaveCount(0);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+
+  const printButton = page.getByRole("button", {
+    name: "Print or save as PDF",
+  });
+  await printButton.focus();
+  await expect(printButton).toBeFocused();
+  await printButton.press("Enter");
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-print-called",
+    "true",
+  );
+
+  await page.emulateMedia({ media: "print" });
+  await expect(page.locator(".snapshot-actions")).toHaveCSS("display", "none");
+  await expect(
+    page.getByRole("heading", { name: "Sample Developer" }),
+  ).toBeVisible();
+});
+
+test("print snapshot states unavailable supporting data without inventing zeroes", async ({
+  page,
+}) => {
+  await page.goto("/u/repo-failure/snapshot");
+  await expect(page.getByText(/Repository data was unavailable/)).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Recent public activity" }),
+  ).toBeVisible();
+
+  await page.goto("/u/activity-failure/snapshot");
+  await expect(page.getByText(/Recent activity was unavailable/)).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Project proof highlights" }),
+  ).toBeVisible();
+});
+
 test("downloads the generated profile card with a useful filename", async ({
   page,
 }) => {
