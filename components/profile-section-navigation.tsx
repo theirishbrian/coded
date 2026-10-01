@@ -1,5 +1,6 @@
 const sections = [
   ["Recent activity", "#recent-activity"],
+  ["Profile checklist", "#profile-checklist"],
   ["Public repositories", "#public-repositories"],
 ] as const;
 

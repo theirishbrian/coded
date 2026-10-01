@@ -73,6 +73,17 @@ test("keyboard submit leads to a shareable attributed profile", async ({
     page.getByRole("link", { name: "repo-01", exact: true }),
   ).toBeVisible();
   await sectionNavigation
+    .getByRole("link", { name: "Profile checklist" })
+    .press("Enter");
+  await expect(page).toHaveURL(/\/u\/sample-dev#profile-checklist$/);
+  const checklist = page.getByRole("region", {
+    name: "Public profile checklist",
+  });
+  await expect(checklist).toHaveAttribute("id", "profile-checklist");
+  await expect(checklist).toContainText("Actionable, not scored");
+  await expect(checklist).toContainText("Project descriptions are in place");
+  await expect(checklist).toContainText("not a developer score");
+  await sectionNavigation
     .getByRole("link", { name: "Public repositories" })
     .press("Enter");
   await expect(page).toHaveURL(/\/u\/sample-dev#public-repositories$/);
@@ -394,6 +405,9 @@ test("account remains usable while repositories load and after they fail", async
   await expect(
     page.getByRole("heading", { name: "Repository data unavailable" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Public profile checklist" }),
+  ).toContainText("Repository checks are unavailable");
   await expect(
     page.getByRole("link", { name: "View on GitHub" }),
   ).toHaveAttribute("href", "https://github.com/repo-failure");
