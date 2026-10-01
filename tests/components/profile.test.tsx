@@ -63,9 +63,12 @@ it("shows reported zero, unavailable values, attribution and freshness distinctl
     within(navigation).getByRole("link", { name: "Recent activity" }),
   ).toHaveAttribute("href", "#recent-activity");
   expect(
+    within(navigation).getByRole("link", { name: "Profile checklist" }),
+  ).toHaveAttribute("href", "#profile-checklist");
+  expect(
     within(navigation).getByRole("link", { name: "Public repositories" }),
   ).toHaveAttribute("href", "#public-repositories");
-  expect(within(navigation).getAllByRole("link")).toHaveLength(2);
+  expect(within(navigation).getAllByRole("link")).toHaveLength(3);
 });
 it("opens the native share sheet with the canonical profile URL", async () => {
   const share = vi.fn().mockResolvedValue(undefined);

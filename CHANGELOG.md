@@ -7,6 +7,8 @@ Only delivered changes are listed here. v0.1.0 was published on 27 September
 
 ### Added
 
+- An actionable public-profile checklist with deterministic account and project
+  presentation guidance, completed strengths and explicit coverage limits.
 - A concise print-ready developer snapshot with transparent project, language
   and recent-activity summaries that visitors can print or save as PDF.
 - An accessible 30-day UTC public-event timeline with exact daily and category

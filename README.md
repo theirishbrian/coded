@@ -147,6 +147,11 @@ and detected-licence metadata from the existing repository response without more
 requests. See [project proof highlights](docs/PROJECT_HIGHLIGHTS.md) for the exact
 selection and interpretation limits.
 
+Successful profiles also include an actionable [public profile checklist](docs/PROFILE_CHECKLIST.md)
+based on the already retrieved biography and eligible project metadata. It shows
+public strengths and suggested presentation improvements without a score, ranking
+or extra GitHub request.
+
 The recent-public-activity section summarizes up to 300 validated events from
 GitHub's available 30-day window and shows the newest 12. It publishes GitHub's
 latency and coverage limits and does not calculate a streak, effort estimate or
@@ -180,6 +185,7 @@ Coded is available under the [MIT License](LICENSE).
 - [Product feedback](docs/PRODUCT_FEEDBACK.md): public submission boundary and evidence-review method.
 - [Profile sharing](docs/PROFILE_SHARING.md): social cards, metadata and browser share behaviour.
 - [Project proof highlights](docs/PROJECT_HIGHLIGHTS.md): deterministic selection, evidence fields and limits.
+- [Public profile checklist](docs/PROFILE_CHECKLIST.md): transparent presentation guidance without scoring.
 - [Recent public activity](docs/PUBLIC_ACTIVITY.md): bounded event retrieval, display categories and limits.
 - [v0.1 release audit](docs/V0_1_RELEASE_AUDIT.md): checks, evidence and publication record.
 - [Contributing](CONTRIBUTING.md) and [agent instructions](AGENTS.md): issue and PR workflow.
