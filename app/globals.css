@@ -25,3 +25,47 @@ body {
   outline: 2px solid #d3ef8b;
   outline-offset: 6px;
 }
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111 !important;
+    print-color-adjust: exact;
+  }
+
+  .snapshot-actions {
+    display: none !important;
+  }
+
+  .snapshot-page {
+    max-width: none !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+
+  .snapshot-surface {
+    border: 0 !important;
+    background: #fff !important;
+    padding: 0 !important;
+  }
+
+  .snapshot-surface *,
+  .snapshot-surface a {
+    border-color: #aaa !important;
+    background: transparent !important;
+    color: #111 !important;
+  }
+
+  .snapshot-block,
+  .snapshot-card {
+    break-inside: avoid;
+  }
+}

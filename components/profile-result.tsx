@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ProfileSectionNavigation } from "@/components/profile-section-navigation";
 import { ShareProfileButton } from "@/components/share-profile-button";
 import type { LookupResult } from "@/lib/profile/lookup-policy";
@@ -124,6 +125,12 @@ export function ProfileResultView({ result }: { result: LookupResult }) {
           username={profile.username}
           displayName={profile.displayName || profile.username}
         />
+        <Link
+          href={`/u/${encodeURIComponent(profile.username)}/snapshot`}
+          className="inline-flex min-h-11 items-center text-sm font-semibold text-[#d3ef8b] underline underline-offset-4"
+        >
+          Print snapshot
+        </Link>
       </div>
       <dl className="my-8 grid gap-3 sm:grid-cols-3">
         {counts.map(([label, count]) => (
